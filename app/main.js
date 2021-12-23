@@ -8,7 +8,7 @@ import store from "../store/store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>put components here!</div>
+    <div>React connected! Insert app components here.</div>
   </Provider>,
   document.getElementById("app")
 );

@@ -1,9 +1,10 @@
 module.exports = {
+  mode: "production",
   entry: ["./app/main.js"],
   // this must MATCH the entry point where I'm using ReactDOM.render!
   output: {
     path: __dirname,
-    filename: "./bundle.js",
+    filename: "public/bundle.js",
   },
   devtool: "source-map",
   module: {
