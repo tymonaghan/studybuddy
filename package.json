@@ -11,15 +11,20 @@
     "webpack-dev-server": "^4.7.1"
   },
   "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "volleyball": "^1.5.1"
   },
   "scripts": {
-    "start-dev": "webpack serve --mode development"
+    "start-webpack": "webpack serve --mode development",
+    "start-express": "nodemon server"
   }
 }
