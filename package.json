@@ -11,8 +11,10 @@
     "webpack-dev-server": "^4.7.1"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",

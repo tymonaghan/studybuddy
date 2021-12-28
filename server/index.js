@@ -20,6 +20,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 app.use("/api/projects", require("./projects"));
 // app.use("/api/sources", require("./sources"));
 
+//login post route:
+app.use("/api/user", require("./user"));
+
 // index redirector. how does this work with the 404? idk!
 app.get("*", (req, res) => {
   console.log(
