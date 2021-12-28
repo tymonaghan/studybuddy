@@ -11,6 +11,7 @@
     "webpack-dev-server": "^4.7.1"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "express": "^4.17.2",
@@ -30,6 +31,6 @@
   },
   "scripts": {
     "start-webpack": "webpack serve --mode development",
-    "start-express": "nodemon start.js"
+    "start-express": "webpack && nodemon start.js"
   }
 }

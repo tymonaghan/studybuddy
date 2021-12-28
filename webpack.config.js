@@ -1,5 +1,5 @@
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: ["./app/main.js"],
   // this must MATCH the entry point where I'm using ReactDOM.render!
   output: {
