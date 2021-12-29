@@ -13,6 +13,7 @@ export const me = () => async (dispatch) => {
   //check local storage (user browser) for token
   if (token) {
     const res = await Axios.get("auth/me", {
+      //see server/auth.js loc27: router.get("/me"
       headers: { authorization: token },
     });
     return dispatch(setAuth(res.data));
@@ -21,6 +22,9 @@ export const me = () => async (dispatch) => {
 
 export const authenticate =
   (username, password, method) => async (dispatch) => {
+    // console.log(
+    //   `reducer authenticate method reached. username: ${username}\npassword: ${password}\nmethod: ${method}`
+    // );
     try {
       const res = await Axios.post(`/auth/${method}`, { username, password });
       window.localStorage.setIten(TOKEN, res.data.token);

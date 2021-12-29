@@ -21,7 +21,7 @@ app.use("/api/projects", require("./projects"));
 // app.use("/api/sources", require("./sources"));
 
 //login post route:
-app.use("/api/user", require("./user"));
+app.use("/auth", require("./auth"));
 
 //favicon
 app.get("/favicon.ico", (req, res) => {
@@ -37,6 +37,7 @@ app.get("*", (req, res) => {
       "../public/index.html"
     )}`
   );
+  console.log(`missed ${req.method} request to ${req.url}`);
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 

@@ -2,7 +2,7 @@ const User = require("./db/User");
 
 const router = require("express").Router();
 
-//all routes prefixed with /api/user
+//all routes prefixed with /auth
 router.post("/login", async (req, res, next) => {
   try {
     res.send({ token: await User.authenticate(req.body) });
@@ -21,6 +21,15 @@ router.post("/signup", async (req, res, next) => {
     } else {
       next(error);
     }
+  }
+});
+
+router.get("/me", async (req, res, next) => {
+  try {
+    res.send(await User.findByToken(req.headers.authorization));
+  } catch (error) {
+    next(error);
+    console.log(`error in router.get(/auth/me)`);
   }
 });
 
