@@ -1,3 +1,7 @@
 {
-  "presets": ["@babel/preset-react", "@babel/preset-env"]
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+    // thx https://stackoverflow.com/questions/61755999/uncaught-referenceerror-regeneratorruntime-is-not-defined-in-react
+  ]
 }
