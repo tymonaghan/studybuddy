@@ -23,6 +23,12 @@ app.use("/api/projects", require("./projects"));
 //login post route:
 app.use("/api/user", require("./user"));
 
+//favicon
+app.get("/favicon.ico", (req, res) => {
+  console.log(`reaching favicon express GET route`);
+  res.sendFile(path.join(__dirname, "../public/favicon.ico)"));
+});
+
 // index redirector. how does this work with the 404? idk!
 app.get("*", (req, res) => {
   console.log(
