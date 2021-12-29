@@ -32,6 +32,6 @@
   },
   "scripts": {
     "start-webpack": "webpack serve --mode development",
-    "start-express": "webpack -w & nodemon start.js"
+    "start-express": "JWT=atlantis && (webpack -w & nodemon start.js)"
   }
 }

@@ -29,8 +29,10 @@ User.prototype.correctPassword = (candidatePwd) => {
 };
 
 User.prototype.generateToken = () => {
+  console.log(`attempting to generate token. JWT is read as:`);
+  console.log(process.env.JWT);
   //generate a user token using the secret stored in enviroment path: JWT
-  return jwt.sign({ id: this.id }, process.env.JWT);
+  return jwt.sign({ id: this.id }, process.env.JWT || "atlantis");
 };
 
 // User class methods:
