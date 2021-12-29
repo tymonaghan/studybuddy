@@ -31,6 +31,6 @@
   },
   "scripts": {
     "start-webpack": "webpack serve --mode development",
-    "start-express": "webpack && nodemon start.js"
+    "start-express": "webpack -w & nodemon start.js"
   }
 }
