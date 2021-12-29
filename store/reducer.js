@@ -22,9 +22,9 @@ export const me = () => async (dispatch) => {
 
 export const authenticate =
   (username, password, method) => async (dispatch) => {
-    // console.log(
-    //   `reducer authenticate method reached. username: ${username}\npassword: ${password}\nmethod: ${method}`
-    // );
+    console.log(
+      `reducer authenticate method reached. username: ${username}\nPLAINTEXT password: ${password}\nmethod: ${method}`
+    );
     try {
       const res = await Axios.post(`/auth/${method}`, { username, password });
       window.localStorage.setIten(TOKEN, res.data.token);

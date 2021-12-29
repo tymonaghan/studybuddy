@@ -1,3 +1,7 @@
 div {
   background-color: red;
 }
+
+.loginbox * {
+  background-color: aqua;
+}
