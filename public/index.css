@@ -5,3 +5,8 @@ div {
 .loginbox * {
   background-color: aqua;
 }
+
+.errorbox {
+  background-color: yellow;
+  color: black;
+}

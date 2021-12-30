@@ -7,7 +7,7 @@ import { authenticate } from "../../store/reducer";
  * COMPONENT
  */
 const AuthForm = ({ name, displayName }) => {
-  // const { error } = useSelector((state) => state.auth) || null;
+  const { error } = useSelector((state) => state.auth) || null;
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
@@ -36,7 +36,9 @@ const AuthForm = ({ name, displayName }) => {
         <div>
           <button type="submit">{displayName}</button>
         </div>
-        {/* {error && error.response && <div> {error.response.data} </div>} */}
+        {error && error.response && (
+          <div className="errorbox"> {error.response.data} </div>
+        )}
       </form>
     </div>
   );
