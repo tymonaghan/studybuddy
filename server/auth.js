@@ -4,6 +4,8 @@ const router = require("express").Router();
 
 //all routes prefixed with /auth
 router.post("/login", async (req, res, next) => {
+  //should receive {username, password} as req.body (reducer.js loc30)
+  // console.dir(req.body);
   try {
     res.send({ token: await User.authenticate(req.body) });
   } catch (error) {

@@ -23,15 +23,15 @@ const User = db.define("user", {
 module.exports = User;
 
 // User instance methods:
-User.prototype.correctPassword = (candidatePwd) => {
+User.prototype.correctPassword = function (candidatePwd) {
   // compare supplied and stored password
   return bcrypt.compare(candidatePwd, this.password);
 };
 
-User.prototype.generateToken = () => {
+User.prototype.generateToken = function () {
   console.log(`attempting to generate token. JWT is read as:`);
   console.log(process.env.JWT);
-  //generate a user token using the secret stored in enviroment path: JWT
+  //generate a user token using the secret stored in enviroment path: JWT (this isn't working!)
   return jwt.sign({ id: this.id }, process.env.JWT || "atlantis");
 };
 
@@ -50,10 +50,10 @@ User.authenticate = async function ({ username, password }) {
   return user.generateToken();
 };
 
-User.findByToken = async (token) => {
+User.findByToken = async function (token) {
   // this takes a token as an argument. if valid, returns User instance object.
   try {
-    const { id } = await jwt.verify(token, process.env.JWT);
+    const { id } = await jwt.verify(token, process.env.JWT || "atlantis");
     const user = User.findByPk(id);
     if (!user) {
       throw `you don't exist`;
@@ -68,9 +68,13 @@ User.findByToken = async (token) => {
 };
 
 // hookz:
-const hashPassword = async (user) => {
+User.beforeCreate(async (user) => {
   //anytime password changes, encrypt it and store the hash, not the password.
-  if (user.changed("password")) {
-    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
-  }
-};
+  const hashedPw = await bcrypt.hash(user.password, SALT_ROUNDS);
+  user.password = hashedPw;
+});
+User.beforeUpdate(async (user) => {
+  //anytime password changes, encrypt it and store the hash, not the password.
+  const hashedPw = await bcrypt.hash(user.password, SALT_ROUNDS);
+  user.password = hashedPw;
+});
