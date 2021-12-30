@@ -7,7 +7,7 @@ import { authenticate } from "../../store/reducer";
  * COMPONENT
  */
 const AuthForm = ({ name, displayName }) => {
-  // const { error } = useSelector((state) => state.auth);
+  // const { error } = useSelector((state) => state.auth) || null;
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {

@@ -5,7 +5,15 @@ const TOKEN = "token";
 const SET_AUTH = "SET_AUTH";
 
 // action creator
-const setAuth = (auth) => ({ type: SET_AUTH, auth });
+const setAuth = (auth) => {
+  const authAction = { auth: {}, error: auth.error || {} };
+  console.log(`auth.error is null? ${auth.error == null}`);
+  if (auth.error == null) {
+    // if there is NO error in the auth response, spread the id, pwd, etc into auth object
+    authAction.auth = { ...auth };
+  }
+  return { type: SET_AUTH, authAction };
+};
 
 //thunk creator
 export const me = () => async (dispatch) => {
@@ -27,9 +35,9 @@ export const authenticate =
     //   `reducer authenticate method reached. username: ${username}\nPLAINTEXT password: ${password}\nmethod: ${method}`
     // );
     try {
-      console.log(
-        `trying axios.post to /auth/${method}, passing \nusername: ${username} \npassword:${password}`
-      );
+      // console.log(
+      //   `trying axios.post to /auth/${method}, passing \nusername: ${username} \npassword:${password}`
+      // );
       const res = await Axios.post(`/auth/${method}`, { username, password });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
@@ -47,10 +55,14 @@ export const logout = () => {
   };
 };
 
-export default function (state = {}, action) {
+export default function (state = { auth: {}, error: {} }, action) {
   switch (action.type) {
     case SET_AUTH:
-      return action.auth;
+      console.log(`action:`);
+      console.dir(action);
+
+      // return action.auth;
+      return { ...state, ...action.authAction };
     default:
       return state;
   }

@@ -6,13 +6,10 @@ import reducer from "./reducer";
 import thunkMiddleware from "redux-thunk";
 
 const MiddlewareWithDevtools = composeWithDevTools(
+  //wrapping the applyMiddleWare like this enabled redux devtools via the redux-devtools-extension package
   applyMiddleware(thunkMiddleware, createLogger())
 );
 
-const store = createStore(
-  reducer,
-  MiddlewareWithDevtools
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = createStore(reducer, MiddlewareWithDevtools);
 
 export default store;
