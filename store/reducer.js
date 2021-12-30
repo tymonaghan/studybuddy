@@ -6,13 +6,14 @@ const SET_AUTH = "SET_AUTH";
 
 // action creator
 const setAuth = (auth) => {
-  const authAction = { auth: {}, error: auth.error || {} };
-  console.log(`auth.error is null? ${auth.error == null}`);
-  if (auth.error == null) {
-    // if there is NO error in the auth response, spread the id, pwd, etc into auth object
-    authAction.auth = { ...auth };
-  }
-  return { type: SET_AUTH, authAction };
+  // const authAction = { auth: {}, error: auth.error || {} };
+  // console.log(`auth.error is null? ${auth.error == null}`);
+  // if (auth.error == null) {
+  //   // if there is NO error in the auth response, spread the id, pwd, etc into auth object
+  //   authAction.auth = { ...auth };
+  // }
+  // return { type: SET_AUTH, authAction };
+  return { type: SET_AUTH, auth };
 };
 
 //thunk creator
@@ -55,14 +56,14 @@ export const logout = () => {
   };
 };
 
-export default function (state = { auth: {}, error: {} }, action) {
+export default function (state = { auth: {} }, action) {
   switch (action.type) {
     case SET_AUTH:
       console.log(`action:`);
       console.dir(action);
 
       // return action.auth;
-      return { ...state, ...action.authAction };
+      return { ...state, auth: { ...action.auth } };
     default:
       return state;
   }
