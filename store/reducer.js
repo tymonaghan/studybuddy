@@ -17,11 +17,12 @@ const setAuth = (auth) => {
 };
 
 //thunk creator
-export const me = () => async (dispatch) => {
-  console.log(`hitting "me"(?) thunk in reducer file`);
+export const checkForUserToken = () => async (dispatch) => {
+  console.log(`checking local storage for user token`);
   const token = window.localStorage.getItem(TOKEN);
   //check local storage (user browser) for token
   if (token) {
+    console.log(`token FOUND. logging in`);
     const res = await Axios.get("auth/me", {
       //see server/auth.js loc27: router.get("/me"
       headers: { authorization: token },
@@ -41,7 +42,7 @@ export const authenticate =
       // );
       const res = await Axios.post(`/auth/${method}`, { username, password });
       window.localStorage.setItem(TOKEN, res.data.token);
-      dispatch(me());
+      dispatch(checkForUserToken());
     } catch (authError) {
       return dispatch(setAuth({ error: authError }));
     }
@@ -59,10 +60,6 @@ export const logout = () => {
 export default function (state = { auth: {} }, action) {
   switch (action.type) {
     case SET_AUTH:
-      console.log(`action:`);
-      console.dir(action);
-
-      // return action.auth;
       return { ...state, auth: { ...action.auth } };
     default:
       return state;
