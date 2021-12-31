@@ -28,7 +28,8 @@ export const checkForUserToken = () => async (dispatch) => {
     // if there's a token, look up the user and send that object into setAuth action creator
     return dispatch(setAuth(res.data));
   }
-  // if there's no token, do nothing (seems like we should produce an error but i guess this is only ever being called inside try blocks)
+  console.log(`no token found, please log in`);
+  // if there's no token, do nothing. state will continue not having "auth" object, so Login screen will render.
 };
 
 export const authenticate =

@@ -1,15 +1,15 @@
-import { Login, Signup } from "./components/AuthForm";
-import { Navigate, Route, Routes, Switch } from "react-router-dom";
+import { About, Home, Login, NavBar, Signup } from "./components/";
 // import Navbar from "./components/Navbar";
 import React, { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import Home from "./components/Home";
-import { checkForUserToken } from "../store/reducer";
+import Container from "react-bootstrap/Container";
 
 const App = () => {
   return (
-    <div>
+    <Container className="main-contain">
+      <NavBar />
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route
@@ -17,8 +17,9 @@ const App = () => {
           element={<div className={"loginbox"}>{Login}</div>}
         />
         <Route path="/signup" element={Signup} />
+        <Route path="/about" element={<About />} />
       </Routes>
-    </div>
+    </Container>
   );
 };
 

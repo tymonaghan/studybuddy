@@ -1,6 +1,6 @@
-div {
+/* div {
   background-color: red;
-}
+} 
 
 .loginbox * {
   background-color: aqua;
@@ -9,4 +9,12 @@ div {
 .errorbox {
   background-color: yellow;
   color: black;
+}
+*/
+main {
+  background-color: gray;
+}
+
+.main-contain {
+  background-color: thistle;
 }
