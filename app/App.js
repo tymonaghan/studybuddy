@@ -9,14 +9,15 @@ import Container from "react-bootstrap/Container";
 const App = () => {
   return (
     <Container className="main-contain">
-      <NavBar />
+      <NavBar /> {/*always render navBar*/}
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route
           path="/login"
           element={<div className={"loginbox"}>{Login}</div>}
         />
-        <Route path="/signup" element={Signup} />
+        <Route path="/signup" element={Signup} />{" "}
+        {/*this re-used AuthForm is more trouble than it's worth!*/}
         <Route path="/about" element={<About />} />
       </Routes>
     </Container>

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
+import { authenticate, checkForUserToken } from "../../store/reducer";
 import { useDispatch, useSelector } from "react-redux";
 
+import Button from "react-bootstrap/Button";
 import { Navigate } from "react-router-dom";
-import { authenticate } from "../../store/reducer";
-import { checkForUserToken } from "../../store/reducer";
 
 /**
  * COMPONENT
@@ -32,6 +32,7 @@ const AuthForm = ({ name, displayName }) => {
 
   return (
     <div>
+      <h1>{displayName}</h1>
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">
@@ -46,7 +47,7 @@ const AuthForm = ({ name, displayName }) => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <Button type="submit">{displayName}</Button>
         </div>
         {error && error.response && (
           <div className="errorbox"> {error.response.data} </div>
@@ -58,3 +59,4 @@ const AuthForm = ({ name, displayName }) => {
 
 export const Login = <AuthForm name="login" displayName="Login" />;
 export const Signup = <AuthForm name="signup" displayName="Sign Up" />;
+// these "props" get passed into the component function as arguments
