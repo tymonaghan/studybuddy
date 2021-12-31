@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+
 const Axios = require("axios");
 const TOKEN = "token";
 
@@ -43,7 +45,8 @@ export const authenticate =
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  history.push("/login");
+  // history.push("/login");
+  <Navigate to="/login" />;
   return {
     type: SET_AUTH,
     auth: {},

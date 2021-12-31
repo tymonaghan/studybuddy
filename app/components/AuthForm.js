@@ -1,14 +1,22 @@
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import React from "react";
+import { Navigate } from "react-router-dom";
 import { authenticate } from "../../store/reducer";
+import { checkForUserToken } from "../../store/reducer";
 
 /**
  * COMPONENT
  */
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth) || null;
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  // if state.auth.id exists, this user is logged in
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkForUserToken());
+  }, []);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -17,6 +25,10 @@ const AuthForm = ({ name, displayName }) => {
     const password = evt.target.password.value;
     dispatch(authenticate(username, password, formName));
   };
+
+  if (isLoggedIn) {
+    return <Navigate to="/home" />;
+  }
 
   return (
     <div>
