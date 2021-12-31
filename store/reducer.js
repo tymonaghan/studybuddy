@@ -6,18 +6,14 @@ const SET_AUTH = "SET_AUTH";
 
 // action creator
 const setAuth = (auth) => {
-  // const authAction = { auth: {}, error: auth.error || {} };
-  // console.log(`auth.error is null? ${auth.error == null}`);
-  // if (auth.error == null) {
-  //   // if there is NO error in the auth response, spread the id, pwd, etc into auth object
-  //   authAction.auth = { ...auth };
-  // }
-  // return { type: SET_AUTH, authAction };
+  // action payload will be auth object
+  // auth object will either contain db user object (id, username, pw, etc) or error object
   return { type: SET_AUTH, auth };
 };
 
 //thunk creator
 export const checkForUserToken = () => async (dispatch) => {
+  //checks browser storage for token and dispatches set auth action if found
   console.log(`checking local storage for user token`);
   const token = window.localStorage.getItem(TOKEN);
   //check local storage (user browser) for token
@@ -27,19 +23,16 @@ export const checkForUserToken = () => async (dispatch) => {
       //see server/auth.js loc27: router.get("/me"
       headers: { authorization: token },
     });
+    // if there's a token, look up the user and send that object into setAuth action creator
     return dispatch(setAuth(res.data));
   }
+  // if there's no token, do nothing (seems like we should produce an error but i guess this is only ever being called inside try blocks)
 };
 
 export const authenticate =
   (username, password, method) => async (dispatch) => {
-    // console.log(
-    //   `reducer authenticate method reached. username: ${username}\nPLAINTEXT password: ${password}\nmethod: ${method}`
-    // );
+    // look up the user's token and try to add it to their browser local storage
     try {
-      // console.log(
-      //   `trying axios.post to /auth/${method}, passing \nusername: ${username} \npassword:${password}`
-      // );
       const res = await Axios.post(`/auth/${method}`, { username, password });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(checkForUserToken());
