@@ -24,20 +24,21 @@ app.use("/api/projects", require("./projects"));
 app.use("/auth", require("./auth"));
 
 //favicon
-app.get("/favicon.ico", (req, res) => {
-  console.log(`reaching favicon express GET route`);
-  res.sendFile(path.join(__dirname, "../public/favicon.ico)"));
-});
+// app.get("/favicon.ico", (req, res) => {
+//   console.log(`reaching favicon express GET route`);
+//   res.sendFile(path.join(__dirname, "../public/favicon.ico)"));
+// });
+// i shouldn't need this bc of the static middleware
 
 // index redirector. how does this work with the 404? idk!
 app.get("*", (req, res) => {
   console.log(
-    `reached index redidirector, trying ${path.join(
+    `app.get(*) caught ${req.method} request to ${req.url}\nserving ${path.join(
       __dirname,
       "../public/index.html"
     )}`
   );
-  console.log(`missed ${req.method} request to ${req.url}`);
+  // console.dir(req);
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 

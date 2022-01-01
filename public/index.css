@@ -18,3 +18,10 @@ main {
 .main-contain {
   background-color: thistle;
 }
+
+html,
+body,
+#app,
+#app > div {
+  height: 100%;
+}
