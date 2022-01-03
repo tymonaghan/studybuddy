@@ -8148,7 +8148,7 @@ var App = function App() {
     style: {
       padding: "0px"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components___WEBPACK_IMPORTED_MODULE_0__.NavBar, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "main-contain"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/",
@@ -8243,13 +8243,19 @@ var AuthForm = function AuthForm(_ref) {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_store_reducer__WEBPACK_IMPORTED_MODULE_1__.checkForUserToken)());
-  }, []);
+  }, []); // useEffect(() => {
+  //   console.log("hello from the AuthForm useEffect");
+  // }, []);
 
   var handleSubmit = function handleSubmit(evt) {
+    // console.dir(evt);
     evt.preventDefault();
     var formName = evt.target.name;
     var username = evt.target.username.value;
-    var password = evt.target.password.value;
+    var password = evt.target.password.value; // console.log(
+    //   `username: ${username}\npassword: ${password}\nmethod: ${formName}`
+    // );
+
     dispatch((0,_store_reducer__WEBPACK_IMPORTED_MODULE_1__.authenticate)(username, password, formName));
   };
 
@@ -8571,33 +8577,35 @@ var authenticate = function authenticate(username, password, method) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
+              console.log("this message generated from the reducer authenticate method\nusername: ".concat(username, "\npassword: ").concat(password, "\nmethod: ").concat(method)); // look up the user's token and try to add it to their browser local storage
+
+              _context2.prev = 1;
+              _context2.next = 4;
               return Axios.post("/auth/".concat(method), {
                 username: username,
                 password: password
               });
 
-            case 3:
+            case 4:
               res = _context2.sent;
               window.localStorage.setItem(TOKEN, res.data.token);
               dispatch(checkForUserToken());
-              _context2.next = 11;
+              _context2.next = 12;
               break;
 
-            case 8:
-              _context2.prev = 8;
-              _context2.t0 = _context2["catch"](0);
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](1);
               return _context2.abrupt("return", dispatch(setAuth({
                 error: _context2.t0
               })));
 
-            case 11:
+            case 12:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 8]]);
+      }, _callee2, null, [[1, 9]]);
     }));
 
     return function (_x2) {

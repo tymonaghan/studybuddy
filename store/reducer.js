@@ -34,8 +34,14 @@ export const checkForUserToken = () => async (dispatch) => {
 
 export const authenticate =
   (username, password, method) => async (dispatch) => {
+    console.log(
+      `this message generated from the reducer authenticate method\nusername: ${username}\npassword: ${password}\nmethod: ${method}`
+    );
     // look up the user's token and try to add it to their browser local storage
     try {
+      // console.log(
+      //   `attempting axios.post to /auth/${method} , req should be {${this.username}, ${password}}`
+      // );
       const res = await Axios.post(`/auth/${method}`, { username, password });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(checkForUserToken());

@@ -4,6 +4,9 @@ const volleyball = require("volleyball"); // npm install --save volleyball
 const path = require("path"); // no npm install needed
 const bodyParser = require("body-parser"); // needs npm install --save body-parser
 
+// parse all the bodies; enables use of req.body
+app.use(bodyParser.json()); // for json requests
+app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 // http logging
 app.use(volleyball);
 
@@ -20,10 +23,6 @@ app.get("/", (req, res) =>
 );
 const staticMiddleWare = express.static(path.join(__dirname, "../public"));
 app.use(staticMiddleWare);
-
-// parse all the bodies; enables use of req.body
-app.use(bodyParser.json()); // for json requests
-app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 
 //favicon
 // app.get("/favicon.ico", (req, res) => {

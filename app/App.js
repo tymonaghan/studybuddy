@@ -18,7 +18,7 @@ const App = () => {
   return (
     <Stack>
       <Container className="nav-contain" style={{ padding: "0px" }}>
-        <NavBar />
+        {/* <NavBar /> */}
       </Container>
       <Container className="main-contain">
         <Routes>

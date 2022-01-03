@@ -14,11 +14,25 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/signup", async (req, res, next) => {
+  // res.send("hey buuudddy");
+  // res.send(req.body);
+  console.log(
+    `hello from the router.post route which should be at /auth/signup`
+  );
+  // res.send(
+  //   `username is ${req.body.username}\npassword is ${req.body.password}`
+  // );
+  // console.dir(req.body);
   try {
-    const user = await User.create(req.body);
+    const user = await User.create({
+      username: req.body.username,
+      password: req.body.password,
+    });
     res.send({ token: await user.generateToken() });
   } catch (error) {
-    if (error.name === "SequelizeUniqueConstraintError") {
+    if (error.name === "SequelizeValidationError") {
+      res.status(401).send("reading username as undefined, inexplicably");
+    } else if (error.name === "SequelizeUniqueConstraintError") {
       res.status(401).send("User already exists");
     } else {
       next(error);
