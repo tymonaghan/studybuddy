@@ -18,14 +18,13 @@ const App = () => {
   return (
     <Stack>
       <Container className="nav-contain" style={{ padding: "0px" }}>
-        {/* <NavBar /> */}
+        <NavBar />
       </Container>
       <Container className="main-contain">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={Login} />
           <Route path="/signup" element={Signup} />{" "}
-          {/*this re-used AuthForm is more trouble than it's worth!*/}
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

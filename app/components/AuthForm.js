@@ -22,15 +22,10 @@ const AuthForm = ({ name, displayName }) => {
   // }, []);
 
   const handleSubmit = (evt) => {
-    // console.dir(evt);
     evt.preventDefault();
-
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    // console.log(
-    //   `username: ${username}\npassword: ${password}\nmethod: ${formName}`
-    // );
     dispatch(authenticate(username, password, formName));
   };
 

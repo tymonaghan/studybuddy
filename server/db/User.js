@@ -15,8 +15,8 @@ const User = db.define("user", {
   password: {
     type: Sequelize.STRING,
   },
-  //githubId:{
-  //type: Sequelize.INTEGER
+  //newField:{
+  //type: Sequelize.DATATYPE
   //}
 });
 

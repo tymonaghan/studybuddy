@@ -8148,7 +8148,7 @@ var App = function App() {
     style: {
       padding: "0px"
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components___WEBPACK_IMPORTED_MODULE_0__.NavBar, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "main-contain"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/",
@@ -8248,14 +8248,10 @@ var AuthForm = function AuthForm(_ref) {
   // }, []);
 
   var handleSubmit = function handleSubmit(evt) {
-    // console.dir(evt);
     evt.preventDefault();
     var formName = evt.target.name;
     var username = evt.target.username.value;
-    var password = evt.target.password.value; // console.log(
-    //   `username: ${username}\npassword: ${password}\nmethod: ${formName}`
-    // );
-
+    var password = evt.target.password.value;
     dispatch((0,_store_reducer__WEBPACK_IMPORTED_MODULE_1__.authenticate)(username, password, formName));
   };
 
@@ -8542,8 +8538,8 @@ var checkForUserToken = function checkForUserToken() {
 
               console.log("token FOUND. logging in");
               _context.next = 6;
-              return Axios.get("auth/me", {
-                //see server/auth.js loc27: router.get("/me"
+              return Axios.get("auth/getUserByToken", {
+                //see server/auth.js loc40: router.get("/getUserByToken"
                 headers: {
                   authorization: token
                 }
@@ -8614,12 +8610,13 @@ var authenticate = function authenticate(username, password, method) {
   }();
 };
 var logout = function logout() {
-  window.localStorage.removeItem(TOKEN); // history.push("/login");
+  window.localStorage.removeItem(TOKEN); // history.push("/login"); <-- method from FS template app
 
   /*#__PURE__*/
   React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Navigate, {
     to: "/login"
-  });
+  }); // <-- new method using React Router v6
+
   return {
     type: SET_AUTH,
     auth: {}

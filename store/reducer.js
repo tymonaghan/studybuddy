@@ -21,8 +21,8 @@ export const checkForUserToken = () => async (dispatch) => {
   //check local storage (user browser) for token
   if (token) {
     console.log(`token FOUND. logging in`);
-    const res = await Axios.get("auth/me", {
-      //see server/auth.js loc27: router.get("/me"
+    const res = await Axios.get("auth/getUserByToken", {
+      //see server/auth.js loc40: router.get("/getUserByToken"
       headers: { authorization: token },
     });
     // if there's a token, look up the user and send that object into setAuth action creator
@@ -39,9 +39,6 @@ export const authenticate =
     );
     // look up the user's token and try to add it to their browser local storage
     try {
-      // console.log(
-      //   `attempting axios.post to /auth/${method} , req should be {${this.username}, ${password}}`
-      // );
       const res = await Axios.post(`/auth/${method}`, { username, password });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(checkForUserToken());
@@ -52,8 +49,8 @@ export const authenticate =
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  // history.push("/login");
-  <Navigate to="/login" />;
+  // history.push("/login"); <-- method from FS template app
+  <Navigate to="/login" />; // <-- new method using React Router v6
   return {
     type: SET_AUTH,
     auth: {},
