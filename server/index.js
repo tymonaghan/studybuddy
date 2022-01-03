@@ -1,23 +1,13 @@
+const app = express();
+const volleyball = require("volleyball"); // npm install --save volleyball
+const path = require("path"); // no npm install needed
+const bodyParser = require("body-parser"); // needs npm install --save body-parser
+
 // create Express app
 const express = require("express"); // npm install --save express
-const app = express();
 
 // http logging
-const volleyball = require("volleyball"); // npm install --save volleyball
 app.use(volleyball);
-
-// static middleware
-const path = require("path"); // no npm install needed
-const staticMiddleWare = express.static(path.join(__dirname, "../public"));
-app.use(staticMiddleWare);
-app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "..", "public/index.html"))
-);
-
-// parse all the bodies; enables use of req.body
-const bodyParser = require("body-parser"); // needs npm install --save body-parser
-app.use(bodyParser.json()); // for json requests
-app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 
 // some routes
 app.use("/api/projects", require("./projects"));
@@ -25,6 +15,17 @@ app.use("/api/projects", require("./projects"));
 
 //login post route:
 app.use("/auth", require("./auth"));
+
+// static index/home and static middleware
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "..", "public/index.html"))
+);
+const staticMiddleWare = express.static(path.join(__dirname, "../public"));
+app.use(staticMiddleWare);
+
+// parse all the bodies; enables use of req.body
+app.use(bodyParser.json()); // for json requests
+app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 
 //favicon
 // app.get("/favicon.ico", (req, res) => {
@@ -41,9 +42,9 @@ app.use((req, res, next) => {
 });
 
 // index redirector. how does this work with the 404? idk!
-app.get("*", (req, res) => {
+app.use("*", (req, res) => {
   console.log(
-    `app.get(*) caught ${req.method} request to ${req.url}\nserving ${path.join(
+    `app.use(*) caught ${req.method} request to ${req.url}\nserving ${path.join(
       __dirname,
       "../public/index.html"
     )}`
