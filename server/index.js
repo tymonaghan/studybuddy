@@ -1,10 +1,8 @@
+const express = require("express"); // npm install --save express
 const app = express();
 const volleyball = require("volleyball"); // npm install --save volleyball
 const path = require("path"); // no npm install needed
 const bodyParser = require("body-parser"); // needs npm install --save body-parser
-
-// create Express app
-const express = require("express"); // npm install --save express
 
 // http logging
 app.use(volleyball);
