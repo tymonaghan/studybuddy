@@ -34,9 +34,13 @@ app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 
 // 404
 app.use((req, res, next) => {
-  const artificialFourOhFour = new Error("404 not found sucka!");
-  next(artificialFourOhFour);
-  res.status(404).send("soth knew you were there.");
+  if (path.extname(req.path).length) {
+    const artificialFourOhFour = new Error("404 not found sucka!");
+    next(artificialFourOhFour);
+    res.status(404).send("soth knew you were there.");
+  } else {
+    next();
+  }
 });
 
 // index redirector. how does this work with the 404? idk!
