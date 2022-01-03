@@ -34,8 +34,9 @@
     "volleyball": "^1.5.1"
   },
   "scripts": {
-    "start": "node webpack & node start.js",
+    "build": "webpack",
+    "start": "node start.js",
     "start-webpack": "webpack serve --mode development",
-    "start-express": "JWT=atlantis webpack -w & nodemon start.js"
+    "start-express": "webpack -w & nodemon start.js"
   }
 }
