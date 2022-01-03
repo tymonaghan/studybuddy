@@ -10,6 +10,9 @@ app.use(volleyball);
 const path = require("path"); // no npm install needed
 const staticMiddleWare = express.static(path.join(__dirname, "../public"));
 app.use(staticMiddleWare);
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "..", "public/index.html"))
+);
 
 // parse all the bodies; enables use of req.body
 const bodyParser = require("body-parser"); // needs npm install --save body-parser
@@ -30,6 +33,13 @@ app.use("/auth", require("./auth"));
 // });
 // i shouldn't need this bc of the static middleware
 
+// 404
+app.use((req, res, next) => {
+  const artificialFourOhFour = new Error("404 not found sucka!");
+  next(artificialFourOhFour);
+  res.status(404).send("soth knew you were there.");
+});
+
 // index redirector. how does this work with the 404? idk!
 app.get("*", (req, res) => {
   console.log(
@@ -40,13 +50,6 @@ app.get("*", (req, res) => {
   );
   // console.dir(req);
   res.sendFile(path.join(__dirname, "../public/index.html"));
-});
-
-// 404
-app.use((req, res, next) => {
-  const artificialFourOhFour = new Error("404 not found sucka!");
-  next(artificialFourOhFour);
-  res.status(404).send("soth knew you were there.");
 });
 
 // 500 error handler/logger/we blew it-catcher
