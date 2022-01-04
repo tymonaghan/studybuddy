@@ -1,9 +1,6 @@
 // copying and modifying from Pillars tests
 const { expect } = require("chai");
 
-// import { cyan } from "chalk";
-const { db, User } = require("../server/db");
-
 const _app = require("../server/index");
 const app = require("supertest")(_app);
 
