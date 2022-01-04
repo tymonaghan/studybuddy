@@ -8303,12 +8303,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Stack */ "./node_modules/react-bootstrap/esm/Stack.js");
-/* harmony import */ var _store_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/reducer */ "./store/reducer.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ "./app/components/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _store_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/reducer */ "./store/reducer.js");
+
 
 
 
@@ -8318,49 +8318,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Home = function Home() {
-  var isLoggedIn = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(function (state) {
+  var isLoggedIn = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return !!state.auth.id;
   }); // if state.auth.id exists, this user is logged in (boolean)
 
-  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(function (state) {
+  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.auth;
   }),
       username = _useSelector.username; //if they're logged in, also grab their username
 
 
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useDispatch)();
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
 
   if (!isLoggedIn) {
     // if the user is not logged in, return a message inviting them to login or create account
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      border: "warning",
-      style: {
-        width: "40%",
-        margin: "2rem"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Header, null, "Warning"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Title, null, "Please Log In"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Text, null, "You must be logged in to use this site. Please log in or create an account."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      direction: "horizontal",
-      gap: 3
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      variant: "primary",
-      href: "/login"
-    }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      variant: "secondary",
-      href: "/signup"
-    }, "Create Account"))));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(___WEBPACK_IMPORTED_MODULE_0__.NoLoginWarning, null);
   }
 
   return (
     /*#__PURE__*/
     // if the user Is logged in, show the homescreen greeting and logout button
-    react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+    react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
       className: "home"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Welcome, ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("strong", null, username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("h1", null, "Welcome, ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("strong", null, username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       variant: "warning",
       onClick: function onClick() {
-        dispatch((0,_store_reducer__WEBPACK_IMPORTED_MODULE_2__.logout)());
+        dispatch((0,_store_reducer__WEBPACK_IMPORTED_MODULE_3__.logout)());
       }
-    }, "Logout"))
+    }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(___WEBPACK_IMPORTED_MODULE_0__.ProjectList, null))
   );
 };
 
@@ -8447,6 +8432,79 @@ var NavBar = function NavBar() {
 
 /***/ }),
 
+/***/ "./app/components/NoLoginWarning.js":
+/*!******************************************!*\
+  !*** ./app/components/NoLoginWarning.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Stack */ "./node_modules/react-bootstrap/esm/Stack.js");
+
+
+
+
+
+var NoLoginWarning = function NoLoginWarning() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    border: "warning",
+    style: {
+      width: "80%",
+      margin: "2rem"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, "Warning"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Title, null, "Please Log In"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Text, null, "You must be logged in to use this site. Please log in or create an account."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    direction: "horizontal",
+    gap: 3
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    variant: "primary",
+    href: "/login"
+  }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    variant: "secondary",
+    href: "/signup"
+  }, "Create Account"))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NoLoginWarning);
+
+/***/ }),
+
+/***/ "./app/components/ProjectList.js":
+/*!***************************************!*\
+  !*** ./app/components/ProjectList.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
+var ProjectList = function ProjectList() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    border: "primary",
+    style: {
+      width: "80%",
+      margin: "1rem"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, "Your Projects"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Text, null, "If you have projects, they will appear here.")));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectList);
+
+/***/ }),
+
 /***/ "./app/components/index.js":
 /*!*********************************!*\
   !*** ./app/components/index.js ***!
@@ -8460,12 +8518,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Signup": () => (/* reexport safe */ _AuthForm__WEBPACK_IMPORTED_MODULE_0__.Signup),
 /* harmony export */   "About": () => (/* reexport safe */ _About__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "NavBar": () => (/* reexport safe */ _Navbar__WEBPACK_IMPORTED_MODULE_3__["default"]),
-/* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_2__["default"])
+/* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   "NoLoginWarning": () => (/* reexport safe */ _NoLoginWarning__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "ProjectList": () => (/* reexport safe */ _ProjectList__WEBPACK_IMPORTED_MODULE_5__["default"])
 /* harmony export */ });
 /* harmony import */ var _AuthForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AuthForm */ "./app/components/AuthForm.js");
 /* harmony import */ var _About__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./About */ "./app/components/About.js");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./app/components/Home.js");
 /* harmony import */ var _Navbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Navbar */ "./app/components/Navbar.js");
+/* harmony import */ var _NoLoginWarning__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NoLoginWarning */ "./app/components/NoLoginWarning.js");
+/* harmony import */ var _ProjectList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ProjectList */ "./app/components/ProjectList.js");
+
+
 
 
 

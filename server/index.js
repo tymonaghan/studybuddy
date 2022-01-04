@@ -9,7 +9,12 @@ app.use(bodyParser.json()); // for json requests
 app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 
 // http logging
-if (process.env.NODE_ENV !== "testing") app.use(volleyball);
+if (process.env.NODE_ENV !== "testing") {
+  console.log(`testing mode OFF. logging enabled`);
+  app.use(volleyball);
+} else {
+  console.log(`testing mode ON. logging disabled`);
+}
 
 // some routes
 app.use("/api/projects", require("./projects"));
@@ -55,7 +60,7 @@ app.use("*", (req, res) => {
 
 // 500 error handler/logger/we blew it-catcher
 // print the error to our console and send the user a generic "internal server error" message
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || "Internal server error.");
