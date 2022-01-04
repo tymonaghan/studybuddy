@@ -54,7 +54,7 @@ User.findByToken = async function (token) {
   // this takes a token as an argument. if valid, returns User instance object.
   try {
     console.log(`JWT is: `);
-    console.dir(process.env);
+    console.dir(process.env.JWT);
     const { id } = await jwt.verify(token, process.env.JWT || "atlantis");
     const user = User.findByPk(id);
     if (!user) {

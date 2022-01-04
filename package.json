@@ -5,9 +5,13 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "babel-loader": "^8.2.3",
+    "chai": "^4.3.4",
+    "chalk": "^5.0.0",
     "css-loader": "^6.5.1",
+    "mocha": "^9.1.3",
     "redux-devtools-extension": "^2.13.9",
     "style-loader": "^3.3.1",
+    "supertest": "^6.1.6",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.1"
@@ -37,6 +41,7 @@
     "build": "webpack",
     "start": "node start.js",
     "start-webpack": "webpack serve --mode development",
-    "start-express": "webpack -w & nodemon start.js"
+    "start-express": "webpack -w & nodemon start.js & JWT='pandora' ",
+    "test": "mocha ./tests/*_tests.js --compilers:babel-register --watch"
   }
 }
