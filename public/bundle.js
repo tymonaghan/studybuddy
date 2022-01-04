@@ -8303,12 +8303,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Stack */ "./node_modules/react-bootstrap/esm/Stack.js");
-/* harmony import */ var _store_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/reducer */ "./store/reducer.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ "./app/components/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _store_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/reducer */ "./store/reducer.js");
+
 
 
 
@@ -8318,49 +8318,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Home = function Home() {
-  var isLoggedIn = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(function (state) {
+  var isLoggedIn = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return !!state.auth.id;
   }); // if state.auth.id exists, this user is logged in (boolean)
 
-  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(function (state) {
+  var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.auth;
   }),
       username = _useSelector.username; //if they're logged in, also grab their username
 
 
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useDispatch)();
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
 
   if (!isLoggedIn) {
     // if the user is not logged in, return a message inviting them to login or create account
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      border: "warning",
-      style: {
-        width: "40%",
-        margin: "2rem"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Header, null, "Warning"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Title, null, "Please Log In"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Text, null, "You must be logged in to use this site. Please log in or create an account."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      direction: "horizontal",
-      gap: 3
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      variant: "primary",
-      href: "/login"
-    }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      variant: "secondary",
-      href: "/signup"
-    }, "Create Account"))));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(___WEBPACK_IMPORTED_MODULE_0__.NoLoginWarning, null);
   }
 
   return (
     /*#__PURE__*/
     // if the user Is logged in, show the homescreen greeting and logout button
-    react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+    react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
       className: "home"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Welcome, ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("strong", null, username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("h1", null, "Welcome, ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("strong", null, username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       variant: "warning",
       onClick: function onClick() {
-        dispatch((0,_store_reducer__WEBPACK_IMPORTED_MODULE_2__.logout)());
+        dispatch((0,_store_reducer__WEBPACK_IMPORTED_MODULE_3__.logout)());
       }
-    }, "Logout"))
+    }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(___WEBPACK_IMPORTED_MODULE_0__.ProjectList, null))
   );
 };
 
@@ -8447,6 +8432,102 @@ var NavBar = function NavBar() {
 
 /***/ }),
 
+/***/ "./app/components/NoLoginWarning.js":
+/*!******************************************!*\
+  !*** ./app/components/NoLoginWarning.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Stack */ "./node_modules/react-bootstrap/esm/Stack.js");
+
+
+
+
+
+var NoLoginWarning = function NoLoginWarning() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    border: "warning",
+    style: {
+      width: "80%",
+      margin: "2rem"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, "Warning"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Title, null, "Please Log In"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Text, null, "You must be logged in to use this site. Please log in or create an account."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    direction: "horizontal",
+    gap: 3
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    variant: "primary",
+    href: "/login"
+  }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    variant: "secondary",
+    href: "/signup"
+  }, "Create Account"))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NoLoginWarning);
+
+/***/ }),
+
+/***/ "./app/components/ProjectList.js":
+/*!***************************************!*\
+  !*** ./app/components/ProjectList.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Stack */ "./node_modules/react-bootstrap/esm/Stack.js");
+/* harmony import */ var _store_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/reducer */ "./store/reducer.js");
+
+
+
+
+
+
+var ProjectList = function ProjectList() {
+  var userId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.auth.id;
+  });
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    dispatch((0,_store_reducer__WEBPACK_IMPORTED_MODULE_2__.retrieveUserProjectsFromDb)(userId));
+  }, []);
+  var projects = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.projects;
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    border: "primary",
+    style: {
+      width: "80%",
+      margin: "1rem"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Header, null, "Your Projects"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Body, null, !projects[0] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "No projects found.") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Stack__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    gap: 2
+  }, Object.values(projects).map(function (entry, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: index,
+      className: "bg-light-border"
+    }, entry.name);
+  }))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectList);
+
+/***/ }),
+
 /***/ "./app/components/index.js":
 /*!*********************************!*\
   !*** ./app/components/index.js ***!
@@ -8460,12 +8541,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Signup": () => (/* reexport safe */ _AuthForm__WEBPACK_IMPORTED_MODULE_0__.Signup),
 /* harmony export */   "About": () => (/* reexport safe */ _About__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "NavBar": () => (/* reexport safe */ _Navbar__WEBPACK_IMPORTED_MODULE_3__["default"]),
-/* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_2__["default"])
+/* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   "NoLoginWarning": () => (/* reexport safe */ _NoLoginWarning__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "ProjectList": () => (/* reexport safe */ _ProjectList__WEBPACK_IMPORTED_MODULE_5__["default"])
 /* harmony export */ });
 /* harmony import */ var _AuthForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AuthForm */ "./app/components/AuthForm.js");
 /* harmony import */ var _About__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./About */ "./app/components/About.js");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./app/components/Home.js");
 /* harmony import */ var _Navbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Navbar */ "./app/components/Navbar.js");
+/* harmony import */ var _NoLoginWarning__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NoLoginWarning */ "./app/components/NoLoginWarning.js");
+/* harmony import */ var _ProjectList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ProjectList */ "./app/components/ProjectList.js");
+
+
 
 
 
@@ -8484,6 +8571,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "checkForUserToken": () => (/* binding */ checkForUserToken),
+/* harmony export */   "retrieveUserProjectsFromDb": () => (/* binding */ retrieveUserProjectsFromDb),
 /* harmony export */   "authenticate": () => (/* binding */ authenticate),
 /* harmony export */   "logout": () => (/* binding */ logout),
 /* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
@@ -8507,7 +8595,15 @@ var Axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var TOKEN = "token"; //action type constants
 
-var SET_AUTH = "SET_AUTH"; // action creator
+var SET_AUTH = "SET_AUTH";
+var SET_USER_PROJECTS = "SET_USER_PROJECTS"; // action creator
+
+var setUserProjects = function setUserProjects(projects) {
+  return {
+    type: SET_USER_PROJECTS,
+    projects: projects
+  };
+};
 
 var setAuth = function setAuth(auth) {
   // action payload will be auth object
@@ -8565,47 +8661,84 @@ var checkForUserToken = function checkForUserToken() {
     };
   }();
 };
-var authenticate = function authenticate(username, password, method) {
+var retrieveUserProjectsFromDb = function retrieveUserProjectsFromDb(userId) {
   return /*#__PURE__*/function () {
     var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default().mark(function _callee2(dispatch) {
-      var res;
+      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              console.log("this message generated from the reducer authenticate method\nusername: ".concat(username, "\npassword: ").concat(password, "\nmethod: ").concat(method)); // look up the user's token and try to add it to their browser local storage
-
+              console.log("Retrieving user projects from db...");
               _context2.prev = 1;
               _context2.next = 4;
+              return Axios.get("/api/user/".concat(userId, "/projects"));
+
+            case 4:
+              response = _context2.sent;
+              dispatch(setUserProjects(response.data));
+              _context2.next = 11;
+              break;
+
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2["catch"](1);
+              console.log("error in retrieveUserProjectsFromDb thunk creator: ".concat(_context2.t0));
+
+            case 11:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[1, 8]]);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+var authenticate = function authenticate(username, password, method) {
+  return /*#__PURE__*/function () {
+    var _ref3 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default().mark(function _callee3(dispatch) {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              console.log("this message generated from the reducer authenticate method\nusername: ".concat(username, "\npassword: ").concat(password, "\nmethod: ").concat(method)); // look up the user's token and try to add it to their browser local storage
+
+              _context3.prev = 1;
+              _context3.next = 4;
               return Axios.post("/auth/".concat(method), {
                 username: username,
                 password: password
               });
 
             case 4:
-              res = _context2.sent;
+              res = _context3.sent;
               window.localStorage.setItem(TOKEN, res.data.token);
               dispatch(checkForUserToken());
-              _context2.next = 12;
+              _context3.next = 12;
               break;
 
             case 9:
-              _context2.prev = 9;
-              _context2.t0 = _context2["catch"](1);
-              return _context2.abrupt("return", dispatch(setAuth({
-                error: _context2.t0
+              _context3.prev = 9;
+              _context3.t0 = _context3["catch"](1);
+              return _context3.abrupt("return", dispatch(setAuth({
+                error: _context3.t0
               })));
 
             case 12:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, null, [[1, 9]]);
+      }, _callee3, null, [[1, 9]]);
     }));
 
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
     };
   }();
 };
@@ -8624,7 +8757,8 @@ var logout = function logout() {
 };
 /* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    auth: {}
+    auth: {},
+    projects: {}
   };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -8632,6 +8766,11 @@ var logout = function logout() {
     case SET_AUTH:
       return _objectSpread(_objectSpread({}, state), {}, {
         auth: _objectSpread({}, action.auth)
+      });
+
+    case SET_USER_PROJECTS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        projects: _objectSpread({}, action.projects)
       });
 
     default:

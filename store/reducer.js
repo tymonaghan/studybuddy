@@ -5,8 +5,12 @@ const TOKEN = "token";
 
 //action type constants
 const SET_AUTH = "SET_AUTH";
+const SET_USER_PROJECTS = "SET_USER_PROJECTS";
 
 // action creator
+const setUserProjects = (projects) => {
+  return { type: SET_USER_PROJECTS, projects };
+};
 const setAuth = (auth) => {
   // action payload will be auth object
   // auth object will either contain db user object (id, username, pw, etc) or error object
@@ -30,6 +34,16 @@ export const checkForUserToken = () => async (dispatch) => {
   }
   console.log(`no token found, please log in`);
   // if there's no token, do nothing. state will continue not having "auth" object, so Login screen will render.
+};
+
+export const retrieveUserProjectsFromDb = (userId) => async (dispatch) => {
+  console.log(`Retrieving user projects from db...`);
+  try {
+    const response = await Axios.get(`/api/user/${userId}/projects`);
+    dispatch(setUserProjects(response.data));
+  } catch (error) {
+    console.log(`error in retrieveUserProjectsFromDb thunk creator: ${error}`);
+  }
 };
 
 export const authenticate =
@@ -57,10 +71,12 @@ export const logout = () => {
   };
 };
 
-export default function (state = { auth: {} }, action) {
+export default function (state = { auth: {}, projects: {} }, action) {
   switch (action.type) {
     case SET_AUTH:
       return { ...state, auth: { ...action.auth } };
+    case SET_USER_PROJECTS:
+      return { ...state, projects: { ...action.projects } };
     default:
       return state;
   }
