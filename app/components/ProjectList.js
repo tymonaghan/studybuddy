@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { AddProject } from ".";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import { retrieveUserProjectsFromDb } from "../../store/reducer";
@@ -19,19 +20,20 @@ const ProjectList = () => {
       <Card.Header>Your Projects</Card.Header>
       <Card.Body>
         {/* <Card.Text>If you have projects, they will appear here.</Card.Text> */}
-        {!projects[0] ? (
-          <p>No projects found.</p>
-        ) : (
-          <Stack gap={2}>
-            {Object.values(projects).map((entry, index) => {
+        <Stack gap={2}>
+          {!projects[0] ? (
+            <p>No projects found.</p>
+          ) : (
+            Object.values(projects).map((entry, index) => {
               return (
                 <div key={index} className="bg-light-border">
                   {entry.name}
                 </div>
               );
-            })}
-          </Stack>
-        )}
+            })
+          )}
+          <AddProject />
+        </Stack>
       </Card.Body>
     </Card>
   );
