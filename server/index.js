@@ -9,7 +9,7 @@ app.use(bodyParser.json()); // for json requests
 app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 
 // http logging
-app.use(volleyball);
+if (process.env.NODE_ENV !== "testing") app.use(volleyball);
 
 // some routes
 app.use("/api/projects", require("./projects"));

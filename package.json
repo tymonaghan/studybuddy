@@ -41,7 +41,7 @@
     "build": "webpack",
     "start": "node start.js",
     "start-webpack": "webpack serve --mode development",
-    "start-express": "webpack -w & nodemon start.js & JWT='pandora' ",
-    "test": "mocha ./tests/*_tests.js --compilers:babel-register --watch"
+    "start-express": "JWT='pandora' &(webpack -w & nodemon start.js)",
+    "test": "NODE_ENV='testing' mocha ./tests/*_tests.js --compilers:babel-register --watch"
   }
 }
