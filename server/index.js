@@ -18,6 +18,7 @@ if (process.env.NODE_ENV !== "testing") {
 
 // some routes
 app.use("/api/projects", require("./projects"));
+app.use("/api/user", require("./user"));
 // app.use("/api/sources", require("./sources"));
 
 //login post route:
