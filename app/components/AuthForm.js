@@ -17,6 +17,9 @@ const AuthForm = ({ name, displayName }) => {
   useEffect(() => {
     dispatch(checkForUserToken());
   }, []);
+  // useEffect(() => {
+  //   console.log("hello from the AuthForm useEffect");
+  // }, []);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

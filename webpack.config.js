@@ -4,7 +4,7 @@ module.exports = {
   // this must MATCH the entry point where I'm using ReactDOM.render!
   output: {
     path: __dirname,
-    filename: "public/bundle.js",
+    filename: "./public/bundle.js",
   },
   devtool: "source-map",
   module: {
