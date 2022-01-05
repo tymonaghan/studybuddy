@@ -11,6 +11,7 @@ const Project = db.define("project", {
   status: {
     type: Sequelize.ENUM,
     values: ["active", "complete", "dormant"],
+    defaultValue: "active",
   },
 });
 

@@ -9,14 +9,15 @@ router.get("/", (req, res, next) => {
   res.status(418).send("reached the /api/projects GET route, good job");
 });
 
-router.post("/addNew", (req, res, next) => {
+router.post("/addNew", async (req, res, next) => {
   try {
-    const newProject = Project.create({
-      name: req.body.project.name,
-      status: req.body.project.status,
+    const newProject = await Project.create({
+      name: req.body.projectName,
       userId: req.body.userId,
     });
-    res.send(`hi from the add new project route.`);
+    console.log(`this one is from the router.post express route:`);
+    console.dir(newProject);
+    res.status(201).send(newProject);
   } catch (error) {
     console.log(
       `error from the router.post /api/projects/addNew route: ${error}`
