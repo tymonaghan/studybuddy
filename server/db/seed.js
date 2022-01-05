@@ -1,7 +1,7 @@
 const { green, red } = require("chalk");
 const {
   db,
-  models: { Project, User },
+  models: { Project, User, Source },
 } = require(".");
 
 const seed = async () => {
@@ -33,6 +33,19 @@ const seed = async () => {
   } catch (projectError) {
     console.log(red(`error seeding projects! ${projectError}`));
   }
+  try {
+    const fairNoteOne = await Source.create({
+      name: "history.com",
+      classification: "secondary",
+      type: "website",
+      authorLastName: "Editors",
+      authorFirstName: "History Dot Com",
+      publicationDate: "2021-01-19",
+    });
+  } catch (sourceError) {
+    console.log(red(`error seeding sources! ${sourceError}`));
+  }
+
   try {
     const historyDay = await Project.findOne({
       where: { name: "history day" },

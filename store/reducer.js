@@ -40,6 +40,7 @@ export const retrieveUserProjectsFromDb = (userId) => async (dispatch) => {
   console.log(`Retrieving user projects from db...`);
   try {
     const response = await Axios.get(`/api/user/${userId}/projects`);
+    console.log(`projects loaded from db. dispatching setUserProjects`);
     dispatch(setUserProjects(response.data));
   } catch (error) {
     console.log(`error in retrieveUserProjectsFromDb thunk creator: ${error}`);
@@ -76,6 +77,7 @@ export default function (state = { auth: {}, projects: {} }, action) {
     case SET_AUTH:
       return { ...state, auth: { ...action.auth } };
     case SET_USER_PROJECTS:
+      console.log(`setUserProjects dispatched successfully. updating state`);
       return { ...state, projects: { ...action.projects } };
     default:
       return state;
