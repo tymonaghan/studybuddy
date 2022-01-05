@@ -14,7 +14,14 @@ const Source = db.define("source", {
   },
   type: {
     type: Sequelize.ENUM,
-    values: ["book", "website", "journal article", "documentary film or clip"],
+    values: [
+      "book",
+      "website",
+      "journal article",
+      "documentary film or clip",
+      "newspaper",
+      "archival document",
+    ],
   },
   authorLastName: {
     type: Sequelize.STRING,
@@ -25,6 +32,9 @@ const Source = db.define("source", {
   },
   publicationDate: {
     type: Sequelize.DATEONLY,
+  },
+  pageNumber: {
+    type: Sequelize.INTEGER,
   },
 });
 
