@@ -26,9 +26,21 @@ const ProjectList = () => {
           ) : (
             Object.values(projects).map((entry, index) => {
               return (
-                <div key={index} className="bg-light-border">
-                  {entry.name}
-                </div>
+                <Card key={index} className="bg-light-border">
+                  <Card.Body>
+                    <Stack gap={2} direction="horizontal">
+                      <img
+                        style={{ width: "10%" }}
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Noun_Project_task_icon_1251563.svg/105px-Noun_Project_task_icon_1251563.svg.png"
+                      />
+                      <div>
+                        <strong>{entry.name}</strong>
+                      </div>
+                      <div className="ms-auto">{entry.id}</div>
+                      <div>{entry.status}</div>
+                    </Stack>
+                  </Card.Body>
+                </Card>
               );
             })
           )}

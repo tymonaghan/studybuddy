@@ -30,6 +30,17 @@ const Source = db.define("source", {
   authorFirstName: {
     type: Sequelize.STRING,
   },
+  authorFullName: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return `${this.authorFirstName} ${authorLastName}`;
+    },
+    set(value) {
+      throw new Error(
+        "do not try to set the fullname; set first and last names directly"
+      );
+    },
+  },
   publicationDate: {
     type: Sequelize.DATEONLY,
   },
