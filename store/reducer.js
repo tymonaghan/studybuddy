@@ -115,7 +115,7 @@ export default function (state = { auth: {}, projects: {} }, action) {
       const length = Object.values(state.projects).length;
       return {
         ...state,
-        projects: { ...state.projects, length: action.newProject },
+        projects: { ...state.projects, [length]: action.newProject },
       };
     default:
       return state;
