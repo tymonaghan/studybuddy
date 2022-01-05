@@ -1,7 +1,7 @@
 const { green, red } = require("chalk");
 const {
   db,
-  models: { Project, User },
+  models: { Project, User, Source },
 } = require(".");
 
 const seed = async () => {
@@ -33,6 +33,56 @@ const seed = async () => {
   } catch (projectError) {
     console.log(red(`error seeding projects! ${projectError}`));
   }
+  try {
+    const fairNoteOne = await Source.create({
+      name: "history.com",
+      classification: "secondary",
+      type: "website",
+      authorLastName: "Editors",
+      authorFirstName: "History Dot Com",
+      publicationDate: "2021-01-19",
+      projectId: 1,
+    });
+    const fairNoteTwo = await Source.create({
+      name: "Year of Hope for Farmers in a Free Ghana",
+      classification: "secondary",
+      type: "newspaper",
+      authorLastName: "Appiah-Danquah",
+      authorFirstName: "Martin",
+      publicationDate: "1958-03-06",
+      pageNumber: 24,
+      projectId: 1,
+    });
+    const fairNoteThree = await Source.create({
+      name: "Kwame Nkrumah archives",
+      classification: "primary",
+      type: "archival document",
+      authorLastName: "Nkrumah",
+      authorFirstName: "Kwame",
+      projectId: 1,
+    });
+    const fairNoteFour = await Source.create({
+      name: "Ghana: The Autobiography of Kwame Nkrumah",
+      classification: "primary",
+      type: "book",
+      authorLastName: "Nkrumah",
+      authorFirstName: "Kwame",
+      publicationDate: "1957-01-01",
+      projectId: 1,
+    });
+    const biographyNoteOne = await Source.create({
+      name: "Britannica encyclopedia",
+      classification: "secondary",
+      type: "website",
+      authorLastName: "Lewis",
+      authorFirstName: "James",
+      publicationDate: "2022-01-01",
+      projectId: 3,
+    });
+  } catch (sourceError) {
+    console.log(red(`error seeding sources! ${sourceError}`));
+  }
+
   try {
     const historyDay = await Project.findOne({
       where: { name: "history day" },

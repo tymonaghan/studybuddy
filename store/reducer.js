@@ -6,11 +6,19 @@ const TOKEN = "token";
 //action type constants
 const SET_AUTH = "SET_AUTH";
 const SET_USER_PROJECTS = "SET_USER_PROJECTS";
+const ADD_NEW_PROJECT = "ADD_NEW_PROJECT";
 
 // action creator
 const setUserProjects = (projects) => {
   return { type: SET_USER_PROJECTS, projects };
 };
+
+const addNewProject = (newProject) => {
+  console.log(`logging newProject from addNewProject action creator:`);
+  console.dir(newProject);
+  return { type: ADD_NEW_PROJECT, newProject };
+};
+
 const setAuth = (auth) => {
   // action payload will be auth object
   // auth object will either contain db user object (id, username, pw, etc) or error object
@@ -18,6 +26,25 @@ const setAuth = (auth) => {
 };
 
 //thunk creator
+export const addNewProjectToDb = (projectName, userId) => async (dispatch) => {
+  window.alert(
+    `you're doing it! projectName is ${projectName} and userId is ${userId}`
+  );
+  try {
+    const response = await Axios.post("/api/projects/addNew", {
+      projectName,
+      userId,
+    });
+    console.log(
+      `ayyy it looks like your object was created in the db. dispatching redux action. but first: logging response.data`
+    );
+    console.dir(response.data);
+    dispatch(addNewProject(response.data));
+  } catch (error) {
+    console.log(`error in addNewProjectToDb thunk: ${error}`);
+  }
+};
+
 export const checkForUserToken = () => async (dispatch) => {
   //checks browser storage for token and dispatches set auth action if found
   console.log(`checking local storage for user token`);
@@ -40,6 +67,7 @@ export const retrieveUserProjectsFromDb = (userId) => async (dispatch) => {
   console.log(`Retrieving user projects from db...`);
   try {
     const response = await Axios.get(`/api/user/${userId}/projects`);
+    console.log(`projects loaded from db. dispatching setUserProjects`);
     dispatch(setUserProjects(response.data));
   } catch (error) {
     console.log(`error in retrieveUserProjectsFromDb thunk creator: ${error}`);
@@ -76,7 +104,19 @@ export default function (state = { auth: {}, projects: {} }, action) {
     case SET_AUTH:
       return { ...state, auth: { ...action.auth } };
     case SET_USER_PROJECTS:
+      console.log(`setUserProjects dispatched successfully. updating state`);
       return { ...state, projects: { ...action.projects } };
+    case ADD_NEW_PROJECT:
+      console.log(`logging the action.newProject:`);
+      console.dir(action.newProject);
+      console.log(
+        `state.projects length!? ${Object.values(state.projects).length}`
+      );
+      const length = Object.values(state.projects).length;
+      return {
+        ...state,
+        projects: { ...state.projects, length: action.newProject },
+      };
     default:
       return state;
   }

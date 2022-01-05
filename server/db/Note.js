@@ -1,18 +1,15 @@
 const Sequelize = require("sequelize");
 const db = require("./database");
 
-const Project = db.define("project", {
-  name: {
+const Note = db.define("note", {
+  headline: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
     validate: { notEmpty: true },
   },
-  status: {
-    type: Sequelize.ENUM,
+  text: {
+    type: Sequelize.TEXT,
     values: ["active", "complete", "dormant"],
-    defaultValue: "active",
   },
 });
-
-module.exports = Project;
