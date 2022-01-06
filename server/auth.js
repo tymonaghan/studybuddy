@@ -27,6 +27,8 @@ router.post("/signup", async (req, res, next) => {
         projects: [
           {
             name: "Example Project",
+            summary:
+              "This project was created automatically. Check it out to explore StudyBuddy features.",
             status: "active",
           },
         ],

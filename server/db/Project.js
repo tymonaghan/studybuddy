@@ -4,9 +4,11 @@ const db = require("./database");
 const Project = db.define("project", {
   name: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: false,
     validate: { notEmpty: true },
+  },
+  summary: {
+    type: Sequelize.TEXT,
   },
   status: {
     type: Sequelize.ENUM,
