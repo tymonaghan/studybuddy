@@ -15,6 +15,11 @@ main {
   background-color: gray;
 }
 
+a > * {
+  color: black;
+  text-decoration: none;
+}
+
 .main-contain {
   background-color: thistle;
 }
@@ -24,4 +29,18 @@ body,
 #app,
 #app > div {
   height: 100%;
+}
+
+.active-project {
+  color: green;
+}
+.dormant-project {
+  color: rgb(99, 63, 17);
+}
+.complete-project {
+  color: blue;
+}
+
+.project-view-container {
+  background-color: cornsilk;
 }

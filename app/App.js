@@ -1,4 +1,12 @@
-import { About, Home, Login, NavBar, Signup } from "./components/";
+import {
+  About,
+  Home,
+  Login,
+  NavBar,
+  Signup,
+  ProjectView,
+  ProjectViewWrapper,
+} from "./components/";
 import { Navigate, Route, Routes } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +34,9 @@ const App = () => {
           <Route path="/login" element={Login} />
           <Route path="/signup" element={Signup} />{" "}
           <Route path="/about" element={<About />} />
+          <Route path="project" element={<ProjectViewWrapper />}>
+            <Route path=":projectId" element={<ProjectView />} />
+          </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Container>
