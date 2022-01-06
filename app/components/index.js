@@ -6,6 +6,7 @@ import Home from "./Home";
 import NavBar from "./Navbar";
 import NoLoginWarning from "./NoLoginWarning";
 import ProjectList from "./ProjectList";
+import ProjectListCard from "./ProjectListCard";
 
 export {
   Login,
@@ -16,4 +17,5 @@ export {
   NoLoginWarning,
   ProjectList,
   AddProject,
+  ProjectListCard,
 };
