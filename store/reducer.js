@@ -99,6 +99,7 @@ export const logout = () => {
   };
 };
 
+//big ol' reducer:
 export default function (state = { auth: {}, projects: {} }, action) {
   switch (action.type) {
     case SET_AUTH:

@@ -1,4 +1,7 @@
 const User = require("./db/User");
+const {
+  models: { Project },
+} = require("./db");
 
 const router = require("express").Router();
 
@@ -15,12 +18,23 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const user = await User.create({
-      // the destructured req.body did not work here for whatever reason
-      // create a new user based on the object passed in as req
-      username: req.body.username,
-      password: req.body.password,
-    });
+    const user = await User.create(
+      {
+        // the destructured req.body did not work here for whatever reason
+        // create a new user based on the object passed in as req
+        username: req.body.username,
+        password: req.body.password,
+        projects: [
+          {
+            name: "Example Project",
+            status: "active",
+          },
+        ],
+      },
+      {
+        include: [Project],
+      }
+    );
     res.send({ token: await user.generateToken() }); // generate and return their token
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
