@@ -1,6 +1,6 @@
 const User = require("./db/User");
 const {
-  models: { Project },
+  models: { Project, Source },
 } = require("./db");
 
 const router = require("express").Router();
@@ -30,11 +30,21 @@ router.post("/signup", async (req, res, next) => {
             summary:
               "This project was created automatically. Check it out to explore StudyBuddy features.",
             status: "active",
+            sources: [
+              {
+                name: "Example Book Source",
+                classification: "secondary",
+                type: "book",
+                authorLastName: "Tilly",
+                authorFirstName: "Syliva",
+                publicationDate: "3189-01-01",
+              },
+            ],
           },
         ],
       },
       {
-        include: [Project],
+        include: [Project, Source],
       }
     );
     res.send({ token: await user.generateToken() }); // generate and return their token

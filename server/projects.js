@@ -15,8 +15,6 @@ router.post("/addNew", async (req, res, next) => {
       name: req.body.projectName,
       userId: req.body.userId,
     });
-    console.log(`this one is from the router.post express route:`);
-    console.dir(newProject);
     res.status(201).send(newProject);
   } catch (error) {
     console.log(
@@ -26,8 +24,8 @@ router.post("/addNew", async (req, res, next) => {
 });
 
 router.get("/countSources", async (req, res, next) => {
-  // res.status(418).send(`you suck!`);
-  // res.send(req.body);
+  //this was supposed to be a helper function to count the number of notes but it still didn't
+  // work when called from within a .map. it's not currently doing anything.
 
   const projectsArray = req.body;
   const newProjectsArray = [];

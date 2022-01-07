@@ -12,23 +12,23 @@ const AddProject = () => {
   return (
     <div className="bg-dark-border">
       <Stack direction="horizontal" gap={2}>
-        <Form>
+        <Form style={{ width: "75%" }}>
           <Form.Control
             id="new-project-text"
             className="me-auto"
             placeholder="New Project Name"
           />
-          <Button
-            variant="secondary"
-            onClick={() => {
-              const thisForm = document.getElementById("new-project-text");
-              dispatch(addNewProjectToDb(thisForm.value, userId));
-              thisForm.value = "";
-            }}
-          >
-            Add Project
-          </Button>
         </Form>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            const thisForm = document.getElementById("new-project-text");
+            dispatch(addNewProjectToDb(thisForm.value, userId));
+            thisForm.value = "";
+          }}
+        >
+          Add Project
+        </Button>
       </Stack>
     </div>
   );

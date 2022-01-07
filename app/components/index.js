@@ -7,6 +7,8 @@ import NavBar from "./Navbar";
 import NoLoginWarning from "./NoLoginWarning";
 import ProjectList from "./ProjectList";
 import ProjectListCard from "./ProjectListCard";
+import ProjectView from "./ProjectView";
+import ProjectViewWrapper from "./ProjectViewWrapper";
 
 export {
   Login,
@@ -18,4 +20,6 @@ export {
   ProjectList,
   AddProject,
   ProjectListCard,
+  ProjectView,
+  ProjectViewWrapper,
 };

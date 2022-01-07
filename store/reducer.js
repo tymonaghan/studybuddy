@@ -100,23 +100,19 @@ export const logout = () => {
 };
 
 //big ol' reducer:
-export default function (state = { auth: {}, projects: {} }, action) {
+export default function (state = { auth: {}, projects: [] }, action) {
   switch (action.type) {
     case SET_AUTH:
       return { ...state, auth: { ...action.auth } };
     case SET_USER_PROJECTS:
       console.log(`setUserProjects dispatched successfully. updating state`);
-      return { ...state, projects: { ...action.projects } };
+      return { ...state, projects: [...action.projects] };
     case ADD_NEW_PROJECT:
       console.log(`logging the action.newProject:`);
       console.dir(action.newProject);
-      console.log(
-        `state.projects length!? ${Object.values(state.projects).length}`
-      );
-      const length = Object.values(state.projects).length;
       return {
         ...state,
-        projects: { ...state.projects, [length]: action.newProject },
+        projects: [...state.projects, action.newProject],
       };
     default:
       return state;
