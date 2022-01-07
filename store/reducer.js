@@ -126,24 +126,40 @@ export const logout = () => {
 };
 
 //big ol' reducer:
-export default function (
-  state = { auth: {}, projects: [], currentProjectId: NaN, currentSources: [] }, // <-- default state
-  action
-) {
+// auth: {}, projects: [], currentProjectId: NaN, currentSources: []
+export function authReducer(state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
-      return { ...state, auth: { ...action.auth } };
-    case SET_CURRENT_PROJECT_ID:
-      return { ...state, currentProjectId: action.projectId };
+      return { ...action.auth };
+    default:
+      return state;
+  }
+}
+
+export function projectsReducer(state = [], action) {
+  switch (action.type) {
     case SET_USER_PROJECTS:
-      return { ...state, projects: [...action.projects] };
+      return [...action.projects];
     case ADD_NEW_PROJECT:
-      return {
-        ...state,
-        projects: [...state.projects, action.newProject],
-      };
+      return [...state.projects, action.newProject];
+    default:
+      return state;
+  }
+}
+
+export function currentProjectReducer(state = NaN, action) {
+  switch (action.type) {
+    case SET_CURRENT_PROJECT_ID:
+      return action.projectId;
+    default:
+      return state;
+  }
+}
+
+export function currentSourcesReducer(state = [], action) {
+  switch (action.type) {
     case SET_CURRENT_SOURCES:
-      return { ...state, currentSources: action.sources };
+      return [...action.sources];
     default:
       return state;
   }
