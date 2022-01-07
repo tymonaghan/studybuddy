@@ -19,7 +19,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(`dispatching checkForUserToken from App.js useEffect`);
+    // console.log(`dispatching checkForUserToken from App.js useEffect`);
     dispatch(checkForUserToken());
   });
   // check for user token every time this page is loaded

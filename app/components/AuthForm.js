@@ -13,6 +13,7 @@ const AuthForm = ({ name, displayName }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   // if state.auth.id exists, this user is logged in
   const dispatch = useDispatch();
+  // console.dir(error);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -46,7 +47,10 @@ const AuthForm = ({ name, displayName }) => {
           <Button type="submit">{displayName}</Button>
         </div>
         {error && error.response && (
-          <div className="errorbox"> {error.response.data} </div>
+          <div className="errorbox">
+            {" "}
+            Login Error. Check your username and password and try again.{" "}
+          </div>
         )}
       </form>
     </div>

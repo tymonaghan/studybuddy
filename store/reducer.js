@@ -14,12 +14,13 @@ const SET_CURRENT_SOURCES = "SET_CURRENT_SOURCES";
 
 // action creator
 const setUserProjects = (projects) => {
+  console.dir(projects);
   return { type: SET_USER_PROJECTS, projects };
 };
 
 const setCurrentSources = (sources) => {
-  console.log(`this is the sources from setCurrentSources action creator:`);
-  console.dir(sources);
+  // console.log(`this is the sources from setCurrentSources action creator:`);
+  // console.dir(sources);
   return { type: SET_CURRENT_SOURCES, sources };
 };
 
@@ -56,10 +57,10 @@ export const getCurrentProjectSourcesFromDb =
   (projectId) => async (dispatch) => {
     // take in the projectId number
     try {
-      console.log(`getting current project sources. projectId is ${projectId}`);
+      // console.log(`getting current project sources. projectId is ${projectId}`);
       const response = await Axios.get(`/api/projects/${projectId}/getSources`);
-      console.log(`logging response.data:`);
-      console.dir(response.data);
+      // console.log(`logging response.data:`);
+      // console.dir(response.data);
       dispatch(setCurrentSources(response.data));
       //send that response to the setCurrentSources action creator
     } catch (error) {
@@ -71,11 +72,11 @@ export const getCurrentProjectSourcesFromDb =
 
 export const checkForUserToken = () => async (dispatch) => {
   //checks browser storage for token and dispatches set auth action if found
-  console.log(`checking local storage for user token`);
+  // console.log(`checking local storage for user token`);
   const token = window.localStorage.getItem(TOKEN);
   //check local storage (user browser) for token
   if (token) {
-    console.log(`token FOUND. attempting log in.`);
+    console.log(`user token found, attempting log-in`);
     const res = await Axios.get("/auth/getUserByToken", {
       //see server/auth.js loc40: router.get("/getUserByToken"
       headers: { authorization: token },
@@ -89,10 +90,10 @@ export const checkForUserToken = () => async (dispatch) => {
 };
 
 export const retrieveUserProjectsFromDb = (userId) => async (dispatch) => {
-  console.log(`Retrieving user projects from db... userId is ${userId}`);
+  // console.log(`Retrieving user projects from db... userId is ${userId}`);
   try {
     const response = await Axios.get(`/api/user/${userId}/projects`);
-    console.log(`projects loaded from db. dispatching setUserProjects`);
+    // console.log(`projects loaded from db. dispatching setUserProjects`);
     dispatch(setUserProjects(response.data));
   } catch (error) {
     console.log(`error in retrieveUserProjectsFromDb thunk creator: ${error}`);
@@ -101,9 +102,9 @@ export const retrieveUserProjectsFromDb = (userId) => async (dispatch) => {
 
 export const authenticate =
   (username, password, method) => async (dispatch) => {
-    console.log(
-      `this message generated from the reducer authenticate method\nusername: ${username}\npassword: ${password}\nmethod: ${method}`
-    );
+    // console.log(
+    //   `this message generated from the reducer authenticate method\nusername: ${username}\npassword: ${password}\nmethod: ${method}`
+    // );
     // look up the user's token and try to add it to their browser local storage
     try {
       const res = await Axios.post(`/auth/${method}`, { username, password });

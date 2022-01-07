@@ -1,6 +1,7 @@
 const User = require("./db/User");
 const {
   models: { Project, Source },
+  ProjectHasManySources,
 } = require("./db");
 
 const router = require("express").Router();
@@ -44,16 +45,6 @@ router.post("/signup", async (req, res, next) => {
             summary:
               "This project was created automatically. Check it out to explore StudyBuddy features.",
             status: "active",
-            sources: [
-              {
-                name: "Example Book Source",
-                classification: "secondary",
-                type: "book",
-                authorLastName: "Tilly",
-                authorFirstName: "Syliva",
-                publicationDate: "3189-01-01",
-              },
-            ],
           },
         ],
       },
@@ -61,6 +52,21 @@ router.post("/signup", async (req, res, next) => {
         include: [Project, Source],
       }
     );
+    const exampleSource = await Source.create({
+      name: "Example Book Source",
+      classification: "secondary",
+      type: "book",
+      authorLastName: "Tilly",
+      authorFirstName: "Syliva",
+      publicationDate: "3189-01-01",
+      notes:
+        "These notes were added automatically. You can replace them with your own notes.",
+    });
+
+    // associate the new user, project, and source together here:
+    // const exampleProject=await Project.findOne({where:{id:req.body.username,}})
+    // exampleSource.setProject()
+
     res.send({ token: await user.generateToken() }); // generate and return their token
   } catch (error) {
     if (error.name === "SequelizeValidationError") {

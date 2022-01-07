@@ -13,4 +13,8 @@ const SourceBelongsToProject = Source.belongsTo(Project);
 const UserHasManySources = User.hasMany(Source);
 
 // module.exports = { db, Project, User };
-module.exports = { db, models: { Project, User, Source } };
+module.exports = {
+  db,
+  models: { Project, User, Source },
+  ProjectHasManySources,
+};

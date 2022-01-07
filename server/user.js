@@ -15,7 +15,7 @@ router.get("/:id/projects", async function (req, res, next) {
     //this is a stupid hack because this gets hit once before userId
     //is defined from the ProjectViewWrapper component. it was throwing (and catching, but still)
     // an error because it was trying to findByPk(undefined)
-    res.send({});
+    res.send([]);
   } else {
     try {
       const currentUser = await User.findByPk(req.params.id);
@@ -23,7 +23,7 @@ router.get("/:id/projects", async function (req, res, next) {
       // console.dir(projects);
       res.send(projects);
     } catch (error) {
-      console.log(`error getting projects: ${error}`);
+      console.log(`error getting projects: ${error.stack}`);
     }
   }
 });
