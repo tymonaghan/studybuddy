@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { red } from "chalk";
 
 const Axios = require("axios");
 const TOKEN = "token";
@@ -7,10 +8,23 @@ const TOKEN = "token";
 const SET_AUTH = "SET_AUTH";
 const SET_USER_PROJECTS = "SET_USER_PROJECTS";
 const ADD_NEW_PROJECT = "ADD_NEW_PROJECT";
+const SET_CURRENT_PROJECT_ID = "SET_CURRENT_PROJECT_ID";
+const SET_CURRENT_SOURCES = "SET_CURRENT_SOURCES";
+// const TRASH_PROJECT = "TRASH_PROJECT";
 
 // action creator
 const setUserProjects = (projects) => {
   return { type: SET_USER_PROJECTS, projects };
+};
+
+const setCurrentSources = (sources) => {
+  console.log(`this is the sources from setCurrentSources action creator:`);
+  console.dir(sources);
+  return { type: SET_CURRENT_SOURCES, sources };
+};
+
+export const setCurrentProjectId = (projectId) => {
+  return { type: SET_CURRENT_PROJECT_ID, projectId };
 };
 
 const addNewProject = (newProject) => {
@@ -27,23 +41,33 @@ const setAuth = (auth) => {
 
 //thunk creator
 export const addNewProjectToDb = (projectName, userId) => async (dispatch) => {
-  window.alert(
-    `you're doing it! projectName is ${projectName} and userId is ${userId}`
-  );
   try {
     const response = await Axios.post("/api/projects/addNew", {
       projectName,
       userId,
     });
-    console.log(
-      `ayyy it looks like your object was created in the db. dispatching redux action. but first: logging response.data`
-    );
-    console.dir(response.data);
     dispatch(addNewProject(response.data));
   } catch (error) {
     console.log(`error in addNewProjectToDb thunk: ${error}`);
   }
 };
+
+export const getCurrentProjectSourcesFromDb =
+  (projectId) => async (dispatch) => {
+    // take in the projectId number
+    try {
+      console.log(`getting current project sources. projectId is ${projectId}`);
+      const response = await Axios.get(`/api/projects/${projectId}/getSources`);
+      console.log(`logging response.data:`);
+      console.dir(response.data);
+      dispatch(setCurrentSources(response.data));
+      //send that response to the setCurrentSources action creator
+    } catch (error) {
+      console.log(
+        red(`error in getCurrentProjectSourcesFromDb (reducer file): ${error}`)
+      );
+    }
+  };
 
 export const checkForUserToken = () => async (dispatch) => {
   //checks browser storage for token and dispatches set auth action if found
@@ -51,20 +75,21 @@ export const checkForUserToken = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   //check local storage (user browser) for token
   if (token) {
-    console.log(`token FOUND. logging in`);
-    const res = await Axios.get("auth/getUserByToken", {
+    console.log(`token FOUND. attempting log in.`);
+    const res = await Axios.get("/auth/getUserByToken", {
       //see server/auth.js loc40: router.get("/getUserByToken"
       headers: { authorization: token },
     });
     // if there's a token, look up the user and send that object into setAuth action creator
     return dispatch(setAuth(res.data));
+  } else {
+    // if there's no token, do nothing. state will continue not having "auth" object, so Login screen will render.
+    console.log(`no token found, please log in`);
   }
-  console.log(`no token found, please log in`);
-  // if there's no token, do nothing. state will continue not having "auth" object, so Login screen will render.
 };
 
 export const retrieveUserProjectsFromDb = (userId) => async (dispatch) => {
-  console.log(`Retrieving user projects from db...`);
+  console.log(`Retrieving user projects from db... userId is ${userId}`);
   try {
     const response = await Axios.get(`/api/user/${userId}/projects`);
     console.log(`projects loaded from db. dispatching setUserProjects`);
@@ -99,24 +124,25 @@ export const logout = () => {
   };
 };
 
-export default function (state = { auth: {}, projects: {} }, action) {
+//big ol' reducer:
+export default function (
+  state = { auth: {}, projects: [], currentProjectId: NaN, currentSources: [] }, // <-- default state
+  action
+) {
   switch (action.type) {
     case SET_AUTH:
       return { ...state, auth: { ...action.auth } };
+    case SET_CURRENT_PROJECT_ID:
+      return { ...state, currentProjectId: action.projectId };
     case SET_USER_PROJECTS:
-      console.log(`setUserProjects dispatched successfully. updating state`);
-      return { ...state, projects: { ...action.projects } };
+      return { ...state, projects: [...action.projects] };
     case ADD_NEW_PROJECT:
-      console.log(`logging the action.newProject:`);
-      console.dir(action.newProject);
-      console.log(
-        `state.projects length!? ${Object.values(state.projects).length}`
-      );
-      const length = Object.values(state.projects).length;
       return {
         ...state,
-        projects: { ...state.projects, [length]: action.newProject },
+        projects: [...state.projects, action.newProject],
       };
+    case SET_CURRENT_SOURCES:
+      return { ...state, currentSources: action.sources };
     default:
       return state;
   }

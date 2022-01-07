@@ -55,7 +55,9 @@ app.use("*", (req, res) => {
       __dirname,
       "../public/index.html"
     )}`
-  ); // end logging
+  );
+  console.dir(req.headers.authorization);
+  // end logging
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 

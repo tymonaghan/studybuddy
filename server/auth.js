@@ -1,8 +1,25 @@
 const User = require("./db/User");
+const {
+  models: { Project, Source },
+} = require("./db");
 
 const router = require("express").Router();
 
 //all routes prefixed with /auth
+
+router.get("/getUserByToken", async function (req, res, next) {
+  try {
+    // console.log(
+    //   `here we are inside the getUserByToken route. req.headers.authorization:`
+    // );
+    // console.dir(req.headers.authorization);
+    res.send(await User.findByToken(req.headers.authorization));
+  } catch (error) {
+    next(error);
+    console.log(`error in router.get(/auth/getUserByToken)`);
+  }
+});
+
 router.post("/login", async (req, res, next) => {
   //should receive {username, password} as req.body (reducer.js loc30)
   // console.dir(req.body);
@@ -15,12 +32,35 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const user = await User.create({
-      // the destructured req.body did not work here for whatever reason
-      // create a new user based on the object passed in as req
-      username: req.body.username,
-      password: req.body.password,
-    });
+    const user = await User.create(
+      {
+        // the destructured req.body did not work here for whatever reason
+        // create a new user based on the object passed in as req
+        username: req.body.username,
+        password: req.body.password,
+        projects: [
+          {
+            name: "Example Project",
+            summary:
+              "This project was created automatically. Check it out to explore StudyBuddy features.",
+            status: "active",
+            sources: [
+              {
+                name: "Example Book Source",
+                classification: "secondary",
+                type: "book",
+                authorLastName: "Tilly",
+                authorFirstName: "Syliva",
+                publicationDate: "3189-01-01",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        include: [Project, Source],
+      }
+    );
     res.send({ token: await user.generateToken() }); // generate and return their token
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
@@ -34,15 +74,6 @@ router.post("/signup", async (req, res, next) => {
     } else {
       next(error);
     }
-  }
-});
-
-router.get("/getUserByToken", async (req, res, next) => {
-  try {
-    res.send(await User.findByToken(req.headers.authorization));
-  } catch (error) {
-    next(error);
-    console.log(`error in router.get(/auth/getUserByToken)`);
   }
 });
 

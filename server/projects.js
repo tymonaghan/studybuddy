@@ -9,14 +9,44 @@ router.get("/", (req, res, next) => {
   res.status(418).send("reached the /api/projects GET route, good job");
 });
 
+router.get("/:projectId/getSources", async (req, res, next) => {
+  try {
+    const currentSources = await Source.findAll({
+      where: { projectId: req.params.projectId },
+    });
+    // const currentSources = await t.getSources(currentProject);
+    // console.log(Object.keys(currentProject.__proto__));
+    // console.dir(currentSources);
+    res.send(currentSources);
+  } catch (error) {
+    console.log(
+      `error in router.get /api/projects/:projectId/getSources: ${error.stack}`
+    );
+  }
+});
+
 router.post("/addNew", async (req, res, next) => {
   try {
-    const newProject = await Project.create({
-      name: req.body.projectName,
-      userId: req.body.userId,
-    });
-    console.log(`this one is from the router.post express route:`);
-    console.dir(newProject);
+    const newProject = await Project.create(
+      {
+        name: req.body.projectName,
+        userId: req.body.userId,
+        summary: "This is a user-created project. You can edit this summary.",
+        sources: [
+          {
+            name: "Example Book Source",
+            classification: "secondary",
+            type: "book",
+            authorLastName: "Tilly",
+            authorFirstName: "Syliva",
+            publicationDate: "3189-01-01",
+            notes:
+              "This source was created for you automatically as an example. Click this card to view/edit this source.",
+          },
+        ],
+      },
+      { include: [Source] }
+    );
     res.status(201).send(newProject);
   } catch (error) {
     console.log(
@@ -26,8 +56,8 @@ router.post("/addNew", async (req, res, next) => {
 });
 
 router.get("/countSources", async (req, res, next) => {
-  // res.status(418).send(`you suck!`);
-  // res.send(req.body);
+  //this was supposed to be a helper function to count the number of notes but it still didn't
+  // work when called from within a .map. it's not currently doing anything.
 
   const projectsArray = req.body;
   const newProjectsArray = [];

@@ -1,18 +1,21 @@
-/* div {
-  background-color: red;
-} 
-
-.loginbox * {
-  background-color: aqua;
+body {
+  font-size: 100%;
 }
 
-.errorbox {
-  background-color: yellow;
-  color: black;
-}
-*/
 main {
   background-color: gray;
+}
+
+a > * {
+  color: black;
+  text-decoration: none;
+  text-decoration-line: none;
+}
+
+.project-title {
+  text-decoration: none;
+  font-size: 1.4em;
+  font-weight: bold;
 }
 
 .main-contain {
@@ -24,4 +27,28 @@ body,
 #app,
 #app > div {
   height: 100%;
+}
+
+.active-project {
+  color: green;
+}
+.dormant-project {
+  color: rgb(99, 63, 17);
+}
+.complete-project {
+  color: blue;
+}
+
+.project-view-container {
+  background-color: cornsilk;
+}
+
+/* these need this weird syntax to avoid being overwritten with bootstrap styles */
+
+div[id^="secondary-source-card"] {
+  background-color: rgba(30, 143, 255, 0.5);
+}
+
+div[id^="primary-source-card"] {
+  background-color: rgba(184, 135, 11, 0.5);
 }

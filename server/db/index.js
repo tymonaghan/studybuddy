@@ -4,11 +4,13 @@ const User = require("./User");
 const Source = require("./Source");
 
 //define db associations here:
-User.hasMany(Project);
-Project.belongsTo(User);
+const UserHasManyProjects = User.hasMany(Project);
+const ProjectBelongsToUser = Project.belongsTo(User);
 
-Project.hasMany(Source);
-Source.belongsTo(Project);
+const ProjectHasManySources = Project.hasMany(Source);
+const SourceBelongsToProject = Source.belongsTo(Project);
+
+const UserHasManySources = User.hasMany(Source);
 
 // module.exports = { db, Project, User };
 module.exports = { db, models: { Project, User, Source } };

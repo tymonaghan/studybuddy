@@ -4,7 +4,6 @@ const db = require("./database");
 const Source = db.define("source", {
   name: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: false,
     validate: { notEmpty: true },
   },
@@ -33,7 +32,7 @@ const Source = db.define("source", {
   authorFullName: {
     type: Sequelize.VIRTUAL,
     get() {
-      return `${this.authorFirstName} ${authorLastName}`;
+      return `${this.authorFirstName} ${this.authorLastName}`;
     },
     set(value) {
       throw new Error(
@@ -44,8 +43,9 @@ const Source = db.define("source", {
   publicationDate: {
     type: Sequelize.DATEONLY,
   },
-  pageNumber: {
-    type: Sequelize.INTEGER,
+  notes: {
+    type: Sequelize.TEXT,
+    defaultValue: "add your own notes here.",
   },
 });
 

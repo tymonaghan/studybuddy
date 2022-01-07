@@ -7,6 +7,7 @@ import { logout } from "../../store/reducer";
 const NavBar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const dispatch = useDispatch();
+  const { username } = useSelector((state) => state.auth);
 
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
@@ -24,7 +25,7 @@ const NavBar = () => {
               },
               (
                 <Nav className="justify-content-end">
-                  <NavDropdown title="Account" id="basic-nav-dropdown">
+                  <NavDropdown title={username} id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">
                       Edit account details
                     </NavDropdown.Item>
