@@ -23,7 +23,7 @@ router.get("/:id/projects", async function (req, res, next) {
       // console.dir(projects);
       res.send(projects);
     } catch (error) {
-      console.log(`error getting projects: ${error}`);
+      console.log(`error getting projects: ${error.stack}`);
     }
   }
 });
