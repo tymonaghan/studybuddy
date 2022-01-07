@@ -59,7 +59,7 @@ router.post("/signup", async (req, res, next) => {
       authorLastName: "Tilly",
       authorFirstName: "Syliva",
       publicationDate: "3189-01-01",
-      notes:
+      sourceNotes:
         "These notes were added automatically. You can replace them with your own notes.",
     });
 

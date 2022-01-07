@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("./database");
+const Note = require("./Note");
 
 const Source = db.define("source", {
   name: {
@@ -43,10 +44,22 @@ const Source = db.define("source", {
   publicationDate: {
     type: Sequelize.DATEONLY,
   },
-  notes: {
+  sourceNotes: {
     type: Sequelize.TEXT,
     defaultValue: "add your own notes here.",
   },
 });
 
 module.exports = Source;
+
+Source.afterCreate(async (source) => {
+  const demoNote = await Note.create(
+    {
+      headline: "example note",
+      text: "add text notes here, for example quotes",
+      pageNumber: "pg 23, 52-57",
+      sourceId: source.id,
+    },
+    { include: [Source] }
+  );
+});
