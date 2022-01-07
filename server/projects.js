@@ -27,26 +27,11 @@ router.get("/:projectId/getSources", async (req, res, next) => {
 
 router.post("/addNew", async (req, res, next) => {
   try {
-    const newProject = await Project.create(
-      {
-        name: req.body.projectName,
-        userId: req.body.userId,
-        summary: "This is a user-created project. You can edit this summary.",
-        sources: [
-          {
-            name: "Example Book Source",
-            classification: "secondary",
-            type: "book",
-            authorLastName: "Tilly",
-            authorFirstName: "Syliva",
-            publicationDate: "3189-01-01",
-            notes:
-              "This source was created for you automatically as an example. Click this card to view/edit this source.",
-          },
-        ],
-      },
-      { include: [Source] }
-    );
+    const newProject = await Project.create({
+      name: req.body.projectName,
+      userId: req.body.userId,
+      summary: "This is a user-created project. You can edit this summary.",
+    });
     res.status(201).send(newProject);
   } catch (error) {
     console.log(

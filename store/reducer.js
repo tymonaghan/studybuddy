@@ -14,6 +14,7 @@ const SET_CURRENT_SOURCES = "SET_CURRENT_SOURCES";
 
 // action creator
 const setUserProjects = (projects) => {
+  console.dir(projects);
   return { type: SET_USER_PROJECTS, projects };
 };
 
@@ -75,6 +76,7 @@ export const checkForUserToken = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   //check local storage (user browser) for token
   if (token) {
+    console.log(`user token found, attempting log-in`);
     const res = await Axios.get("/auth/getUserByToken", {
       //see server/auth.js loc40: router.get("/getUserByToken"
       headers: { authorization: token },
