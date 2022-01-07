@@ -6,6 +6,20 @@ const {
 const router = require("express").Router();
 
 //all routes prefixed with /auth
+
+router.get("/getUserByToken", async function (req, res, next) {
+  try {
+    // console.log(
+    //   `here we are inside the getUserByToken route. req.headers.authorization:`
+    // );
+    // console.dir(req.headers.authorization);
+    res.send(await User.findByToken(req.headers.authorization));
+  } catch (error) {
+    next(error);
+    console.log(`error in router.get(/auth/getUserByToken)`);
+  }
+});
+
 router.post("/login", async (req, res, next) => {
   //should receive {username, password} as req.body (reducer.js loc30)
   // console.dir(req.body);
@@ -60,15 +74,6 @@ router.post("/signup", async (req, res, next) => {
     } else {
       next(error);
     }
-  }
-});
-
-router.get("/getUserByToken", async (req, res, next) => {
-  try {
-    res.send(await User.findByToken(req.headers.authorization));
-  } catch (error) {
-    next(error);
-    console.log(`error in router.get(/auth/getUserByToken)`);
   }
 });
 

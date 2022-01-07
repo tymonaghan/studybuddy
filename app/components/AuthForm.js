@@ -14,13 +14,6 @@ const AuthForm = ({ name, displayName }) => {
   // if state.auth.id exists, this user is logged in
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(checkForUserToken());
-  }, []);
-  // useEffect(() => {
-  //   console.log("hello from the AuthForm useEffect");
-  // }, []);
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;

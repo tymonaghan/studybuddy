@@ -15,6 +15,10 @@ const Project = db.define("project", {
     values: ["active", "complete", "dormant"],
     defaultValue: "active",
   },
+  trashed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 module.exports = Project;

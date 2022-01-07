@@ -32,7 +32,7 @@ const Source = db.define("source", {
   authorFullName: {
     type: Sequelize.VIRTUAL,
     get() {
-      return `${this.authorFirstName} ${authorLastName}`;
+      return `${this.authorFirstName} ${this.authorLastName}`;
     },
     set(value) {
       throw new Error(

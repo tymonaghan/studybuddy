@@ -18,6 +18,8 @@ const seed = async () => {
         projects: [
           {
             name: "Example Project",
+            summary:
+              "This example project was created automatically. Click to Explore or delete.",
             status: "active",
           },
         ],
@@ -32,6 +34,8 @@ const seed = async () => {
         projects: [
           {
             name: "Example Project",
+            summary:
+              "This example project was created automatically. Click to Explore or delete.",
             status: "active",
           },
         ],
@@ -45,6 +49,9 @@ const seed = async () => {
         projects: [
           {
             name: "Example Project",
+            summary:
+              "This example project was created automatically. Click to Explore or delete.",
+
             status: "active",
           },
         ],
@@ -74,7 +81,7 @@ const seed = async () => {
     console.log(red(`error seeding projects! ${projectError}`));
   }
   try {
-    const fairNoteOne = await Source.create({
+    const fairSourceOne = await Source.create({
       name: "history.com",
       classification: "secondary",
       type: "website",
@@ -83,7 +90,7 @@ const seed = async () => {
       publicationDate: "2021-01-19",
       projectId: 1,
     });
-    const fairNoteTwo = await Source.create({
+    const fairSourceTwo = await Source.create({
       name: "Year of Hope for Farmers in a Free Ghana",
       classification: "secondary",
       type: "newspaper",
@@ -92,7 +99,7 @@ const seed = async () => {
       publicationDate: "1958-03-06",
       projectId: 1,
     });
-    const fairNoteThree = await Source.create({
+    const fairSourceThree = await Source.create({
       name: "Kwame Nkrumah archives",
       classification: "primary",
       type: "archival document",
@@ -100,7 +107,7 @@ const seed = async () => {
       authorFirstName: "Kwame",
       projectId: 1,
     });
-    const fairNoteFour = await Source.create({
+    const fairSourceFour = await Source.create({
       name: "Ghana: The Autobiography of Kwame Nkrumah",
       classification: "primary",
       type: "book",
@@ -109,7 +116,7 @@ const seed = async () => {
       publicationDate: "1957-01-01",
       projectId: 1,
     });
-    const biographyNoteOne = await Source.create({
+    const biographySourceOne = await Source.create({
       name: "Britannica encyclopedia",
       classification: "secondary",
       type: "website",
