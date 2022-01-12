@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   Card,
@@ -10,7 +11,7 @@ import {
 } from "react-bootstrap";
 
 const SourceList = () => {
-  const { currentSources } = useSelector((state) => state);
+  const currentSources = useSelector((state) => state.currentSources);
 
   return (
     <Container>
@@ -19,30 +20,32 @@ const SourceList = () => {
           currentSources.map((currentSource, i) => {
             return (
               <Col key={i}>
-                <Card key={i} style={{ width: "15rem" }} border="primary">
-                  <Card.Header
-                    id={`${currentSource.classification}-source-card-${currentSource.id}`}
-                  >
-                    {currentSource.classification}
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Title bg="secondary">
-                      "{currentSource.name}"
-                    </Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      {currentSource.authorLastName},{" "}
-                      {currentSource.authorFirstName}
-                    </Card.Subtitle>
-                    <Card.Text>{currentSource.notes}</Card.Text>
-                    <Row>
-                      <Col>
-                        <Button variant="warning">Edit</Button>
-                      </Col>
-                      <Col>
-                        <Button variant="danger">Delete</Button>
-                      </Col>
-                    </Row>
-                  </Card.Body>
+                <Card style={{ width: "15rem" }} border="primary">
+                  <Link to={`source/${currentSource.id}`}>
+                    <Card.Header
+                      id={`${currentSource.classification}-source-card-${currentSource.id}`}
+                    >
+                      {currentSource.classification}
+                    </Card.Header>
+                    <Card.Body>
+                      <Card.Title bg="secondary">
+                        "{currentSource.name}"
+                      </Card.Title>
+                      <Card.Subtitle className="mb-2 text-muted">
+                        {currentSource.authorLastName},{" "}
+                        {currentSource.authorFirstName}
+                      </Card.Subtitle>
+                      <Card.Text>{currentSource.notes}</Card.Text>
+                      <Row>
+                        <Col>
+                          <Button variant="warning">Edit</Button>
+                        </Col>
+                        <Col>
+                          <Button variant="danger">Delete</Button>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Link>
                 </Card>
               </Col>
             );

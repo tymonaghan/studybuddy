@@ -10,12 +10,19 @@ const SET_USER_PROJECTS = "SET_USER_PROJECTS";
 const ADD_NEW_PROJECT = "ADD_NEW_PROJECT";
 const SET_CURRENT_PROJECT_ID = "SET_CURRENT_PROJECT_ID";
 const SET_CURRENT_SOURCES = "SET_CURRENT_SOURCES";
+const SET_CURRENT_NOTES = "SET_CURRENT_NOTES";
 // const TRASH_PROJECT = "TRASH_PROJECT";
 
 // action creator
 const setUserProjects = (projects) => {
-  console.dir(projects);
+  // console.dir(projects);
   return { type: SET_USER_PROJECTS, projects };
+};
+
+export const setCurrentNotes = (notes) => {
+  console.log(`hello from setCurrentNotes action creator. notes:`);
+  console.dir(notes);
+  return { type: SET_CURRENT_NOTES, notes };
 };
 
 const setCurrentSources = (sources) => {
@@ -50,6 +57,17 @@ export const addNewProjectToDb = (projectName, userId) => async (dispatch) => {
     dispatch(addNewProject(response.data));
   } catch (error) {
     console.log(`error in addNewProjectToDb thunk: ${error}`);
+  }
+};
+
+export const setCurrentNotesThunk = (noteId) => async (dispatch) => {
+  try {
+    const response = await Axios.get(
+      `/api/projects/:projectId/source/${noteId}`
+    );
+    dispatch(setCurrentNotes(response.data));
+  } catch (error) {
+    console.log(`error in the setCurrentNotesThunk: ${error}`);
   }
 };
 
@@ -160,6 +178,15 @@ export function currentSourcesReducer(state = [], action) {
   switch (action.type) {
     case SET_CURRENT_SOURCES:
       return [...action.sources];
+    default:
+      return state;
+  }
+}
+
+export function currentNotesReducer(state = [], action) {
+  switch (action.type) {
+    case SET_CURRENT_NOTES:
+      return [...action.notes];
     default:
       return state;
   }

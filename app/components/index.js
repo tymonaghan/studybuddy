@@ -10,6 +10,7 @@ import ProjectListCard from "./ProjectListCard";
 import ProjectView from "./ProjectView";
 import ProjectViewWrapper from "./ProjectViewWrapper";
 import SourceList from "./SourceList";
+import SourceView from "./SourceView";
 
 export {
   Login,
@@ -24,4 +25,5 @@ export {
   ProjectView,
   ProjectViewWrapper,
   SourceList,
+  SourceView,
 };

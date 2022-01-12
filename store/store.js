@@ -3,18 +3,20 @@ import { applyMiddleware, createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
 import {
-  authReducer,
-  projectsReducer,
-  currentProjectReducer,
-  currentSourcesReducer,
+  authReducer as auth,
+  projectsReducer as projects,
+  currentProjectReducer as currentProjectId,
+  currentSourcesReducer as currentSources,
+  currentNotesReducer as currentNotes,
 } from "./reducer";
 import thunkMiddleware from "redux-thunk";
 
 export const combinedReducer = combineReducers({
-  auth: authReducer,
-  projects: projectsReducer,
-  currentProjectId: currentProjectReducer,
-  currentSources: currentSourcesReducer,
+  auth,
+  projects,
+  currentProjectId,
+  currentSources,
+  currentNotes,
 });
 
 const MiddlewareWithDevtools = composeWithDevTools(
