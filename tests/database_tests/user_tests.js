@@ -1,8 +1,10 @@
 // copying and modifying from Pillars tests
-const { expect } = require("chai");
+const chai = require("chai"),
+  expect = chai.expect,
+  should = chai.should();
 
-const _app = require("../server/index");
-const app = require("supertest")(_app);
+const _app = require("../../server/index"); // import the app to test
+const app = require("supertest")(_app); // import supertest - not actually sure what this does yet
 
 describe("Basic GET routes", () => {
   it("allows connections to project", async () => {
