@@ -11,53 +11,19 @@ const seed = async () => {
     console.log(red(`error on db.sync: ${error}`));
   }
   try {
-    const jimmy = await User.create(
-      {
-        username: "jimmy",
-        password: "jimmay",
-        projects: [
-          {
-            name: "Example Project",
-            summary:
-              "This example project was created automatically. Click to Explore or delete.",
-            status: "active",
-          },
-        ],
-      },
-      { include: [Project] }
-    );
+    const jimmy = await User.create({
+      username: "jimmy",
+      password: "jimmay",
+    });
 
-    const ricky = await User.create(
-      {
-        username: "ricky",
-        password: "rickay",
-        projects: [
-          {
-            name: "Example Project",
-            summary:
-              "This example project was created automatically. Click to Explore or delete.",
-            status: "active",
-          },
-        ],
-      },
-      { include: [Project] }
-    );
-    const bluey = await User.create(
-      {
-        username: "bluey",
-        password: "bingo",
-        projects: [
-          {
-            name: "Example Project",
-            summary:
-              "This example project was created automatically. Click to Explore or delete.",
-
-            status: "active",
-          },
-        ],
-      },
-      { include: [Project] }
-    );
+    const ricky = await User.create({
+      username: "ricky",
+      password: "rickay",
+    });
+    const bluey = await User.create({
+      username: "bluey",
+      password: "bingo",
+    });
   } catch (userError) {
     console.log(red(`error seeding users! ${userError}`));
   }
