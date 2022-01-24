@@ -59,22 +59,17 @@ User.findByToken = async function (token) {
     const { id } = await jwt.verify(token, process.env.JWT || "atlantis");
     const user = await User.findByPk(id);
     if (!user) {
-      throw `Token found but not recognized.`;
+      throw `That user doesn't seem to exist.`;
     }
     return user;
   } catch (actualError) {
     console.log(`actual error: ${actualError}`);
     const error = Error(
       red(
-        "The token supplied was not recognized. This usually means that you tried to sign on to a different version of the project than the version where you created the token/account. Removing token from browser storage..."
+        "The token supplied was not recognized. This usually means that you tried to sign on to a different version of the project than the version where you created the token/account."
       )
     );
-    try {
-      const TOKEN = "token";
-      window.localStorage.removeItem(TOKEN);
-    } catch (error) {
-      console.log(red(`error removing token: ${error}`));
-    }
+
     error.status = 401;
     throw error;
   }

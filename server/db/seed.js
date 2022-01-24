@@ -151,24 +151,6 @@ const seed = async () => {
       red(`error associating students and projects! ${studentToProjectError}`)
     );
   }
-  // try {
-  //   // const userList = await User.findAll();
-  //   // // console.log(Array.isArray(userList));
-  //   // for (let i = 0; i < userList.length; i++) {
-  //   //   const currentUser = userList[i];
-
-  //   //   await Source.create({
-  //   //     name: "Example Book Source",
-  //   //     classification: "secondary",
-  //   //     type: "book",
-  //   //     authorLastName: "Tilly",
-  //   //     authorFirstName: "Syliva",
-  //   //     publicationDate: "3189-01-01",
-  //   //   });
-  //   // }
-  // } catch (error) {
-  //   console.log(red(`error creating sample sources: ${error}`));
-  // }
 };
 
 seed()

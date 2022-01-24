@@ -37,7 +37,7 @@ Project.afterCreate(async (project) => {
       authorLastName: "Tilly",
       authorFirstName: "Syliva",
       publicationDate: "3189-01-01",
-      notes:
+      sourceNotes:
         "This source was created automatically as an example. Feel free to delete it.",
       projectId: project.id,
     },

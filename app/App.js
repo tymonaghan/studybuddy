@@ -6,6 +6,7 @@ import {
   Signup,
   ProjectView,
   ProjectViewWrapper,
+  SourceView,
 } from "./components/";
 import { Navigate, Route, Routes } from "react-router-dom";
 import React, { useEffect } from "react";
@@ -36,7 +37,11 @@ const App = () => {
           <Route path="/signup" element={Signup} />{" "}
           <Route path="/about" element={<About />} />
           <Route path="project" element={<ProjectViewWrapper />}>
-            <Route path=":projectId" element={<ProjectView />} />
+            <Route exact path=":projectId" element={<ProjectView />} />
+            <Route
+              path=":projectId/source/:sourceId"
+              element={<SourceView />}
+            />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

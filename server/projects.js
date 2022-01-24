@@ -1,12 +1,23 @@
 const router = require("express").Router();
 const {
-  models: { Project, Source },
+  models: { Project, Source, Note },
 } = require("./db");
 
 // all routes branch from
 // ###   /api/projects   ###
 router.get("/", (req, res, next) => {
   res.status(418).send("reached the /api/projects GET route, good job");
+});
+
+router.get("/:projectId/source/:sourceId", async (req, res, next) => {
+  try {
+    const { projectId, sourceId } = req.params;
+    const currentSource = Source.findByPk(sourceId);
+    const currentNotes = await Note.findAll({ where: { sourceId } });
+    res.send(currentNotes);
+  } catch (error) {
+    console.log(`error in router.get /projects/id/source/id: ${error}`);
+  }
 });
 
 router.get("/:projectId/getSources", async (req, res, next) => {
