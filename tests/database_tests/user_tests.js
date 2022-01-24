@@ -13,22 +13,23 @@ const { logTable } = require("../setup_tests");
 const _app = require("../../server/index"); // import the app to test
 const app = require("supertest")(_app); // import supertest - not actually sure what this does yet
 
-describe("USER tests: creating and reading users", () => {
-  before(async () => {
+describe("USER tests: creating and reading users", function () {
+  if (process.env.NODE_ENV !== "testing") {
+    this.slow(200);
+    this.timeout(3000);
+    // allow plenty of time when doing CI tests to heroku test db
+    // i basically never want this to timeout unless something is completely dead
+  }
+
+  before(async function () {
     // tasks to perform once before this entire block
     await db.sync({ force: true });
-    // let's try just syncing the db once before all of these tests, and writing tests that don't use the same namespaces
-    //console.log(cyan(`      Take a look at server/db/User.js\n`));
+    // let's syncing the db once before all of these tests; don't use the same namespaces
   });
-  describe("regular users", () => {
-    beforeEach(() => {
-      // i believe this will happen before EACH test in this block (that's a lotta syncs)
-      // await db.sync({ force: true });
-    });
-
-    describe("Basic Fields: name and userType", () => {
-      describe("name", () => {
-        it("name is a string", async () => {
+  describe("regular users", function () {
+    describe("Basic Fields: name and userType", function () {
+      describe("name", function () {
+        it("name is a string", async function () {
           const bluey = await User.create({
             username: "BLUEY",
             password: "bingo",
@@ -39,7 +40,7 @@ describe("USER tests: creating and reading users", () => {
           );
         });
 
-        it("name must be unique", async () => {
+        it("name must be unique", async function () {
           // We shouldn't be able to create two users with the same name.
           // await User.create({
           //   username: "BLUEY",
@@ -55,7 +56,7 @@ describe("USER tests: creating and reading users", () => {
           ).to.be.rejected;
         });
 
-        it("name cannot be null nor empty string", async () => {
+        it("name cannot be null nor empty string", async function () {
           // We shouldn't be able to create a user without a name.
           await expect(
             User.create({ password: "bingo" }),
@@ -67,7 +68,7 @@ describe("USER tests: creating and reading users", () => {
           ).to.be.rejected;
         });
 
-        it("password cannot be null nor empty string", async () => {
+        it("password cannot be null nor empty string", async function () {
           // We also shouldn't be able to create a user with an empty name.
           await expect(
             User.create({ username: "bingo" }),
@@ -82,13 +83,13 @@ describe("USER tests: creating and reading users", () => {
     });
   });
 
-  describe("superusers", () => {
-    it("users are NOT superusers by default", async () => {
+  describe("superusers", function () {
+    it("users are NOT superusers by default", async function () {
       const ali = await User.create({ username: "ALI", password: "ALI" });
       expect(ali.superuser).to.equal(false);
     });
 
-    it("can create a superuser", async () => {
+    it("can create a superuser", async function () {
       const moana = await User.create({
         username: "MOANA",
         password: "navigator",
@@ -99,27 +100,10 @@ describe("USER tests: creating and reading users", () => {
     });
   });
 
-  describe("example projects", () => {
-    it("created users include an example project automatically", async () => {
+  describe("example projects", function () {
+    it("created users include an example project automatically", async function () {
       const raya = await User.create({ username: "RAYA", password: "DRAGON" });
       should.exist(raya);
-      //   const example = await Project.findOne({
-      //     where: { userId: +raya.id },
-      //   });
-
-      //   console.log(example);
-      //   // should.exist(example);
-      //   expect(example.name).to.equal(false);
     });
-
-    // it("can create a superuser", async () => {
-    //   const moana = await User.create({
-    //     username: "MOANA",
-    //     password: "navigator",
-    //     superuser: true,
-    //   });
-    //   // should.exist(moana);
-    //   expect(moana.superuser).to.equal(true);
-    // });
   });
 });
