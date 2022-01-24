@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for url-encoded requests
 
 // http logging
 if (process.env.NODE_ENV !== "testing") {
-  console.log(`testing mode OFF. logging enabled`);
+  console.log(`logging enabled http requests with volleyball`);
   app.use(volleyball);
 } else {
   console.log(`testing mode ON. logging disabled`);

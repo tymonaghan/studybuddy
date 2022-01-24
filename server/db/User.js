@@ -3,6 +3,7 @@ const db = require("./database"); // <-- points to database instance
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { red } = require("chalk");
+const Project = require("./Project");
 // const axios = require("axios");
 
 const SALT_ROUNDS = 5;
@@ -12,13 +13,21 @@ const User = db.define("user", {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
-  //newField:{
-  //type: Sequelize.DATATYPE
-  //}
+  admin: {
+    type: Sequelize.STRING,
+    defaultValue: "false",
+  },
 });
 
 module.exports = User;
@@ -85,4 +94,12 @@ User.beforeUpdate(async (user) => {
   //anytime password changes, encrypt it and store the hash, not the password.
   const hashedPw = await bcrypt.hash(user.password, SALT_ROUNDS);
   user.password = hashedPw;
+});
+User.afterCreate(async (user) => {
+  const demoProject = await Project.create({
+    name: "Example Project",
+    summary:
+      "This project was created automatically. Check it out to explore StudyBuddy features.",
+    status: "active",
+  });
 });

@@ -33,25 +33,12 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const user = await User.create(
-      {
-        // the destructured req.body did not work here for whatever reason
-        // create a new user based on the object passed in as req
-        username: req.body.username,
-        password: req.body.password,
-        projects: [
-          {
-            name: "Example Project",
-            summary:
-              "This project was created automatically. Check it out to explore StudyBuddy features.",
-            status: "active",
-          },
-        ],
-      },
-      {
-        include: [Project, Source],
-      }
-    );
+    const user = await User.create({
+      // the destructured req.body did not work here for whatever reason
+      // create a new user based on the object passed in as req
+      username: req.body.username,
+      password: req.body.password,
+    });
     const exampleSource = await Source.create({
       name: "Example Book Source",
       classification: "secondary",
