@@ -21,18 +21,18 @@ describe("PROJECT tests: creating and reading projects", function () {
     // i basically never want this to timeout unless something is completely dead
   }
 
-  before(async function () {
-    // tasks to perform once before this entire block
-    await db.sync({ force: true });
-    const userOne = await User.create({
-      username: "testuser1",
-      password: "pwd",
-    });
-    const userTwo = await User.create({
-      username: "testuser2",
-      password: "pwd",
-    });
-  });
+  // before(async function () {
+  //   // tasks to perform once before this entire block
+  //   await db.sync({ force: true });
+  //   const userOne = await User.create({
+  //     username: "testuser1",
+  //     password: "pwd",
+  //   });
+  //   const userTwo = await User.create({
+  //     username: "testuser2",
+  //     password: "pwd",
+  //   });
+  // });
   describe("basic project validation", function () {
     it("Projects require a name", async function () {
       await expect(
