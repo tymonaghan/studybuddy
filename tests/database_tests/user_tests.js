@@ -27,59 +27,55 @@ describe("USER tests: creating and reading users", function () {
     // let's syncing the db once before all of these tests; don't use the same namespaces
   });
   describe("regular users", function () {
-    describe("Basic Fields: name and userType", function () {
-      describe("name", function () {
-        it("name is a string", async function () {
-          const bluey = await User.create({
-            username: "BLUEY",
-            password: "bingo",
-          });
-          expect(bluey.username).to.equal(
-            "BLUEY",
-            "Was not able to create a user with name BLUEY"
-          );
-        });
-
-        it("name must be unique", async function () {
-          // We shouldn't be able to create two users with the same name.
-          // await User.create({
-          //   username: "BLUEY",
-          //   password: "bingo",
-          // });
-          // above User.create not needed if we're not force-syncing beforeEach
-          await expect(
-            User.create({
-              username: "BLUEY",
-              password: "bingo",
-            }),
-            "Shouldn't be able to create two users with the same name (BLUEY)"
-          ).to.be.rejected;
-        });
-
-        it("name cannot be null nor empty string", async function () {
-          // We shouldn't be able to create a user without a name.
-          await expect(
-            User.create({ password: "bingo" }),
-            "We shouldn't be able to create a user with null username"
-          ).to.be.rejected;
-          await expect(
-            User.create({ username: "", password: "bingo" }),
-            "We shouldn't be able to create a user with an empty username"
-          ).to.be.rejected;
-        });
-
-        it("password cannot be null nor empty string", async function () {
-          // We also shouldn't be able to create a user with an empty name.
-          await expect(
-            User.create({ username: "bingo" }),
-            "We shouldn't be able to create a user with null password"
-          ).to.be.rejected;
-          await expect(
-            User.create({ username: "bandit", password: "" }),
-            "We shouldn't be able to create a user with an empty password"
-          ).to.be.rejected;
-        });
+    it("name is a string", async function () {
+      const bluey = await User.create({
+        username: "BLUEY",
+        password: "bingo",
       });
+      expect(bluey.username).to.equal(
+        "BLUEY",
+        "Was not able to create a user with name BLUEY"
+      );
+    });
+
+    it("name must be unique", async function () {
+      // We shouldn't be able to create two users with the same name.
+      // await User.create({
+      //   username: "BLUEY",
+      //   password: "bingo",
+      // });
+      // above User.create not needed if we're not force-syncing beforeEach
+      await expect(
+        User.create({
+          username: "BLUEY",
+          password: "bingo",
+        }),
+        "Shouldn't be able to create two users with the same name (BLUEY)"
+      ).to.be.rejected;
+    });
+
+    it("name cannot be null nor empty string", async function () {
+      // We shouldn't be able to create a user without a name.
+      await expect(
+        User.create({ password: "bingo" }),
+        "We shouldn't be able to create a user with null username"
+      ).to.be.rejected;
+      await expect(
+        User.create({ username: "", password: "bingo" }),
+        "We shouldn't be able to create a user with an empty username"
+      ).to.be.rejected;
+    });
+
+    it("password cannot be null nor empty string", async function () {
+      // We also shouldn't be able to create a user with an empty name.
+      await expect(
+        User.create({ username: "bingo" }),
+        "We shouldn't be able to create a user with null password"
+      ).to.be.rejected;
+      await expect(
+        User.create({ username: "bandit", password: "" }),
+        "We shouldn't be able to create a user with an empty password"
+      ).to.be.rejected;
     });
   });
 
