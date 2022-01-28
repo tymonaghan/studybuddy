@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
+import PopoverBody from "react-bootstrap/PopoverBody";
+import PopoverHeader from "react-bootstrap/PopoverHeader";
 import {
   getCurrentProjectSourcesFromDb,
   setCurrentNotesThunk,
   setCurrentSources,
 } from "../../store/reducer";
 import { useParams } from "react-router-dom";
+import { NewNoteForm } from ".";
 
 const SourceView = () => {
   const dispatch = useDispatch();
@@ -37,6 +42,22 @@ const SourceView = () => {
           ) : (
             <h1>loading...</h1>
           )}
+        </Col>
+        <Col md="auto">
+          <OverlayTrigger
+            trigger="click"
+            placement="bottom"
+            overlay={
+              <Popover id={`popover-positioned-bottom`}>
+                <Popover.Header as="h3">{`Add a New Note`}</Popover.Header>
+                <Popover.Body>
+                  <NewNoteForm />
+                </Popover.Body>
+              </Popover>
+            }
+          >
+            <Button variant="success">+ Add New Note</Button>
+          </OverlayTrigger>
         </Col>
         <Col md="auto">
           <Button>Back to Sources List</Button>

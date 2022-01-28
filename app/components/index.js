@@ -11,6 +11,7 @@ import ProjectView from "./ProjectView";
 import ProjectViewWrapper from "./ProjectViewWrapper";
 import SourceList from "./SourceList";
 import SourceView from "./SourceView";
+import NewNoteForm from "./NewNoteForm";
 
 export {
   Login,
@@ -26,4 +27,5 @@ export {
   ProjectViewWrapper,
   SourceList,
   SourceView,
+  NewNoteForm,
 };
