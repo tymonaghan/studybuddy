@@ -9,6 +9,7 @@ router.get("/", (req, res, next) => {
   res.status(418).send("reached the /api/projects GET route, good job");
 });
 
+// Get Source by ID
 router.get("/:projectId/source/:sourceId", async (req, res, next) => {
   try {
     const { projectId, sourceId } = req.params;
@@ -20,6 +21,7 @@ router.get("/:projectId/source/:sourceId", async (req, res, next) => {
   }
 });
 
+// get all sources for project by ID
 router.get("/:projectId/getSources", async (req, res, next) => {
   try {
     const currentSources = await Source.findAll({
@@ -36,6 +38,7 @@ router.get("/:projectId/getSources", async (req, res, next) => {
   }
 });
 
+// add a new project
 router.post("/addNew", async (req, res, next) => {
   try {
     const newProject = await Project.create({
@@ -51,6 +54,22 @@ router.post("/addNew", async (req, res, next) => {
   }
 });
 
+// add a new note to a project
+router.post("/:projectId/source/:sourceId/addNote", async (req, res, next) => {
+  try {
+    const { sourceId } = req.params;
+    const newNote = req.body;
+    console.log(req.body);
+    const currentSource = await Source.findByPk(sourceId);
+    console.log(Object.keys(currentSource.__proto__));
+    const addedNote = await currentSource.createNote(newNote);
+    res.status(201).send(addedNote);
+  } catch (error) {
+    console.log(`error in the add new note to project express route: ${error}`);
+  }
+});
+
+// count number of sources
 router.get("/countSources", async (req, res, next) => {
   //this was supposed to be a helper function to count the number of notes but it still didn't
   // work when called from within a .map. it's not currently doing anything.

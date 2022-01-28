@@ -11,6 +11,7 @@ const ADD_NEW_PROJECT = "ADD_NEW_PROJECT";
 const SET_CURRENT_PROJECT_ID = "SET_CURRENT_PROJECT_ID";
 const SET_CURRENT_SOURCES = "SET_CURRENT_SOURCES";
 const SET_CURRENT_NOTES = "SET_CURRENT_NOTES";
+const ADD_NEW_NOTE = "ADD_NEW_NOTE";
 // const TRASH_PROJECT = "TRASH_PROJECT";
 
 // action creator
@@ -19,9 +20,13 @@ const setUserProjects = (projects) => {
   return { type: SET_USER_PROJECTS, projects };
 };
 
+const addNewNote = (note) => {
+  return { type: ADD_NEW_NOTE, note };
+};
+
 export const setCurrentNotes = (notes) => {
-  console.log(`hello from setCurrentNotes action creator. notes:`);
-  console.dir(notes);
+  // console.log(`hello from setCurrentNotes action creator. notes:`);
+  // console.dir(notes);
   return { type: SET_CURRENT_NOTES, notes };
 };
 
@@ -36,8 +41,8 @@ export const setCurrentProjectId = (projectId) => {
 };
 
 const addNewProject = (newProject) => {
-  console.log(`logging newProject from addNewProject action creator:`);
-  console.dir(newProject);
+  // console.log(`logging newProject from addNewProject action creator:`);
+  // console.dir(newProject);
   return { type: ADD_NEW_PROJECT, newProject };
 };
 
@@ -57,6 +62,19 @@ export const addNewProjectToDb = (projectName, userId) => async (dispatch) => {
     dispatch(addNewProject(response.data));
   } catch (error) {
     console.log(`error in addNewProjectToDb thunk: ${error}`);
+  }
+};
+
+export const addNewNoteToDb = (projectid, newNote) => async (dispatch) => {
+  try {
+    const response = await Axios({
+      method: "post",
+      url: "api/projects/:projectId/source/:sourceId/addNote",
+      data: newNote,
+    });
+    dispatch(addNewNote(response.data));
+  } catch (error) {
+    console.log(`error in the addNewNoteToDb thunk: ${error}`);
   }
 };
 
@@ -187,6 +205,8 @@ export function currentNotesReducer(state = [], action) {
   switch (action.type) {
     case SET_CURRENT_NOTES:
       return [...action.notes];
+    case ADD_NEW_NOTE:
+      return [...state.currentNotes, action.newNote];
     default:
       return state;
   }
