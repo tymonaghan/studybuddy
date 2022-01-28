@@ -32,7 +32,7 @@ const ProjectViewWrapper = () => {
   }, [userId, currentProject]);
 
   return (
-    <Container>
+    <Container className="project-view-wrapper">
       <Stack gap={2} direction="horizontal">
         <h1>
           Project View:{" "}
