@@ -47,11 +47,12 @@ const SourceView = () => {
           <OverlayTrigger
             trigger="click"
             placement="bottom"
+            rootClose="true"
             overlay={
               <Popover id={`popover-positioned-bottom`}>
                 <Popover.Header as="h3">{`Add a New Note`}</Popover.Header>
                 <Popover.Body>
-                  <NewNoteForm />
+                  <NewNoteForm sourceId={sourceId} />
                 </Popover.Body>
               </Popover>
             }
