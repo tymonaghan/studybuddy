@@ -1,17 +1,26 @@
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap/";
+import {
+  Container,
+  Nav,
+  NavDropdown,
+  Navbar,
+  Breadcrumb,
+} from "react-bootstrap/";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
 
 import React from "react";
 import { logout } from "../../store/authReducer";
 
 const NavBar = () => {
+  const params = useParams();
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.auth);
 
+  console.log(params);
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
-      <Container>
+      <Container fluid>
         <Navbar.Brand href="/home">StudyBuddy</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -26,13 +35,13 @@ const NavBar = () => {
               (
                 <Nav className="justify-content-end">
                   <NavDropdown title={username} id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">
+                    <NavDropdown.Item disabled href="#action/3.1">
                       Edit account details
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
+                    <NavDropdown.Item disabled href="#action/3.2">
                       placeholder{" "}
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">
+                    <NavDropdown.Item disabled href="#action/3.3">
                       another placeholder
                     </NavDropdown.Item>
                     <NavDropdown.Divider />

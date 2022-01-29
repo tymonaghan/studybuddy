@@ -59,3 +59,9 @@ div[id^="secondary-source-card"] {
 div[id^="primary-source-card"] {
   background-color: rgba(184, 135, 11, 0.5);
 }
+
+.crumbox {
+  background-color: white;
+  margin: 0;
+  margin-block-end: 0;
+}

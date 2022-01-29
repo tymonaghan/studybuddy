@@ -1,10 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
+import { addNewNoteToDb } from "../../store/reducer";
 
 const NewNoteForm = () => {
+  const [formData, setformData] = useState({
+    newNoteHeadline: "",
+    newNoteText: "",
+    pageNumber: "",
+  });
+  const dispatch = useDispatch();
+
   return (
-    <Form>
+    <Form
+      onTimeUpdate={() => {
+        setFormData(form);
+      }}
+    >
       <fieldset>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="newNoteHeadline">headline</Form.Label>
@@ -26,7 +38,9 @@ const NewNoteForm = () => {
             label="Can't check this"
           />
         </Form.Group> */}
-        <Button type="submit">Submit</Button>
+        <Button onClick={() => dispatch(addNewNoteToDb(formData))}>
+          Submit
+        </Button>
       </fieldset>
     </Form>
   );

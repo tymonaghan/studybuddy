@@ -7,6 +7,7 @@ import {
   ProjectView,
   ProjectViewWrapper,
   SourceView,
+  BreadcrumbBox,
 } from "./components/";
 import { Navigate, Route, Routes } from "react-router-dom";
 import React, { useEffect } from "react";
@@ -29,6 +30,7 @@ const App = () => {
     <Stack>
       <Container className="nav-contain" style={{ padding: "0px" }}>
         <NavBar />
+        <BreadcrumbBox />
       </Container>
       <Container className="main-contain">
         <Routes>
