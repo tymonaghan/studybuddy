@@ -59,9 +59,9 @@ router.post("/:projectId/source/:sourceId/addNote", async (req, res, next) => {
   try {
     const { sourceId } = req.params;
     const newNote = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     const currentSource = await Source.findByPk(sourceId);
-    console.log(Object.keys(currentSource.__proto__));
+    // console.log(Object.keys(currentSource.__proto__));
     const addedNote = await currentSource.createNote(newNote);
     res.status(201).send(addedNote);
   } catch (error) {

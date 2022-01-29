@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import { Navigate } from "react-router-dom";
 import React from "react";
 import Stack from "react-bootstrap/Stack";
-import { logout } from "../../store/reducer";
+import { logout } from "../../store/authReducer";
 
 const Home = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);

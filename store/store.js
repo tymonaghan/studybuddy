@@ -3,12 +3,12 @@ import { applyMiddleware, createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
 import {
-  authReducer as auth,
   projectsReducer as projects,
   currentProjectReducer as currentProjectId,
   currentSourcesReducer as currentSources,
   currentNotesReducer as currentNotes,
 } from "./reducer";
+import { authReducer as auth } from "./authReducer";
 import thunkMiddleware from "redux-thunk";
 
 export const combinedReducer = combineReducers({

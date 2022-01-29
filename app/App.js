@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Container from "react-bootstrap/Container";
 import Stack from "react-bootstrap/Stack";
-import { checkForUserToken } from "../store/reducer";
+import { checkForUserToken } from "../store/authReducer";
 
 const App = () => {
   const dispatch = useDispatch();

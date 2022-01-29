@@ -2,7 +2,7 @@ import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap/";
 import { useDispatch, useSelector } from "react-redux";
 
 import React from "react";
-import { logout } from "../../store/reducer";
+import { logout } from "../../store/authReducer";
 
 const NavBar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
