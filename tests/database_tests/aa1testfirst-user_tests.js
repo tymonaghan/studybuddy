@@ -7,6 +7,7 @@ const {
   db,
   models: { User, Project, Source },
 } = require("../../server/db");
+const { cyan, yellow, red } = require("chalk");
 
 const { logTable } = require("../setup_tests");
 

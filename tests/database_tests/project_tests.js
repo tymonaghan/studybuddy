@@ -60,5 +60,22 @@ describe("PROJECT tests: creating and reading projects", function () {
         "project trashed state is not false"
       );
     });
+    it("creating a project automagically creates an associated example source", async function () {
+      // We shouldn't be able to create two users with the same name.
+      const project2 = await Project.create({ name: "Project2" });
+      should.exist(project2);
+      const expectedSource = await Source.findOne({
+        where: { projectId: project2.id },
+      });
+      should.exist(expectedSource);
+      expect(expectedSource.name).to.equal(
+        "Example Book Source",
+        "mismatch on example source name"
+      );
+      expect(expectedSource.classification).to.equal(
+        "secondary",
+        "mismatch on example source classification"
+      );
+    });
   });
 });

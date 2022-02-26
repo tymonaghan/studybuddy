@@ -94,7 +94,8 @@ User.beforeUpdate(async (user) => {
   user.password = hashedPw;
 });
 User.afterCreate(async (user) => {
-  const demoProject = await Project.create({
+  // console.log(Object.keys(user.__proto__));
+  await user.createProject({
     name: "Example Project",
     summary:
       "This project was created automatically. Check it out to explore StudyBuddy features.",

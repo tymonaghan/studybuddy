@@ -29,7 +29,9 @@ a > * {
 html,
 body,
 #app,
-#app > div {
+#app > div,
+.project-view-wrapper,
+.main-contain {
   height: 100%;
 }
 
@@ -45,6 +47,7 @@ body,
 
 .project-view-container {
   background-color: cornsilk;
+  min-height: 80%;
 }
 
 /* these need this weird syntax to avoid being overwritten with bootstrap styles */
@@ -55,4 +58,10 @@ div[id^="secondary-source-card"] {
 
 div[id^="primary-source-card"] {
   background-color: rgba(184, 135, 11, 0.5);
+}
+
+.crumbox {
+  background-color: white;
+  margin: 0;
+  margin-block-end: 0;
 }

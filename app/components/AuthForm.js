@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { authenticate, checkForUserToken } from "../../store/reducer";
+import { authenticate, checkForUserToken } from "../../store/authReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "react-bootstrap/Button";

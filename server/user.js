@@ -5,7 +5,7 @@ const {
 
 //all routes branch from /api/user/
 router.get("/", (req, res, next) => {
-  res.status(413).send("reaching /api/user/ get route. payload too large, lol");
+  res.status(418).send("reaching /api/user/ get route.");
 });
 
 router.get("/:id/projects", async function (req, res, next) {
