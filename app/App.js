@@ -30,7 +30,7 @@ const App = () => {
     <Stack>
       <Container className="nav-contain" style={{ padding: "0px" }}>
         <NavBar />
-        <BreadcrumbBox />
+        {/* <BreadcrumbBox /> */}
       </Container>
       <Container className="main-contain">
         <Routes>

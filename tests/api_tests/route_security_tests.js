@@ -38,12 +38,12 @@ describe("Express route security tests", () => {
       // expect(response.body[0]).to.have.property("name");
     });
   });
-  it("responds with a users projects to any 'superuser' with a valid token", async () => {
-    const response = await app.get("/api/user/2/projects").send({
-      name: "NO ONE HERE",
-    });
-    expect(response.status).to.equal(404);
-  });
+  // it("responds with a users projects to any 'superuser' with a valid token", async () => {
+  //   const response = await app.get("/api/user/2/projects").send({
+  //     name: "NO ONE HERE",
+  //   });
+  //   expect(response.status).to.equal(404);
+  // });
 });
 // describe("Error Handling", () => {
 //   before(() => {
