@@ -17,7 +17,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.auth);
 
-  console.log(params);
+  // console.log(params);
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
       <Container fluid>
