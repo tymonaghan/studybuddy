@@ -7,13 +7,20 @@ const About = () => {
 
   return (
     <div>
-      <h1>Welcome</h1>
-      <p>Welcome to StudyBuddy, created from scratch* by Tyler Monaghan</p>
-      <br />
+      <h1>About</h1>
+      <p>StudyBuddy was created by Tyler Monaghan.</p>
       <br />
       <p>
-        <em>*with help from FS-App-Template and Boilermaker workshop</em>
+        StudyBuddy is built using React, Express, and a Postgres database. It is
+        deployed via Heroku. Learn more about StudyBuddy and my other software
+        at{" "}
+        <a href="https://portfolio.tylermonaghan.dev">
+          portfolio.tylermonaghan.dev
+        </a>
+        .
       </p>
+      <br />
+      <p></p>
     </div>
   );
 };
