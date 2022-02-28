@@ -8,9 +8,11 @@ const {
 const _app = require("../../server/index"); // import the app to test
 const app = require("supertest")(_app); // import supertest - not actually sure what this does yet
 
-describe("Express route security tests", () => {
+describe("Express route security tests", function () {
   let users;
-  before(async () => {
+  this.slow(200);
+  this.timeout(3000);
+  before(async function () {
     await db.sync({ force: true });
     const _users = await User.bulkCreate(
       [
