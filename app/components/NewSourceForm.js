@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { addNewSourceToDb } from "../../store/reducer";
 
 const NewSourceForm = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ const NewSourceForm = () => {
     <Form>
       <fieldset>
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="name">name</Form.Label>
+          <Form.Label htmlFor="name">Title</Form.Label>
           <Form.Control
             id="name"
             placeholder="the title of your source"
@@ -36,7 +37,7 @@ const NewSourceForm = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="classification">classification</Form.Label>
+          <Form.Label htmlFor="classification">Classification</Form.Label>
           <Form.Select
             id="classification"
             aria-label="source classification selector"
@@ -48,7 +49,7 @@ const NewSourceForm = () => {
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="type">type</Form.Label>
+          <Form.Label htmlFor="type">Type/Format</Form.Label>
           <Form.Select
             id="type"
             aria-label="Source type selector"
@@ -99,12 +100,10 @@ const NewSourceForm = () => {
           />
         </Form.Group> */}
         <Button
-          onClick={
-            () => {
-              console.log(Object.entries(formData));
-            }
-            // dispatch(addNewNoteToDb(projectId, sourceId, formData))
-          }
+          onClick={() => {
+            // console.log(Object.entries(formData));
+            dispatch(addNewSourceToDb(projectId, formData));
+          }}
         >
           Submit
         </Button>

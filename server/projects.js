@@ -59,10 +59,10 @@ router.post("/:projectId/addSource", async (req, res, next) => {
   try {
     const { projectId } = req.params;
     const currentProject = await Project.findByPk(projectId);
-    console.log(currentProject);
+    // console.log(currentProject);
 
     const newSource = await currentProject.createSource(req.body);
-    res.status(200).send(newSource);
+    res.status(201).send(newSource);
   } catch (error) {
     console.log(
       `error from the router.post /api/projects/projectId/addSource route: ${error}`
