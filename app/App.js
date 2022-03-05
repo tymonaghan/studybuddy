@@ -8,6 +8,7 @@ import {
   ProjectViewWrapper,
   SourceView,
   BreadcrumbBox,
+  AlphaWarning,
 } from "./components/";
 import { Navigate, Route, Routes } from "react-router-dom";
 import React, { useEffect } from "react";
@@ -35,6 +36,7 @@ const App = () => {
       <Container className="main-contain">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/alphaWarning" element={<AlphaWarning />} />
           <Route path="/login" element={Login} />
           <Route path="/signup" element={Signup} />{" "}
           <Route path="/about" element={<About />} />

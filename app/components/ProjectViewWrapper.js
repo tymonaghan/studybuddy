@@ -34,10 +34,7 @@ const ProjectViewWrapper = () => {
   return (
     <Container className="project-view-wrapper">
       <Stack gap={2} direction="horizontal">
-        <h1>
-          Project View:{" "}
-          {currentProject ? <b>{currentProject.name}</b> : "No project"}
-        </h1>{" "}
+        <h1>{currentProject ? <b>{currentProject.name}</b> : "No project"}</h1>
         <div className="vr" />
         <Link to="/">
           <Button variant="secondary">Back to Projects List</Button>

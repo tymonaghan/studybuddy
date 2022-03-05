@@ -10,7 +10,7 @@ import {
   setCurrentNotesThunk,
   setCurrentSources,
 } from "../../store/reducer";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { NewNoteForm } from ".";
 
 const SourceView = () => {
@@ -25,6 +25,7 @@ const SourceView = () => {
     dispatch(getCurrentProjectSourcesFromDb(projectId));
   }, []);
 
+  const navigate = useNavigate();
   const { currentNotes, currentSources } = useSelector((state) => state);
   // console.dir(currentSources);
   // console.log(sourceId);
@@ -36,14 +37,10 @@ const SourceView = () => {
   return (
     <Container>
       <Row>
-        <Col md>
-          {currentSource ? (
-            <h1>Source: {currentSource.name} </h1>
-          ) : (
-            <h1>loading...</h1>
-          )}
+        <Col sm="auto">
+          {currentSource ? <h3>{currentSource.name} </h3> : <h3>loading...</h3>}
         </Col>
-        <Col md="auto">
+        <Col>
           <OverlayTrigger
             trigger="click"
             placement="bottom"
@@ -57,11 +54,33 @@ const SourceView = () => {
               </Popover>
             }
           >
-            <Button variant="success">+ Add New Note</Button>
+            <Button
+              style={{
+                fontSize: "0.75rem",
+                "border-radius": "100px",
+              }}
+              variant="success"
+              size="sm"
+            >
+              + Add New Note for this Source
+            </Button>
           </OverlayTrigger>
         </Col>
-        <Col md="auto">
-          <Button>Back to Sources List</Button>
+        <Col>
+          <Button
+            style={{
+              fontSize: "0.65rem",
+              maxWidth: "5rem",
+              maxHeight: "5rem",
+              "border-radius": "100px",
+            }}
+            size="sm"
+            onClick={() => {
+              navigate("./../..");
+            }}
+          >
+            Back to Sources List
+          </Button>
         </Col>
       </Row>
       {currentNotes[0] ? (

@@ -10,12 +10,17 @@ const SET_CURRENT_PROJECT_ID = "SET_CURRENT_PROJECT_ID";
 const SET_CURRENT_SOURCES = "SET_CURRENT_SOURCES";
 const SET_CURRENT_NOTES = "SET_CURRENT_NOTES";
 const ADD_NEW_NOTE = "ADD_NEW_NOTE";
+const ADD_NEW_SOURCE = "ADD_NEW_SOURCE";
 // const TRASH_PROJECT = "TRASH_PROJECT";
 
 // action creator
 const setUserProjects = (projects) => {
   // console.dir(projects);
   return { type: SET_USER_PROJECTS, projects };
+};
+
+const addNewSource = (source) => {
+  return { type: ADD_NEW_SOURCE, source };
 };
 
 const addNewNote = (note) => {
@@ -57,21 +62,39 @@ export const addNewProjectToDb = (projectName, userId) => async (dispatch) => {
   }
 };
 
+export const addNewSourceToDb = (projectId, newSource) => async (dispatch) => {
+  try {
+    const response = await Axios({
+      method: "post",
+      url: `/api/projects/${projectId}/addSource`,
+      data: newSource,
+    });
+    // console.log(
+    //   `data we got here from axios seems to beeee ${response.data}`
+    // );
+    // console.dir(response.data);
+
+    dispatch(addNewSource(response.data));
+  } catch (error) {
+    console.log(`error in the addNewSource thunk: ${error}`);
+  }
+};
+
 export const addNewNoteToDb =
   (projectId, sourceId, newNote) => async (dispatch) => {
-    console.log(
-      `gday from the thunk mate.\nprojectId:${projectId}\nsourceId:${sourceId}\nnewNote:${newNote}`
-    );
+    // console.log(
+    //   `gday from the thunk mate.\nprojectId:${projectId}\nsourceId:${sourceId}\nnewNote:${newNote}`
+    // );
     try {
       const response = await Axios({
         method: "post",
         url: `/api/projects/${projectId}/source/${sourceId}/addNote`,
         data: newNote,
       });
-      console.log(
-        `data we got here from axios seems to beeee ${response.data}`
-      );
-      console.dir(response.data);
+      // console.log(
+      //   `data we got here from axios seems to beeee ${response.data}`
+      // );
+      // console.dir(response.data);
 
       dispatch(addNewNote(response.data));
     } catch (error) {
@@ -142,6 +165,8 @@ export function currentSourcesReducer(state = [], action) {
   switch (action.type) {
     case SET_CURRENT_SOURCES:
       return [...action.sources];
+    case ADD_NEW_SOURCE:
+      return [...state, action.source];
     default:
       return state;
   }

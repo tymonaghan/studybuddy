@@ -4,6 +4,7 @@ import {
   NavDropdown,
   Navbar,
   Breadcrumb,
+  NavItem,
 } from "react-bootstrap/";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
@@ -16,12 +17,27 @@ const NavBar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.auth);
+  // const { projects } = useSelector((state) => state);
+  // const { currentProjectId } = useSelector((state) => state);
+  // const currentProject = projects.find(
+  //   (project) => +project.id === +currentProjectId
+  // );
 
-  // console.log(params);
+  // console.log(`currentProjectId: ${currentProjectId}`);
+  // console.log(`projects: ${projects}`);
+  // console.dir(projects);
+  // console.dir(currentProject);
   return (
     <Navbar variant="dark" bg="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="/home">StudyBuddy</Navbar.Brand>
+        {/* <Nav className="me-auto">
+          {" "}
+          <Nav.Link className="">
+            {currentProject ? currentProject.name : ""}
+          </Nav.Link>
+        </Nav> */}
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
