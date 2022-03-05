@@ -29,11 +29,13 @@ const ProjectView = () => {
         <Tabs defaultActiveKey="sources" className="mb-3">
           <Tab eventKey="sources" title="Sources">
             <Row>
-              <Col md>
-                <h2>{currentProject.name} Sources</h2>
+              <Col className="">
+                <h2>Sources</h2>
               </Col>
               <Col>
-                <Button variant="success">Add New Source</Button>
+                <Button variant="success" size="sm">
+                  Add New Source
+                </Button>
               </Col>
             </Row>
             <SourceList />
