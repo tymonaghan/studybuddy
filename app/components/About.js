@@ -8,19 +8,26 @@ const About = () => {
   return (
     <div>
       <h1>About</h1>
-      <p>StudyBuddy was created by Tyler Monaghan.</p>
-      <br />
       <p>
-        StudyBuddy is built using React, Express, and a Postgres database. It is
-        deployed via Heroku. Learn more about StudyBuddy and my other software
-        at{" "}
-        <a href="https://portfolio.tylermonaghan.dev">
-          portfolio.tylermonaghan.dev
-        </a>
-        .
+        StudyBuddy was created by{" "}
+        <a href="https://portfolio.tylermonaghan.dev">Tyler Monaghan</a>.
       </p>
-      <br />
-      <p></p>
+      <h2>Features and Limitations</h2>
+      <p>
+        StudyBuddy is an alpha product; it is still missing key functionality.
+      </p>
+      <p>Currently, users may:</p>
+      <ul>
+        <li>Create and log in to an account</li>
+        <li>View and create Projects</li>
+        <li>View and delete Sources</li>
+        <li>View and add Notes from Source View</li>
+      </ul>
+      <p>Missing functionality includes, but is not limited to:</p>
+      <ul>
+        <li>View, create, edit, and remove Projects, Sources, and Notes</li>
+        <li>Notes View, separate from Source View</li>
+      </ul>
     </div>
   );
 };
