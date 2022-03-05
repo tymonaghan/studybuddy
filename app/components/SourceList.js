@@ -56,7 +56,6 @@ const SourceList = () => {
                             dispatch(
                               trashSourceInDb(projectId, currentSource.id)
                             );
-                            console.log(`click'd`);
                           }}
                         >
                           Delete

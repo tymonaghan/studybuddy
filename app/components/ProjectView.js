@@ -32,30 +32,31 @@ const ProjectView = () => {
       {currentProject ? (
         <Tabs defaultActiveKey="sources" className="mb-3">
           <Tab eventKey="sources" title="Sources">
-            <Row>
-              <Col className="">
-                <h2>Sources</h2>
-              </Col>
-              <Col>
-                <OverlayTrigger
-                  trigger="click"
-                  placement="bottom"
-                  rootClose="true"
-                  overlay={
-                    <Popover id={`popover-positioned-bottom`}>
-                      <Popover.Header as="h3">{`Add a New Source`}</Popover.Header>
-                      <Popover.Body>
-                        <NewSourceForm />
-                      </Popover.Body>
-                    </Popover>
-                  }
+            <div className="mb-2">
+              <OverlayTrigger
+                trigger="click"
+                placement="bottom"
+                rootClose="true"
+                overlay={
+                  <Popover id={`popover-positioned-bottom`}>
+                    <Popover.Header as="h3">{`Add a New Source`}</Popover.Header>
+                    <Popover.Body>
+                      <NewSourceForm />
+                    </Popover.Body>
+                  </Popover>
+                }
+              >
+                <Button
+                  style={{
+                    borderRadius: "100px",
+                  }}
+                  variant="success"
+                  size="sm"
                 >
-                  <Button variant="success" size="sm">
-                    Add New Source
-                  </Button>
-                </OverlayTrigger>
-              </Col>
-            </Row>
+                  + Add New
+                </Button>
+              </OverlayTrigger>
+            </div>
             <SourceList />
           </Tab>
           <Tab eventKey="notes" title="Notes">
