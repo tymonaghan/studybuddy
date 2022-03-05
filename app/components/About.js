@@ -27,6 +27,7 @@ const About = () => {
       <ul>
         <li>View, create, edit, and remove Projects, Sources, and Notes</li>
         <li>Notes View, separate from Source View</li>
+        <li>Edit user details and change password</li>
       </ul>
     </div>
   );

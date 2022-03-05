@@ -11,6 +11,7 @@ const SET_CURRENT_SOURCES = "SET_CURRENT_SOURCES";
 const SET_CURRENT_NOTES = "SET_CURRENT_NOTES";
 const ADD_NEW_NOTE = "ADD_NEW_NOTE";
 const ADD_NEW_SOURCE = "ADD_NEW_SOURCE";
+const TRASH_SOURCE = "TRASH_SOURCE";
 // const TRASH_PROJECT = "TRASH_PROJECT";
 
 // action creator
@@ -21,6 +22,10 @@ const setUserProjects = (projects) => {
 
 const addNewSource = (source) => {
   return { type: ADD_NEW_SOURCE, source };
+};
+
+const trashSource = (sourceId) => {
+  return { type: TRASH_SOURCE, sourceId };
 };
 
 const addNewNote = (note) => {
@@ -77,6 +82,23 @@ export const addNewSourceToDb = (projectId, newSource) => async (dispatch) => {
     dispatch(addNewSource(response.data));
   } catch (error) {
     console.log(`error in the addNewSource thunk: ${error}`);
+  }
+};
+
+export const trashSourceInDb = (projectId, sourceId) => async (dispatch) => {
+  try {
+    const response = await Axios({
+      method: "delete",
+      url: `/api/projects/${projectId}/source/${sourceId}`,
+    });
+    // console.log(
+    //   `data we got here from axios seems to beeee ${response.data}`
+    // );
+    // console.dir(response.data);
+
+    dispatch(trashSource(sourceId));
+  } catch (error) {
+    console.log(`error in the trash source thunk: ${error}`);
   }
 };
 
@@ -167,6 +189,12 @@ export function currentSourcesReducer(state = [], action) {
       return [...action.sources];
     case ADD_NEW_SOURCE:
       return [...state, action.source];
+    case TRASH_SOURCE:
+      let newState = state.filter((source) => {
+        return source.id != action.sourceId;
+      });
+
+      return newState;
     default:
       return state;
   }
