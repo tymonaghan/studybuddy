@@ -14,6 +14,7 @@ import SourceView from "./SourceView";
 import NewNoteForm from "./NewNoteForm";
 import BreadcrumbBox from "./Breadcrumb";
 import AlphaWarning from "./AlphaWarning";
+import NewSourceForm from "./NewSourceForm";
 
 export {
   Login,
@@ -32,4 +33,5 @@ export {
   NewNoteForm,
   BreadcrumbBox,
   AlphaWarning,
+  NewSourceForm,
 };

@@ -7,8 +7,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
+import PopoverBody from "react-bootstrap/PopoverBody";
+import PopoverHeader from "react-bootstrap/PopoverHeader";
 import { getCurrentProjectSourcesFromDb } from "../../store/reducer";
-import { SourceList } from ".";
+import { SourceList, NewSourceForm } from ".";
 
 const ProjectView = () => {
   const dispatch = useDispatch();
@@ -33,9 +37,23 @@ const ProjectView = () => {
                 <h2>Sources</h2>
               </Col>
               <Col>
-                <Button variant="success" size="sm">
-                  Add New Source
-                </Button>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  rootClose="true"
+                  overlay={
+                    <Popover id={`popover-positioned-bottom`}>
+                      <Popover.Header as="h3">{`Add a New Source`}</Popover.Header>
+                      <Popover.Body>
+                        <NewSourceForm />
+                      </Popover.Body>
+                    </Popover>
+                  }
+                >
+                  <Button variant="success" size="sm">
+                    Add New Source
+                  </Button>
+                </OverlayTrigger>
               </Col>
             </Row>
             <SourceList />
