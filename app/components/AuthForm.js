@@ -24,7 +24,7 @@ const AuthForm = ({ name, displayName }) => {
   };
 
   if (isLoggedIn) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/alphaWarning" />;
   }
 
   return (
