@@ -20,14 +20,15 @@ const SourceList = () => {
           currentSources.map((currentSource, i) => {
             return (
               <Col key={i}>
-                <Card style={{ width: "15rem" }} border="primary">
+                <Card style={{ maxWidth: "12rem" }} border="primary">
                   <Link to={`source/${currentSource.id}`}>
                     <Card.Header
                       id={`${currentSource.classification}-source-card-${currentSource.id}`}
+                      className="py-0 px-2"
                     >
                       {currentSource.classification}
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body className="p-2">
                       <Card.Title bg="secondary">
                         "{currentSource.name}"
                       </Card.Title>
@@ -38,10 +39,14 @@ const SourceList = () => {
                       <Card.Text>{currentSource.notes}</Card.Text>
                       <Row>
                         <Col>
-                          <Button variant="warning">Edit</Button>
+                          <Button variant="warning" size="sm">
+                            Edit
+                          </Button>
                         </Col>
                         <Col>
-                          <Button variant="danger">Delete</Button>
+                          <Button variant="danger" size="sm">
+                            Delete
+                          </Button>
                         </Col>
                       </Row>
                     </Card.Body>
