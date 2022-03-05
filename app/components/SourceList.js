@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
   Container,
@@ -9,9 +9,13 @@ import {
   ButtonGroup,
   Button,
 } from "react-bootstrap";
+import { trashSourceInDb } from "../../store/reducer";
 
 const SourceList = () => {
   const currentSources = useSelector((state) => state.currentSources);
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { projectId } = params;
 
   return (
     <Container>
@@ -21,14 +25,14 @@ const SourceList = () => {
             return (
               <Col key={i}>
                 <Card style={{ maxWidth: "12rem" }} border="primary">
-                  <Link to={`source/${currentSource.id}`}>
-                    <Card.Header
-                      id={`${currentSource.classification}-source-card-${currentSource.id}`}
-                      className="py-0 px-2"
-                    >
-                      {currentSource.classification}
-                    </Card.Header>
-                    <Card.Body className="p-2">
+                  <Card.Header
+                    id={`${currentSource.classification}-source-card-${currentSource.id}`}
+                    className="py-0 px-2"
+                  >
+                    {currentSource.classification}
+                  </Card.Header>
+                  <Card.Body className="p-2">
+                    <Link to={`source/${currentSource.id}`}>
                       <Card.Title bg="secondary">
                         "{currentSource.name}"
                       </Card.Title>
@@ -37,20 +41,29 @@ const SourceList = () => {
                         {currentSource.authorFirstName}
                       </Card.Subtitle>
                       <Card.Text>{currentSource.notes}</Card.Text>
-                      <Row>
-                        <Col>
-                          <Button variant="warning" size="sm">
-                            Edit
-                          </Button>
-                        </Col>
-                        <Col>
-                          <Button variant="danger" size="sm">
-                            Delete
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                  </Link>
+                    </Link>
+                    <Row>
+                      <Col>
+                        <Button variant="warning" size="sm">
+                          Edit
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => {
+                            dispatch(
+                              trashSourceInDb(projectId, currentSource.id)
+                            );
+                            console.log(`click'd`);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Card.Body>
                 </Card>
               </Col>
             );

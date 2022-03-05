@@ -21,6 +21,18 @@ router.get("/:projectId/source/:sourceId", async (req, res, next) => {
   }
 });
 
+//remove source
+router.delete("/:projectId/source/:sourceId", async (req, res, next) => {
+  try {
+    const { projectId, sourceId } = req.params;
+    const currentSource = await Source.findByPk(sourceId);
+    await currentSource.destroy();
+    res.status(200).send(`source deleted.`);
+  } catch (error) {
+    console.log(`error in router.delete /projects/id/source/id: ${error}`);
+  }
+});
+
 // get all sources for project by ID
 router.get("/:projectId/getSources", async (req, res, next) => {
   try {
