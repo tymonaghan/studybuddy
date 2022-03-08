@@ -57,7 +57,7 @@ const SourceView = () => {
             <Button
               style={{
                 fontSize: "0.75rem",
-                "border-radius": "100px",
+                borderRadius: "100px",
               }}
               variant="success"
               size="sm"
@@ -72,7 +72,7 @@ const SourceView = () => {
               fontSize: "0.65rem",
               maxWidth: "5rem",
               maxHeight: "5rem",
-              "border-radius": "100px",
+              borderRadius: "100px",
             }}
             size="sm"
             onClick={() => {

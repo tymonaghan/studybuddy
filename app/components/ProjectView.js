@@ -60,7 +60,7 @@ const ProjectView = () => {
             <SourceList />
           </Tab>
           <Tab eventKey="notes" title="Notes">
-            View, edit, and organize your individual notes here.
+            View, edit, and organize your individual notes here (coming soon).
           </Tab>
           <Tab eventKey="projectInfo" title="Project Info">
             <ProjectInfo />
