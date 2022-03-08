@@ -12,7 +12,7 @@ import Popover from "react-bootstrap/Popover";
 import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
 import { getCurrentProjectSourcesFromDb } from "../../store/reducer";
-import { SourceList, NewSourceForm } from ".";
+import { SourceList, NewSourceForm, ProjectInfo } from ".";
 
 const ProjectView = () => {
   const dispatch = useDispatch();
@@ -62,8 +62,8 @@ const ProjectView = () => {
           <Tab eventKey="notes" title="Notes">
             View, edit, and organize your individual notes here.
           </Tab>
-          <Tab eventKey="project info" title="Project Info" disabled>
-            edit project title, summary, and status here.{" "}
+          <Tab eventKey="projectInfo" title="Project Info">
+            <ProjectInfo />
           </Tab>
         </Tabs>
       ) : (
