@@ -63,7 +63,7 @@ User.findByToken = async function (token) {
   try {
     // console.log(`JWT is: `);
     // console.dir(process.env.JWT);
-    const { id } = await jwt.verify(token, process.env.JWT || "atlantis");
+    const { id } = jwt.verify(token, process.env.JWT || "atlantis");
     const user = await User.findByPk(id);
     if (!user) {
       throw `That user doesn't seem to exist.`;
@@ -100,5 +100,9 @@ User.afterCreate(async (user) => {
     summary:
       "This project was created automatically. Check it out to explore StudyBuddy features.",
     status: "active",
+    topic:
+      "Starship Diplomacy: The formation of the United Federation of Planets",
+    thesis:
+      "The formation of the United Federation of Planets would not be possible without the warp technology developed by Zefram Cochrane, and similar technology developed by the other founding species of the Federation.",
   });
 });

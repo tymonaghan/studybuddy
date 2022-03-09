@@ -16,6 +16,16 @@ const Project = db.define("project", {
     values: ["active", "complete", "dormant"],
     defaultValue: "active",
   },
+  theme: {
+    type: Sequelize.STRING,
+    defaultValue: "Debate and Diplomacy in History",
+  },
+  topic: {
+    type: Sequelize.STRING,
+  },
+  thesis: {
+    type: Sequelize.STRING,
+  },
   trashed: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
