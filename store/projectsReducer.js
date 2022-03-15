@@ -1,5 +1,6 @@
 const SET_USER_PROJECTS = "SET_USER_PROJECTS";
 const ADD_NEW_PROJECT = "ADD_NEW_PROJECT";
+const UPDATE_CURRENT_PROJECT = "UPDATE_CURRENT_PROJECT";
 
 import Axios from "axios";
 
@@ -13,6 +14,27 @@ const addNewProject = (newProject) => {
   // console.dir(newProject);
   return { type: ADD_NEW_PROJECT, newProject };
 };
+
+const updateCurrentProject = (updatedProject) => {
+  return {
+    type: UPDATE_CURRENT_PROJECT,
+    updatedProject,
+  };
+};
+
+export const updateCurrentProjectInDb =
+  (projectId, updatedProject) => async (dispatch) => {
+    try {
+      const response = await Axios({
+        method: "put",
+        url: `/api/projects/${projectId}/updateProject`,
+        data: updatedProject,
+      });
+      dispatch(updateCurrentProject(response.data));
+    } catch (error) {
+      console.log(`error in the updateCurrentProjectInDb thunk: ${error}`);
+    }
+  };
 
 export const addNewProjectToDb = (projectName, userId) => async (dispatch) => {
   try {
@@ -43,6 +65,12 @@ export function projectsReducer(state = [], action) {
       return [...action.projects];
     case ADD_NEW_PROJECT:
       return [...state, action.newProject];
+    case UPDATE_CURRENT_PROJECT:
+      return state.map((project) => {
+        if (project.id == action.updatedProject.id)
+          return { ...project, ...action.updatedProject };
+        else return project;
+      });
     default:
       return state;
   }

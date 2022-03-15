@@ -82,6 +82,19 @@ router.post("/:projectId/addSource", async (req, res, next) => {
   }
 });
 
+// modify project info
+router.put("/:projectId/updateProject", async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    const currentProject = await Project.findOne({ where: { id: projectId } });
+    console.log(currentProject);
+    await currentProject.update(req.body);
+    res.status(200).send(currentProject);
+  } catch (error) {
+    console.log(`error from the router.put method: ${error}`);
+  }
+});
+
 // add a new note to a project
 router.post("/:projectId/source/:sourceId/addNote", async (req, res, next) => {
   try {

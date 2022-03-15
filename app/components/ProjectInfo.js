@@ -3,15 +3,15 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
+import { useParams } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateCurrentProjectInDb } from "../../store/projectsReducer";
 
-const ProjectInfo = () => {
-  const currentProject = useSelector((state) =>
-    state.projects.find((project) => project.id == state.currentProjectId)
-  );
+const ProjectInfo = (props) => {
+  const { currentProject } = props;
   // console.log(currentProject);
-  const [currentProjectData, updateProjectData] = useState({ currentProject });
+  const [currentProjectData, updateProjectData] = useState(currentProject);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -19,8 +19,20 @@ const ProjectInfo = () => {
     setLoaded(true);
   }, []);
 
+  const dispatch = useDispatch();
+  const params = useParams();
   function toggleEdit(event) {
-    event.nativeEvent.target.nextSibling.disabled = false;
+    console.dir(event);
+    if (event.target.innerText === "Edit") {
+      event.target.className = "btn btn-primary";
+      event.target.innerText = "Save";
+      event.nativeEvent.target.nextSibling.disabled = false;
+    } else {
+      dispatch(updateCurrentProjectInDb(params.projectId, currentProjectData));
+      event.target.className = "btn btn-secondary";
+      event.target.innerText = "Edit";
+      event.nativeEvent.target.nextSibling.disabled = true;
+    }
   }
 
   function handleChange(event) {

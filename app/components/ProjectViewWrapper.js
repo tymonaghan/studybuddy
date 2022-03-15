@@ -14,7 +14,7 @@ const ProjectViewWrapper = () => {
   const userId = useSelector((state) => state.auth.id);
 
   const currentProject = currentProjects.filter((projectObject) => {
-    return projectObject.id == projectId;
+    return projectObject?.id == projectId;
   })[0];
   //the block above grabs the current project from state based on URL parameters
   // console.dir(currentProject);

@@ -20,7 +20,7 @@ const ProjectView = () => {
   const projects = useSelector((state) => state.projects);
   const projectId = params.projectId;
   const currentProject = projects.filter((project) => {
-    return project.id === +projectId; //gotta remember to coerce projectId to number!
+    return project?.id === +projectId; //gotta remember to coerce projectId to number!
   })[0];
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const ProjectView = () => {
             View, edit, and organize your individual notes here (coming soon).
           </Tab>
           <Tab eventKey="projectInfo" title="Project Info">
-            <ProjectInfo />
+            <ProjectInfo currentProject={currentProject} />
           </Tab>
         </Tabs>
       ) : (
