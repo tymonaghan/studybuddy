@@ -22,9 +22,11 @@ const Project = db.define("project", {
   },
   topic: {
     type: Sequelize.STRING,
+    defaultValue: "Default topic",
   },
   thesis: {
     type: Sequelize.STRING,
+    defaultValue: "Default thesis",
   },
   trashed: {
     type: Sequelize.BOOLEAN,
