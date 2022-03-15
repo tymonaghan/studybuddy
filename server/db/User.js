@@ -33,9 +33,10 @@ const User = db.define("user", {
 module.exports = User;
 
 // User instance methods:
-User.prototype.correctPassword = function (candidatePwd) {
+User.prototype.correctPassword = async function (candidatePwd) {
+  // console.log(`correctPasword`);
   // compare supplied and stored password
-  return bcrypt.compare(candidatePwd, this.password);
+  return await bcrypt.compare(candidatePwd, this.password);
 };
 
 User.prototype.generateToken = function () {
@@ -88,11 +89,13 @@ User.beforeCreate(async (user) => {
   const hashedPw = await bcrypt.hash(user.password, SALT_ROUNDS);
   user.password = hashedPw;
 });
+
 User.beforeUpdate(async (user) => {
   //anytime password changes, encrypt it and store the hash, not the password.
   const hashedPw = await bcrypt.hash(user.password, SALT_ROUNDS);
   user.password = hashedPw;
 });
+
 User.afterCreate(async (user) => {
   // console.log(Object.keys(user.__proto__));
   await user.createProject({
