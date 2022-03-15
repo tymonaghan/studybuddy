@@ -4,10 +4,8 @@ import Container from "react-bootstrap/Container";
 import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  retrieveUserProjectsFromDb,
-  setCurrentProjectId,
-} from "../../store/reducer";
+import { retrieveUserProjectsFromDb } from "../../store/projectsReducer";
+import { setCurrentProjectId } from "../../store/reducer";
 
 const ProjectViewWrapper = () => {
   const params = useParams();
