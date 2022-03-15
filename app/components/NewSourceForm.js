@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { addNewSourceToDb } from "../../store/reducer";
+import { addNewSourceToDb } from "../../store/sourcesReducer";
 
 const NewSourceForm = () => {
   const [formData, setFormData] = useState({

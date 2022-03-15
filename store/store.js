@@ -2,10 +2,8 @@ import { applyMiddleware, createStore, combineReducers } from "redux";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
-import {
-  currentProjectReducer as currentProjectId,
-  currentNotesReducer as currentNotes,
-} from "./reducer";
+import { currentProjectReducer as currentProjectId } from "./currentProjectReducer";
+import { currentNotesReducer as currentNotes } from "./notesReducer";
 import { projectsReducer as projects } from "./projectsReducer";
 import { currentSourcesReducer as currentSources } from "./sourcesReducer";
 

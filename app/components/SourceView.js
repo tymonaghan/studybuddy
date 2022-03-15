@@ -5,7 +5,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
-import { setCurrentNotesThunk } from "../../store/reducer";
+import { setCurrentNotesThunk } from "../../store/notesReducer";
 import {
   setCurrentSources,
   getCurrentProjectSourcesFromDb,
