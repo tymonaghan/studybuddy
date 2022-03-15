@@ -11,7 +11,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
-import { getCurrentProjectSourcesFromDb } from "../../store/reducer";
+import { getCurrentProjectSourcesFromDb } from "../../store/sourcesReducer";
 import { SourceList, NewSourceForm, ProjectInfo } from ".";
 
 const ProjectView = () => {

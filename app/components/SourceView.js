@@ -5,11 +5,11 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
+import { setCurrentNotesThunk } from "../../store/reducer";
 import {
-  getCurrentProjectSourcesFromDb,
-  setCurrentNotesThunk,
   setCurrentSources,
-} from "../../store/reducer";
+  getCurrentProjectSourcesFromDb,
+} from "../../store/sourcesReducer";
 import { useParams, useNavigate } from "react-router-dom";
 import { NewNoteForm } from ".";
 
