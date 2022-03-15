@@ -50,7 +50,11 @@ const NavBar = () => {
               },
               (
                 <Nav className="justify-content-end">
-                  <NavDropdown title={username} id="basic-nav-dropdown">
+                  <NavDropdown
+                    title={username}
+                    id="basic-nav-dropdown"
+                    style={{ marginRight: "5rem" }}
+                  >
                     <NavDropdown.Item disabled href="#action/3.1">
                       Edit account details
                     </NavDropdown.Item>
