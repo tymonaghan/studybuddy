@@ -42,7 +42,7 @@ export function projectsReducer(state = [], action) {
     case SET_USER_PROJECTS:
       return [...action.projects];
     case ADD_NEW_PROJECT:
-      return [...state.projects, action.newProject];
+      return [...state, action.newProject];
     default:
       return state;
   }
