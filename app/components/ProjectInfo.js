@@ -37,7 +37,7 @@ const ProjectInfo = () => {
       {loaded ? (
         <div>
           <Form.Group className="mb-3">
-            <Form.Label>project name</Form.Label>
+            <Form.Label>Project Title</Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -58,7 +58,7 @@ const ProjectInfo = () => {
             </InputGroup>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>project theme</Form.Label>
+            <Form.Label>Project Theme</Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -79,7 +79,7 @@ const ProjectInfo = () => {
             </InputGroup>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>project topic</Form.Label>
+            <Form.Label>Project Topic</Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -100,7 +100,7 @@ const ProjectInfo = () => {
             </InputGroup>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>project thesis</Form.Label>
+            <Form.Label>Project Thesis</Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -111,6 +111,7 @@ const ProjectInfo = () => {
                 Edit
               </Button>
               <Form.Control
+                as="textarea"
                 name="thesis"
                 value={currentProjectData?.thesis}
                 disabled
