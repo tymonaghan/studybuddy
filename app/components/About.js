@@ -20,6 +20,8 @@ const About = () => {
       <Card border="primary" className="mb-3" style={{ maxWidth: "36rem" }}>
         <Card.Header>Recent Updates</Card.Header>
         <Card.Body>
+          <b>3/15/2022: </b> Users may now edit and save project info such as
+          title, theme, topic, and thesis.
           <b>3/15/2022: </b> Update about page to include recent updates
         </Card.Body>
       </Card>
