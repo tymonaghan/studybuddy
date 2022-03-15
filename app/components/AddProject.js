@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import React from "react";
 import Stack from "react-bootstrap/Stack";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewProjectToDb } from "../../store/reducer";
+import { addNewProjectToDb } from "../../store/projectsReducer";
 
 const AddProject = () => {
   const userId = useSelector((state) => state.auth.id);

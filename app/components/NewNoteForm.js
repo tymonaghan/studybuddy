@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
-import { addNewNoteToDb } from "../../store/reducer";
+import { addNewNoteToDb } from "../../store/notesReducer";
 import { useParams } from "react-router-dom";
 
 const NewNoteForm = () => {

@@ -2,12 +2,11 @@ import { applyMiddleware, createStore, combineReducers } from "redux";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
-import {
-  projectsReducer as projects,
-  currentProjectReducer as currentProjectId,
-  currentSourcesReducer as currentSources,
-  currentNotesReducer as currentNotes,
-} from "./reducer";
+import { currentProjectReducer as currentProjectId } from "./currentProjectReducer";
+import { currentNotesReducer as currentNotes } from "./notesReducer";
+import { projectsReducer as projects } from "./projectsReducer";
+import { currentSourcesReducer as currentSources } from "./sourcesReducer";
+
 import { authReducer as auth } from "./authReducer";
 import thunkMiddleware from "redux-thunk";
 

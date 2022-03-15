@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddProject, ProjectListCard } from ".";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
-import { retrieveUserProjectsFromDb } from "../../store/reducer";
+import { retrieveUserProjectsFromDb } from "../../store/projectsReducer";
 
 const ProjectList = () => {
   const userId = useSelector((state) => state.auth.id);

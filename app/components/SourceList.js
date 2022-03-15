@@ -9,7 +9,7 @@ import {
   ButtonGroup,
   Button,
 } from "react-bootstrap";
-import { trashSourceInDb } from "../../store/reducer";
+import { trashSourceInDb } from "../../store/sourcesReducer";
 
 const SourceList = () => {
   const currentSources = useSelector((state) => state.currentSources);

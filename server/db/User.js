@@ -33,9 +33,10 @@ const User = db.define("user", {
 module.exports = User;
 
 // User instance methods:
-User.prototype.correctPassword = function (candidatePwd) {
+User.prototype.correctPassword = async function (candidatePwd) {
+  // console.log(`correctPasword`);
   // compare supplied and stored password
-  return bcrypt.compare(candidatePwd, this.password);
+  return await bcrypt.compare(candidatePwd, this.password);
 };
 
 User.prototype.generateToken = function () {
@@ -63,7 +64,7 @@ User.findByToken = async function (token) {
   try {
     // console.log(`JWT is: `);
     // console.dir(process.env.JWT);
-    const { id } = await jwt.verify(token, process.env.JWT || "atlantis");
+    const { id } = jwt.verify(token, process.env.JWT || "atlantis");
     const user = await User.findByPk(id);
     if (!user) {
       throw `That user doesn't seem to exist.`;
@@ -88,11 +89,13 @@ User.beforeCreate(async (user) => {
   const hashedPw = await bcrypt.hash(user.password, SALT_ROUNDS);
   user.password = hashedPw;
 });
+
 User.beforeUpdate(async (user) => {
   //anytime password changes, encrypt it and store the hash, not the password.
   const hashedPw = await bcrypt.hash(user.password, SALT_ROUNDS);
   user.password = hashedPw;
 });
+
 User.afterCreate(async (user) => {
   // console.log(Object.keys(user.__proto__));
   await user.createProject({
@@ -100,5 +103,9 @@ User.afterCreate(async (user) => {
     summary:
       "This project was created automatically. Check it out to explore StudyBuddy features.",
     status: "active",
+    topic:
+      "Starship Diplomacy: The formation of the United Federation of Planets",
+    thesis:
+      "The formation of the United Federation of Planets would not be possible without the warp technology developed by Zefram Cochrane, and similar technology developed by the other founding species of the Federation.",
   });
 });

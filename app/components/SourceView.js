@@ -5,11 +5,11 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
+import { setCurrentNotesThunk } from "../../store/notesReducer";
 import {
-  getCurrentProjectSourcesFromDb,
-  setCurrentNotesThunk,
   setCurrentSources,
-} from "../../store/reducer";
+  getCurrentProjectSourcesFromDb,
+} from "../../store/sourcesReducer";
 import { useParams, useNavigate } from "react-router-dom";
 import { NewNoteForm } from ".";
 
@@ -57,7 +57,7 @@ const SourceView = () => {
             <Button
               style={{
                 fontSize: "0.75rem",
-                "border-radius": "100px",
+                borderRadius: "100px",
               }}
               variant="success"
               size="sm"
@@ -72,7 +72,7 @@ const SourceView = () => {
               fontSize: "0.65rem",
               maxWidth: "5rem",
               maxHeight: "5rem",
-              "border-radius": "100px",
+              borderRadius: "100px",
             }}
             size="sm"
             onClick={() => {

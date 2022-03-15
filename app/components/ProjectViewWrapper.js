@@ -4,10 +4,8 @@ import Container from "react-bootstrap/Container";
 import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  retrieveUserProjectsFromDb,
-  setCurrentProjectId,
-} from "../../store/reducer";
+import { retrieveUserProjectsFromDb } from "../../store/projectsReducer";
+import { setCurrentProjectId } from "../../store/currentProjectReducer";
 
 const ProjectViewWrapper = () => {
   const params = useParams();
@@ -16,7 +14,7 @@ const ProjectViewWrapper = () => {
   const userId = useSelector((state) => state.auth.id);
 
   const currentProject = currentProjects.filter((projectObject) => {
-    return projectObject.id == projectId;
+    return projectObject?.id == projectId;
   })[0];
   //the block above grabs the current project from state based on URL parameters
   // console.dir(currentProject);

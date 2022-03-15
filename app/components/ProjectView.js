@@ -11,8 +11,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
-import { getCurrentProjectSourcesFromDb } from "../../store/reducer";
-import { SourceList, NewSourceForm } from ".";
+import { getCurrentProjectSourcesFromDb } from "../../store/sourcesReducer";
+import { SourceList, NewSourceForm, ProjectInfo } from ".";
 
 const ProjectView = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const ProjectView = () => {
   const projects = useSelector((state) => state.projects);
   const projectId = params.projectId;
   const currentProject = projects.filter((project) => {
-    return project.id === +projectId; //gotta remember to coerce projectId to number!
+    return project?.id === +projectId; //gotta remember to coerce projectId to number!
   })[0];
 
   useEffect(() => {
@@ -60,10 +60,10 @@ const ProjectView = () => {
             <SourceList />
           </Tab>
           <Tab eventKey="notes" title="Notes">
-            View, edit, and organize your individual notes here.
+            View, edit, and organize your individual notes here (coming soon).
           </Tab>
-          <Tab eventKey="project info" title="Project Info" disabled>
-            edit project title, summary, and status here.{" "}
+          <Tab eventKey="projectInfo" title="Project Info">
+            <ProjectInfo currentProject={currentProject} />
           </Tab>
         </Tabs>
       ) : (
