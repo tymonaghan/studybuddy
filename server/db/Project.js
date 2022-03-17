@@ -58,14 +58,16 @@ Project.afterCreate(async (project) => {
   );
   const demoClaimsOne = await Claim.create(
     {
+      claimNumber: 1,
       claimText:
-        "LTL Travel restricted the possibilities for mankind to encounter new worlds and civilizations.",
+        "Sublight travel restricted the possibilities for mankind to encounter new worlds and civilizations.",
       projectId: project.id,
     },
     { include: [Project] }
   );
   const demoClaimsTwo = await Claim.create(
     {
+      claimNumber: 2,
       claimText:
         "The advent of Warp technology gained the attention of other species in the galaxy.",
       projectId: project.id,

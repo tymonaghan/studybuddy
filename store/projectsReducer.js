@@ -1,12 +1,17 @@
 const SET_USER_PROJECTS = "SET_USER_PROJECTS";
 const ADD_NEW_PROJECT = "ADD_NEW_PROJECT";
 const UPDATE_CURRENT_PROJECT = "UPDATE_CURRENT_PROJECT";
+const ADD_CLAIM = "ADD_CLAIM";
 
 import Axios from "axios";
 
 const setUserProjects = (projects) => {
   // console.dir(projects);
   return { type: SET_USER_PROJECTS, projects };
+};
+
+const addClaimToProject = (projectId, claim) => {
+  return { type: ADD_CLAIM, projectId, claim };
 };
 
 const addNewProject = (newProject) => {
@@ -33,6 +38,21 @@ export const updateCurrentProjectInDb =
       dispatch(updateCurrentProject(response.data));
     } catch (error) {
       console.log(`error in the updateCurrentProjectInDb thunk: ${error}`);
+    }
+  };
+
+export const addNewClaimToDb =
+  (projectId, claimNumber, claimText) => async (dispatch) => {
+    try {
+      const response = await Axios({
+        method: "post",
+        url: `/api/projects/${projectId}/addClaim`,
+        data: { claimNumber, claimText },
+      });
+      // console.log(response.data);
+      dispatch(addClaimToProject(projectId, response.data));
+    } catch (error) {
+      console.log(`error in the addNewClaimtoDb thunk: ${error}`);
     }
   };
 
@@ -69,6 +89,17 @@ export function projectsReducer(state = [], action) {
       return state.map((project) => {
         if (project.id == action.updatedProject.id)
           return { ...project, ...action.updatedProject };
+        else return project;
+      });
+    case ADD_CLAIM:
+      console.log(`add_claim action: ${action}`);
+      console.dir(action);
+      return state.map((project) => {
+        if (project.id == action.projectId) {
+          project.claims.push(action.claim);
+          return project;
+        }
+        // return { ...project, [...project.claims] };
         else return project;
       });
     default:
