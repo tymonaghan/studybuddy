@@ -96,6 +96,17 @@ router.post("/:projectId/addClaim", async (req, res, next) => {
   }
 });
 
+router.delete("/:projectId/claim/:claimId", async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    const currentProject = await Project.findByPk(projectId);
+    await currentProject.removeClaim(req.body);
+    res.status(200).send({ projectId, claimId });
+  } catch (error) {
+    console.log(`error in the delete claim route: ${error}`);
+  }
+});
+
 // modify project info
 router.put("/:projectId/updateProject", async (req, res, next) => {
   try {
