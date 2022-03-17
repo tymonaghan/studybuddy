@@ -35,7 +35,7 @@ const App = () => {
       </Container>
       <Container className="main-contain">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/alphaWarning" element={<AlphaWarning />} />
           <Route path="/login" element={Login} />
           <Route path="/signup" element={Signup} />{" "}
@@ -47,7 +47,7 @@ const App = () => {
               element={<SourceView />}
             />
           </Route>
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </Container>
     </Stack>
