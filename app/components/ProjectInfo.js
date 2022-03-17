@@ -44,7 +44,7 @@ const ProjectInfo = (props) => {
   }
 
   return (
-    <Container>
+    <Container className="pb-3">
       <b>View and Edit your project info here:</b>
       {loaded ? (
         <div>
@@ -62,6 +62,27 @@ const ProjectInfo = (props) => {
               <Form.Control
                 name="name"
                 value={currentProjectData?.name}
+                disabled
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              />
+            </InputGroup>
+          </Form.Group>
+          <Form.Group className="mb-2">
+            <Form.Label className="mb-0">Project Summary</Form.Label>
+            <InputGroup>
+              <Button
+                variant="secondary"
+                onClick={(e) => {
+                  toggleEdit(e);
+                }}
+              >
+                Edit
+              </Button>
+              <Form.Control
+                name="summary"
+                value={currentProjectData?.summary}
                 disabled
                 onChange={(e) => {
                   handleChange(e);
