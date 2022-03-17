@@ -11,16 +11,23 @@ const AddClaim = (props) => {
   const params = useParams();
   const { projectId } = params;
   return (
-    <Stack direction="horizontal" gap={2}>
-      <Form style={{ width: "75%" }}>
+    <Stack
+      className="mx-auto"
+      direction="horizontal"
+      gap={2}
+      style={{ width: "85%" }}
+    >
+      <Form style={{ width: "80%" }}>
         <Form.Control
+          as="textarea"
+          rows={2}
           id="new-claim-text"
           className="me-auto"
           placeholder="New Claim Text"
         />
       </Form>
       <Button
-        variant="primary"
+        variant="outline-primary"
         onClick={() => {
           const thisForm = document.getElementById("new-claim-text");
           dispatch(

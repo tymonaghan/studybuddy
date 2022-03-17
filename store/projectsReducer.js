@@ -92,8 +92,8 @@ export function projectsReducer(state = [], action) {
         else return project;
       });
     case ADD_CLAIM:
-      console.log(`add_claim action: ${action}`);
-      console.dir(action);
+      // console.log(`add_claim action: ${action}`);
+      // console.dir(action);
       return state.map((project) => {
         if (project.id == action.projectId) {
           project.claims.push(action.claim);
