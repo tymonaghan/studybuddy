@@ -82,6 +82,20 @@ router.post("/:projectId/addSource", async (req, res, next) => {
   }
 });
 
+//add a new claim to a project's argument
+router.post("/:projectId/addClaim", async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    // const {claimNumber, claimText}
+    const currentProject = await Project.findByPk(projectId);
+
+    const newClaim = await currentProject.createClaim({ ...req.body });
+    res.status(200).send(newClaim);
+  } catch (error) {
+    console.log(`error in the add claim route: ${error}`);
+  }
+});
+
 // modify project info
 router.put("/:projectId/updateProject", async (req, res, next) => {
   try {
