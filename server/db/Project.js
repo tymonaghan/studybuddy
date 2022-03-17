@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const Claim = require("./Claim");
 const db = require("./database");
 const Source = require("./Source");
 
@@ -51,6 +52,22 @@ Project.afterCreate(async (project) => {
       publicationDate: "3189-01-01",
       sourceNotes:
         "This source was created automatically as an example. Feel free to delete it.",
+      projectId: project.id,
+    },
+    { include: [Project] }
+  );
+  const demoClaimsOne = await Claim.create(
+    {
+      claimText:
+        "LTL Travel restricted the possibilities for mankind to encounter new worlds and civilizations.",
+      projectId: project.id,
+    },
+    { include: [Project] }
+  );
+  const demoClaimsTwo = await Claim.create(
+    {
+      claimText:
+        "The advent of Warp technology gained the attention of other species in the galaxy.",
       projectId: project.id,
     },
     { include: [Project] }
