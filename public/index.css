@@ -11,6 +11,7 @@ main {
 }
 
 a > *,
+.card-body *,
 a,
 .navlink {
   color: black;

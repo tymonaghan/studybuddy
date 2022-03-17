@@ -15,26 +15,25 @@ const ProjectListCard = (props) => {
       <Link to={`/project/${entry.id}`}>
         <Card.Body>
           <Container>
-            <Row>
-              <Col xs="0" sm="3" md="2">
+            <Row className="align-items-center">
+              <Col xs={12} sm={2}>
                 <Image
                   thumbnail="true"
-                  style={{ width: "3rem" }}
+                  // style={{ width: "3rem" }}
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Noun_Project_task_icon_1251563.svg/105px-Noun_Project_task_icon_1251563.svg.png"
                 />
               </Col>
-              <Col lg="8" md="8" sm="9" xs="9">
+              <Col xs={12} sm={7}>
                 <h2 className="project-title">{entry.name}</h2>
-                <em>{entry.summary}</em>
+                <p className="m-0">
+                  <em>{entry.summary}</em>
+                </p>
               </Col>
-              <Col xs sm lg="2">
+              <Col xs={12} sm={3} className="align-items-center">
                 <Stack>
-                  <div style={{ textAlign: "right" }}># Sources</div>
-                  <div style={{ textAlign: "right" }}># Notes</div>
-                  <div
-                    style={{ textAlign: "right" }}
-                    className={`${entry.status}-project`}
-                  >
+                  <div className="text-end"># Sources</div>
+                  <div className="text-end"># Notes</div>
+                  <div className={`${entry.status}-project text-end`}>
                     {entry.status}
                   </div>
                 </Stack>
