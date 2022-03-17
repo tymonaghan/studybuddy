@@ -124,6 +124,7 @@ const ProjectInfo = (props) => {
               </Button>
               <Form.Control
                 as="textarea"
+                rows={5}
                 name="thesis"
                 value={currentProjectData?.thesis}
                 disabled
