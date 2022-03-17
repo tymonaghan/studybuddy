@@ -7,7 +7,7 @@ import {
   NavItem,
 } from "react-bootstrap/";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, NavLink } from "react-router-dom";
 
 import React from "react";
 import { logout } from "../../store/authReducer";
@@ -28,9 +28,11 @@ const NavBar = () => {
   // console.dir(projects);
   // console.dir(currentProject);
   return (
-    <Navbar variant="dark" bg="dark" expand="lg">
+    <Navbar variant="dark" bg="dark" expand="sm">
       <Container fluid>
-        <Navbar.Brand href="/home">StudyBuddy</Navbar.Brand>
+        <Link to="/home" className="navlink">
+          <Navbar.Brand>StudyBuddy</Navbar.Brand>
+        </Link>
         {/* <Nav className="me-auto">
           {" "}
           <Nav.Link className="">
@@ -41,8 +43,28 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Projects</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link>
+              <NavLink
+                to="/home"
+                className="navlink"
+                style={({ isActive }) =>
+                  isActive ? { color: "white" } : { color: "gray" }
+                }
+              >
+                Projects
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink
+                to="/about"
+                className="navlink"
+                style={({ isActive }) =>
+                  isActive ? { color: "white" } : { color: "gray" }
+                }
+              >
+                About
+              </NavLink>
+            </Nav.Link>
           </Nav>
           {isLoggedIn
             ? ({
