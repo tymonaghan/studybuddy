@@ -12,7 +12,7 @@ import Popover from "react-bootstrap/Popover";
 import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
 import { getCurrentProjectSourcesFromDb } from "../../store/sourcesReducer";
-import { SourceList, NewSourceForm, ProjectInfo } from ".";
+import { SourceList, NewSourceForm, ProjectInfo, ArgumentView } from ".";
 
 const ProjectView = () => {
   const dispatch = useDispatch();
@@ -64,6 +64,9 @@ const ProjectView = () => {
           </Tab>
           <Tab eventKey="projectInfo" title="Project Info">
             <ProjectInfo currentProject={currentProject} />
+          </Tab>
+          <Tab eventKey="argumentView" title="Your Argument">
+            <ArgumentView currentProject={currentProject} />
           </Tab>
         </Tabs>
       ) : (
