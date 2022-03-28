@@ -18,6 +18,7 @@ import NewSourceForm from "./NewSourceForm";
 import ProjectInfo from "./ProjectInfo";
 import ArgumentView from "./ArgumentView";
 import AddClaim from "./AddClaim";
+import NotesView from "./NotesView";
 
 export {
   Login,
@@ -40,4 +41,5 @@ export {
   ProjectInfo,
   ArgumentView,
   AddClaim,
+  NotesView,
 };

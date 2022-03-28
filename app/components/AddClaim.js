@@ -23,7 +23,7 @@ const AddClaim = (props) => {
           rows={2}
           id="new-claim-text"
           className="me-auto"
-          placeholder="New Claim Text"
+          placeholder="Add a new claim here..."
         />
       </Form>
       <Button

@@ -1,5 +1,6 @@
 const SET_CURRENT_NOTES = "SET_CURRENT_NOTES";
 const ADD_NEW_NOTE = "ADD_NEW_NOTE";
+const GET_NOTES_BY_PROJECT = "GET_NOTES_BY_PROJECT";
 
 const Axios = require("axios");
 
@@ -11,6 +12,22 @@ export const setCurrentNotes = (notes) => {
   // console.log(`hello from setCurrentNotes action creator. notes:`);
   // console.dir(notes);
   return { type: SET_CURRENT_NOTES, notes };
+};
+
+const getAllTheNotes = (notes) => {
+  return { type: GET_NOTES_BY_PROJECT, notes };
+};
+
+export const getNotesForProject = (projectId) => async (dispatch) => {
+  try {
+    const response = await Axios({
+      method: "get",
+      url: `/api/projects/${projectId}/getNotes`,
+    });
+    dispatch(getAllTheNotes(response.data));
+  } catch (error) {
+    console.log(`error in the "get notes for project" thunk: ${error}`);
+  }
 };
 
 export const addNewNoteToDb =
@@ -49,6 +66,8 @@ export const setCurrentNotesThunk = (noteId) => async (dispatch) => {
 export function currentNotesReducer(state = [], action) {
   switch (action.type) {
     case SET_CURRENT_NOTES:
+      return [...action.notes];
+    case GET_NOTES_BY_PROJECT:
       return [...action.notes];
     case ADD_NEW_NOTE:
       return [...state, action.note];

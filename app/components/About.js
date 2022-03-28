@@ -20,6 +20,9 @@ const About = () => {
       <Card border="primary" className="mb-3" style={{ maxWidth: "36rem" }}>
         <Card.Header>Recent Updates</Card.Header>
         <Card.Body>
+          <b>3/28/2022: </b> Users may now add and remove claims from the "Your
+          Argument" view of a project.
+          <br />
           <b>3/15/2022: </b> Users may now edit and save project info such as
           title, theme, topic, and thesis.
           <br />
@@ -30,15 +33,16 @@ const About = () => {
         <Card.Header>Features and Limitations</Card.Header>
         <Card.Body>
           StudyBuddy is an alpha product; it is still missing key functionality.
+          See more on the{" "}
+          <a
+            href="https://github.com/tymonaghan/studybuddy/issues"
+            target="_blank"
+          >
+            GitHub issues page
+          </a>
+          .
           <br />
-          Currently, users may:
-          <ul>
-            <li>Create and log in to an account</li>
-            <li>View and create Projects</li>
-            <li>View and delete Sources</li>
-            <li>View and add Notes from Source View</li>
-          </ul>
-          <p>Planned features:</p>
+          <h3>Planned features:</h3>
           <ul>
             <li>View, create, edit, and remove Projects, Sources, and Notes</li>
             <li>
