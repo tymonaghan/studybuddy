@@ -73,23 +73,7 @@ Source.afterCreate(async (source) => {
 });
 
 Source.afterSave(async (source) => {
-  // const currentProjectId = source.projectId;
-  // console.log(currentProjectId);
-  // console.dir(Object.keys(source.__proto__));
-  // console.dir(await source.getProject());
   const project = await source.getProject();
-  // console.dir(Object.keys(project.__proto__));
+  //can't use Source.findByPk() or similar methods here, but the sequelize 'magic methods' work.
   await project.update({ sourceCount: await project.countSources() });
 });
-
-// Source.afterValidate(async (source) => {
-//   console.log(`after update in source model reached.`);
-//   const currentProject = await Project.findOne({
-//     where: { id: source.projectId },
-//   });
-//   // const count = await Source.count({
-//   //   where: { projectId: currentProject.id },
-//   // });
-//   // currentProject.sourceCount = count;
-//   // await currentProject.save();
-// });
