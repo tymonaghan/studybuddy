@@ -11,7 +11,7 @@ const app = require("supertest")(_app); // import supertest - not actually sure 
 describe("Express route security tests", function () {
   let users;
   this.slow(200);
-  this.timeout(3000);
+  this.timeout(5000);
   before(async function () {
     await db.sync({ force: true });
     const _users = await User.bulkCreate(
