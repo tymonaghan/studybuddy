@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("./database");
 const Note = require("./Note");
+const Claim = require("./Claim");
 
 const Source = db.define("source", {
   name: {
@@ -59,7 +60,8 @@ Source.afterCreate(async (source) => {
       text: "add text notes here, for example quotes",
       pageNumber: "pg 23, 52-57",
       sourceId: source.id,
+      claimId: 1,
     },
-    { include: [Source] }
+    { include: [Source, Claim] }
   );
 });

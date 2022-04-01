@@ -2,6 +2,11 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 export default function NoteCard(props) {
   const { note } = props;
@@ -26,7 +31,9 @@ export default function NoteCard(props) {
         >
           <p>source:</p>
           <p>
-            {note.source.name} by {note.source.authorFullName}
+            <Link to={`./source/${note.source?.id}`}>
+              {note.source?.name} by {note.source?.authorFullName}
+            </Link>
           </p>
         </Col>
         <Col
@@ -38,9 +45,24 @@ export default function NoteCard(props) {
           }}
         >
           <p>argument</p>
-          <p>
-            {note.claimId ? note.claimId : "not associated with a claim yet"}
-          </p>
+
+          {note.claimId ? (
+            <OverlayTrigger
+              placement="bottom"
+              overlay={
+                <Tooltip id={`tooltip-${note.id}`}>
+                  {`Claim text: "${note.claim?.claimText}"`}
+                </Tooltip>
+              }
+            >
+              {/* the triggering element must be able to accept a ref, so Button is fine, <p> won't work though */}
+              <Link to="." disabled>
+                currently associated with claim #{note.claimId}
+              </Link>
+            </OverlayTrigger>
+          ) : (
+            "not associated with a claim yet"
+          )}
         </Col>
       </Row>
     </Card>
