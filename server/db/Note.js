@@ -17,3 +17,11 @@ const Note = db.define("note", {
 });
 
 module.exports = Note;
+
+Note.afterSave(async (note) => {
+  const source = await note.getSource();
+  // console.dir(source);
+  const project = await source.getProject();
+  // console.dir(project);
+  await project.update({ noteCount: await source.countNotes() });
+});

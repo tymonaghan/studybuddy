@@ -1,6 +1,7 @@
 const SET_CURRENT_NOTES = "SET_CURRENT_NOTES";
 const ADD_NEW_NOTE = "ADD_NEW_NOTE";
 const GET_NOTES_BY_PROJECT = "GET_NOTES_BY_PROJECT";
+const DELETE_NOTE = "DELETE_NOTE";
 
 const Axios = require("axios");
 
@@ -8,7 +9,11 @@ const addNewNote = (note) => {
   return { type: ADD_NEW_NOTE, note };
 };
 
-export const setCurrentNotes = (notes) => {
+const deleteNote = (noteId) => {
+  return { type: DELETE_NOTE, noteId };
+};
+
+const setCurrentNotes = (notes) => {
   // console.log(`hello from setCurrentNotes action creator. notes:`);
   // console.dir(notes);
   return { type: SET_CURRENT_NOTES, notes };

@@ -33,6 +33,14 @@ const Project = db.define("project", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  sourceCount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
+  noteCount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
 });
 
 module.exports = Project;
@@ -42,20 +50,6 @@ module.exports = Project;
 // example source will be associated with it.
 Project.afterCreate(async (project) => {
   // console.dir(project.id);
-  const demoSource = await Source.create(
-    {
-      name: "Example Book Source",
-      classification: "secondary",
-      type: "book",
-      authorLastName: "Tilly",
-      authorFirstName: "Syliva",
-      publicationDate: "3189-01-01",
-      sourceNotes:
-        "This source was created automatically as an example. Feel free to delete it.",
-      projectId: project.id,
-    },
-    { include: [Project] }
-  );
   const demoClaimsOne = await Claim.create(
     {
       claimNumber: 1,
@@ -70,6 +64,20 @@ Project.afterCreate(async (project) => {
       claimNumber: 2,
       claimText:
         "The advent of Warp technology gained the attention of other species in the galaxy.",
+      projectId: project.id,
+    },
+    { include: [Project] }
+  );
+  const demoSource = await Source.create(
+    {
+      name: "Example Book Source",
+      classification: "secondary",
+      type: "book",
+      authorLastName: "Tilly",
+      authorFirstName: "Sylvia",
+      publicationDate: "3189-01-01",
+      sourceNotes:
+        "This source was created automatically as an example. Feel free to delete it.",
       projectId: project.id,
     },
     { include: [Project] }

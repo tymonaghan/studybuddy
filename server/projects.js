@@ -29,7 +29,7 @@ router.get("/:projectId/getNotes", async (req, res, next) => {
     const currentSourceList = await currentProject.getSources();
     const currentNotes = await Promise.all(
       currentSourceList.map((source) => {
-        return source.getNotes();
+        return source.getNotes({ include: [Source, Claim] });
       })
     );
     res.status(200).send(currentNotes[0]);
@@ -67,6 +67,21 @@ router.get("/:projectId/getSources", async (req, res, next) => {
     );
   }
 });
+
+// count all sources for project by ID
+// currently not used - using sequelize hooks instead
+// router.get("/:projectId/countSources", async (req, res, next) => {
+//   try {
+//     const currentSources = await Source.count({
+//       where: { projectId: req.params.projectId },
+//     });
+//     res.status(200).send(String(currentSources));
+//   } catch (error) {
+//     console.log(
+//       `error in router.get /api/projects/:projectId/getSources: ${error.stack}`
+//     );
+//   }
+// });
 
 // add a new project
 router.post("/addNew", async (req, res, next) => {
