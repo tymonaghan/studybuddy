@@ -16,7 +16,7 @@ export default function NotesView() {
   }, [initialNotes]);
 
   useEffect(() => {
-    console.log(projectId);
+    // console.log(projectId);
     dispatch(getNotesForProject(params.projectId));
   }, []);
 

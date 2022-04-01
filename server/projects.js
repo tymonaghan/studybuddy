@@ -29,7 +29,7 @@ router.get("/:projectId/getNotes", async (req, res, next) => {
     const currentSourceList = await currentProject.getSources();
     const currentNotes = await Promise.all(
       currentSourceList.map((source) => {
-        return source.getNotes();
+        return source.getNotes({ include: [Source, Claim] });
       })
     );
     res.status(200).send(currentNotes[0]);

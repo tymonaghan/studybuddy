@@ -25,7 +25,9 @@ export default function NoteCard(props) {
           }}
         >
           <p>source:</p>
-          <p>{note.sourceId}</p>
+          <p>
+            {note.source.name} by {note.source.authorFullName}
+          </p>
         </Col>
         <Col
           sm={2}
