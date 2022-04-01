@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Project, Source, Note },
+  models: { Project, Source, Note, Claim },
 } = require("./db");
 
 // all routes branch from
@@ -79,6 +79,33 @@ router.post("/:projectId/addSource", async (req, res, next) => {
     console.log(
       `error from the router.post /api/projects/projectId/addSource route: ${error}`
     );
+  }
+});
+
+//add a new claim to a project's argument
+router.post("/:projectId/addClaim", async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    // const {claimNumber, claimText}
+    const currentProject = await Project.findByPk(projectId);
+
+    const newClaim = await currentProject.createClaim({ ...req.body });
+    res.status(200).send(newClaim);
+  } catch (error) {
+    console.log(`error in the add claim route: ${error}`);
+  }
+});
+
+router.delete("/:projectId/claim/:claimId", async (req, res, next) => {
+  try {
+    const { projectId, claimId } = req.params;
+    const currentClaim = await Claim.findOne({
+      where: { claimNumber: claimId, projectId: projectId },
+    });
+    await currentClaim.destroy();
+    res.status(200).send({ projectId, claimId });
+  } catch (error) {
+    console.log(`error in the delete claim route: ${error}`);
   }
 });
 

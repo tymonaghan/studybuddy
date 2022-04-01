@@ -1,12 +1,22 @@
 const SET_USER_PROJECTS = "SET_USER_PROJECTS";
 const ADD_NEW_PROJECT = "ADD_NEW_PROJECT";
 const UPDATE_CURRENT_PROJECT = "UPDATE_CURRENT_PROJECT";
+const ADD_CLAIM = "ADD_CLAIM";
+const REMOVE_CLAIM = "REMOVE_CLAIM";
 
 import Axios from "axios";
 
 const setUserProjects = (projects) => {
   // console.dir(projects);
   return { type: SET_USER_PROJECTS, projects };
+};
+
+const addClaimToProject = (projectId, claim) => {
+  return { type: ADD_CLAIM, projectId, claim };
+};
+
+const removeClaimFromProject = (projectId, claimId) => {
+  return { type: REMOVE_CLAIM, projectId, claimId };
 };
 
 const addNewProject = (newProject) => {
@@ -35,6 +45,37 @@ export const updateCurrentProjectInDb =
       console.log(`error in the updateCurrentProjectInDb thunk: ${error}`);
     }
   };
+
+export const addNewClaimToDb =
+  (projectId, claimNumber, claimText) => async (dispatch) => {
+    try {
+      const response = await Axios({
+        method: "post",
+        url: `/api/projects/${projectId}/addClaim`,
+        data: { claimNumber, claimText },
+      });
+      // console.log(response.data);
+      dispatch(addClaimToProject(projectId, response.data));
+    } catch (error) {
+      console.log(`error in the addNewClaimtoDb thunk: ${error}`);
+    }
+  };
+
+export const deleteClaimFromDb = (projectId, claimId) => async (dispatch) => {
+  try {
+    const response = await Axios({
+      method: "delete",
+      url: `/api/projects/${projectId}/claim/${claimId}`,
+    });
+    console.log(
+      "hey cool you deleted the claim from the db! the api responded with: ",
+      response.data
+    );
+    dispatch(removeClaimFromProject(projectId, claimId));
+  } catch (error) {
+    console.log(`error in the deleteClaimFromDb thunk: ${error}`);
+  }
+};
 
 export const addNewProjectToDb = (projectName, userId) => async (dispatch) => {
   try {
@@ -70,6 +111,29 @@ export function projectsReducer(state = [], action) {
         if (project.id == action.updatedProject.id)
           return { ...project, ...action.updatedProject };
         else return project;
+      });
+    case ADD_CLAIM:
+      // console.log(`add_claim action: ${action}`);
+      // console.dir(action);
+      return state.map((project) => {
+        if (project.id == action.projectId) {
+          project.claims.push(action.claim);
+          return project;
+        }
+        // return { ...project, [...project.claims] };
+        else return project;
+      });
+
+    case REMOVE_CLAIM:
+      return state.map((project) => {
+        if (project.id == action.projectId) {
+          return {
+            ...project,
+            claims: project.claims.filter(
+              (claim) => claim.claimNumber != action.claimId
+            ),
+          };
+        } else return project;
       });
     default:
       return state;

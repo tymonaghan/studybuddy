@@ -22,7 +22,8 @@ const About = () => {
         <Card.Body>
           <b>3/15/2022: </b> Users may now edit and save project info such as
           title, theme, topic, and thesis.
-          <b>3/15/2022: </b> Update about page to include recent updates
+          <br />
+          <b>3/15/2022: </b> Update about page to include recent updates.
         </Card.Body>
       </Card>
       <Card border="warning" style={{ maxWidth: "36rem" }}>
@@ -37,10 +38,18 @@ const About = () => {
             <li>View and delete Sources</li>
             <li>View and add Notes from Source View</li>
           </ul>
-          <p>Missing functionality includes, but is not limited to:</p>
+          <p>Planned features:</p>
           <ul>
             <li>View, create, edit, and remove Projects, Sources, and Notes</li>
+            <li>
+              Users can assign teammates and teachers who can collaborate on
+              their projects
+            </li>
             <li>Notes View, separate from Source View</li>
+            <li>
+              Argument view: add your main points, associate them with your
+              notes, see visualizations showing where your evidence is strongest
+            </li>
             <li>Edit user details and change password</li>
           </ul>
         </Card.Body>

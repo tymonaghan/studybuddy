@@ -16,6 +16,8 @@ import BreadcrumbBox from "./Breadcrumb";
 import AlphaWarning from "./AlphaWarning";
 import NewSourceForm from "./NewSourceForm";
 import ProjectInfo from "./ProjectInfo";
+import ArgumentView from "./ArgumentView";
+import AddClaim from "./AddClaim";
 
 export {
   Login,
@@ -36,4 +38,6 @@ export {
   AlphaWarning,
   NewSourceForm,
   ProjectInfo,
+  ArgumentView,
+  AddClaim,
 };
