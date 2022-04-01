@@ -19,6 +19,7 @@ import ProjectInfo from "./ProjectInfo";
 import ArgumentView from "./ArgumentView";
 import AddClaim from "./AddClaim";
 import NotesView from "./NotesView";
+import NoteCard from "./NoteCard";
 
 export {
   Login,
@@ -42,4 +43,5 @@ export {
   ArgumentView,
   AddClaim,
   NotesView,
+  NoteCard,
 };
