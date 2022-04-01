@@ -33,7 +33,7 @@ const ProjectListCard = (props) => {
               <Col xs={12} sm={3} className="align-items-center">
                 <Stack>
                   <div className="text-end">{entry.sourceCount} Sources</div>
-                  <div className="text-end"># Notes</div>
+                  <div className="text-end">{entry.noteCount} Notes</div>
                   <div className={`${entry.status}-project text-end`}>
                     {entry.status}
                   </div>
