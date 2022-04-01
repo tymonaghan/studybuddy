@@ -9,6 +9,7 @@ import Image from "react-bootstrap/Image";
 
 const ProjectListCard = (props) => {
   const { entry } = props;
+  // console.dir(entry);
 
   return (
     <Card className="bg-light-border">
@@ -31,7 +32,7 @@ const ProjectListCard = (props) => {
               </Col>
               <Col xs={12} sm={3} className="align-items-center">
                 <Stack>
-                  <div className="text-end"># Sources</div>
+                  <div className="text-end">{entry.sourceCount} Sources</div>
                   <div className="text-end"># Notes</div>
                   <div className={`${entry.status}-project text-end`}>
                     {entry.status}
