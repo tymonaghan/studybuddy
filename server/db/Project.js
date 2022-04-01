@@ -33,6 +33,10 @@ const Project = db.define("project", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  sourceCount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
 });
 
 module.exports = Project;

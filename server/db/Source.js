@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("./database");
 const Note = require("./Note");
 const Claim = require("./Claim");
+const Project = require("./Project");
 
 const Source = db.define("source", {
   name: {
@@ -64,4 +65,31 @@ Source.afterCreate(async (source) => {
     },
     { include: [Source, Claim] }
   );
+  // const currentProject = await Project.findByPk(source.projectId);
+  // await Project.increment(
+  //   { sourceCount: 1 },
+  //   { where: { id: source.projectId } }
+  // );
 });
+
+Source.afterSave(async (source) => {
+  const currentProjectId = source.projectId;
+  // console.log(currentProjectId);
+  // console.dir(Object.keys(source.__proto__));
+  // console.dir(await source.getProject());
+  const project = await source.getProject();
+  console.dir(Object.keys(project.__proto__));
+  await project.update({ sourceCount: await project.countSources() });
+});
+
+// Source.afterValidate(async (source) => {
+//   console.log(`after update in source model reached.`);
+//   const currentProject = await Project.findOne({
+//     where: { id: source.projectId },
+//   });
+//   // const count = await Source.count({
+//   //   where: { projectId: currentProject.id },
+//   // });
+//   // currentProject.sourceCount = count;
+//   // await currentProject.save();
+// });
