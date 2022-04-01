@@ -73,12 +73,12 @@ Source.afterCreate(async (source) => {
 });
 
 Source.afterSave(async (source) => {
-  const currentProjectId = source.projectId;
+  // const currentProjectId = source.projectId;
   // console.log(currentProjectId);
   // console.dir(Object.keys(source.__proto__));
   // console.dir(await source.getProject());
   const project = await source.getProject();
-  console.dir(Object.keys(project.__proto__));
+  // console.dir(Object.keys(project.__proto__));
   await project.update({ sourceCount: await project.countSources() });
 });
 
