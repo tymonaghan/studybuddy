@@ -13,11 +13,29 @@ router.get("/", (req, res, next) => {
 router.get("/:projectId/source/:sourceId", async (req, res, next) => {
   try {
     const { projectId, sourceId } = req.params;
-    const currentSource = Source.findByPk(sourceId);
+    const currentSource = await Source.findByPk(sourceId);
     const currentNotes = await Note.findAll({ where: { sourceId } });
     res.send(currentNotes);
   } catch (error) {
     console.log(`error in router.get /projects/id/source/id: ${error}`);
+  }
+});
+
+// Get all the notes for a given project
+router.get("/:projectId/getNotes", async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    const currentProject = await Project.findByPk(projectId);
+    const currentSourceList = await currentProject.getSources();
+    const currentNotes = await Promise.all(
+      currentSourceList.map((source) => {
+        return source.getNotes();
+      })
+    );
+    res.status(200).send(currentNotes[0]);
+    // need to take a closer look at why this is returning inside of a nested array (using [0] as workaround)
+  } catch (error) {
+    console.log(`error in the get route for getNotes: ${error}`);
   }
 });
 

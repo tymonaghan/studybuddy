@@ -13,6 +13,7 @@ import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
 import { getCurrentProjectSourcesFromDb } from "../../store/sourcesReducer";
 import { SourceList, NewSourceForm, ProjectInfo, ArgumentView } from ".";
+import NotesView from "./NotesView";
 
 const ProjectView = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const ProjectView = () => {
             <SourceList />
           </Tab>
           <Tab eventKey="notes" title="Notes">
-            View, edit, and organize your individual notes here (coming soon).
+            <NotesView />
           </Tab>
           <Tab eventKey="projectInfo" title="Project Info">
             <ProjectInfo currentProject={currentProject} />
