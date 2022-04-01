@@ -37,6 +37,10 @@ const Project = db.define("project", {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
+  noteCount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
 });
 
 module.exports = Project;
