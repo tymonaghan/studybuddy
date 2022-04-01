@@ -70,7 +70,7 @@ export default function ArgumentView(props) {
       </Form.Group>
       {/* {currentProject.thesis} */}
       <h2>Your Argument:</h2>
-      {currentProject.claims[0]
+      {currentProject.claims
         ? currentProject.claims.map((claim, key) => {
             return (
               <Card
@@ -100,7 +100,7 @@ export default function ArgumentView(props) {
             );
           })
         : "No claims yet."}
-      <AddClaim currentClaimCount={currentProject.claims.length} />
+      <AddClaim currentClaimCount={currentProject.claims?.length} />
     </div>
   );
 }
