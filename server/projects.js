@@ -115,6 +115,7 @@ router.post("/:projectId/addClaim", async (req, res, next) => {
   }
 });
 
+// delete a claim from a project
 router.delete("/:projectId/claim/:claimId", async (req, res, next) => {
   try {
     const { projectId, claimId } = req.params;
