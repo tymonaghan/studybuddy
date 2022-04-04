@@ -22,10 +22,12 @@ const ProjectViewWrapper = () => {
   // console.log(`userId is currently ${userId}`);
 
   useEffect(() => {
+    if (!userId) return false;
     dispatch(retrieveUserProjectsFromDb(userId));
   }, [userId]);
 
   useEffect(() => {
+    if (!userId) return false;
     dispatch(setCurrentProjectId(projectId));
   }, [userId, currentProject]);
 

@@ -68,22 +68,8 @@ router.get("/:projectId/getSources", async (req, res, next) => {
   }
 });
 
-// count all sources for project by ID
-// currently not used - using sequelize hooks instead
-// router.get("/:projectId/countSources", async (req, res, next) => {
-//   try {
-//     const currentSources = await Source.count({
-//       where: { projectId: req.params.projectId },
-//     });
-//     res.status(200).send(String(currentSources));
-//   } catch (error) {
-//     console.log(
-//       `error in router.get /api/projects/:projectId/getSources: ${error.stack}`
-//     );
-//   }
-// });
-
 // add a new project
+// expects body: {projectName, userId}
 router.post("/addNew", async (req, res, next) => {
   try {
     const newProject = await Project.create({
@@ -129,6 +115,7 @@ router.post("/:projectId/addClaim", async (req, res, next) => {
   }
 });
 
+// delete a claim from a project
 router.delete("/:projectId/claim/:claimId", async (req, res, next) => {
   try {
     const { projectId, claimId } = req.params;
@@ -143,11 +130,12 @@ router.delete("/:projectId/claim/:claimId", async (req, res, next) => {
 });
 
 // modify project info
+// expects body: a project object
 router.put("/:projectId/updateProject", async (req, res, next) => {
   try {
     const { projectId } = req.params;
     const currentProject = await Project.findOne({ where: { id: projectId } });
-    console.log(currentProject);
+    // console.log(currentProject);
     await currentProject.update(req.body);
     res.status(200).send(currentProject);
   } catch (error) {
@@ -156,6 +144,7 @@ router.put("/:projectId/updateProject", async (req, res, next) => {
 });
 
 // add a new note to a project
+// expects body: a note object
 router.post("/:projectId/source/:sourceId/addNote", async (req, res, next) => {
   try {
     const { sourceId } = req.params;
@@ -169,26 +158,5 @@ router.post("/:projectId/source/:sourceId/addNote", async (req, res, next) => {
     console.log(`error in the add new note to project express route: ${error}`);
   }
 });
-
-// count number of sources
-router.get("/countSources", async (req, res, next) => {
-  //this was supposed to be a helper function to count the number of notes but it still didn't
-  // work when called from within a .map. it's not currently doing anything.
-
-  const projectsArray = req.body;
-  const newProjectsArray = [];
-
-  projectsArray.map(async (project) => {
-    const projectId = project.id;
-    newProjectsArray.push(project);
-    const numSources = await countSources(projectId);
-  });
-
-  res.send(newProjectsArray);
-});
-
-countSources = async (projectId) => {
-  return await Source.count({ where: { projectId: projectId } });
-};
 
 module.exports = router;

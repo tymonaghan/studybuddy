@@ -20,6 +20,8 @@ import ArgumentView from "./ArgumentView";
 import AddClaim from "./AddClaim";
 import NotesView from "./NotesView";
 import NoteCard from "./NoteCard";
+import AddSourceButton from "./AddSourceButton";
+import ClaimDetailView from "./ClaimDetailView";
 
 export {
   Login,
@@ -44,4 +46,6 @@ export {
   AddClaim,
   NotesView,
   NoteCard,
+  AddSourceButton,
+  ClaimDetailView,
 };
