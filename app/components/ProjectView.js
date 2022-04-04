@@ -7,15 +7,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import PopoverBody from "react-bootstrap/PopoverBody";
-import PopoverHeader from "react-bootstrap/PopoverHeader";
 import { getCurrentProjectSourcesFromDb } from "../../store/sourcesReducer";
-import { SourceList, NewSourceForm, ProjectInfo, ArgumentView } from ".";
+import {
+  SourceList,
+  NewSourceForm,
+  ProjectInfo,
+  ArgumentView,
+  AddSourceButton,
+  SourceView,
+} from ".";
 import NotesView from "./NotesView";
 
-const ProjectView = () => {
+const ProjectView = (props) => {
+  const { source } = props;
   const dispatch = useDispatch();
   const params = useParams();
   const projects = useSelector((state) => state.projects);
@@ -33,32 +37,14 @@ const ProjectView = () => {
       {currentProject ? (
         <Tabs defaultActiveKey="sources" className="mb-3">
           <Tab eventKey="sources" title="Sources">
-            <div className="mb-2">
-              <OverlayTrigger
-                trigger="click"
-                placement="bottom"
-                rootClose="true"
-                overlay={
-                  <Popover id={`popover-positioned-bottom`}>
-                    <Popover.Header as="h3">{`Add a New Source`}</Popover.Header>
-                    <Popover.Body>
-                      <NewSourceForm />
-                    </Popover.Body>
-                  </Popover>
-                }
-              >
-                <Button
-                  style={{
-                    borderRadius: "100px",
-                  }}
-                  variant="success"
-                  size="sm"
-                >
-                  + Add New
-                </Button>
-              </OverlayTrigger>
-            </div>
-            <SourceList />
+            {source ? (
+              <SourceView />
+            ) : (
+              <div>
+                <AddSourceButton />
+                <SourceList />
+              </div>
+            )}
           </Tab>
           <Tab eventKey="notes" title="Notes">
             <NotesView />

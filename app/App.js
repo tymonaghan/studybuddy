@@ -41,10 +41,14 @@ const App = () => {
           <Route path="/signup" element={Signup} />{" "}
           <Route path="/about" element={<About />} />
           <Route path="project" element={<ProjectViewWrapper />}>
-            <Route exact path=":projectId" element={<ProjectView />} />
+            <Route
+              exact
+              path=":projectId"
+              element={<ProjectView source={false} />}
+            />
             <Route
               path=":projectId/source/:sourceId"
-              element={<SourceView />}
+              element={<ProjectView source={true} />}
             />
           </Route>
           <Route path="*" element={<Navigate to="/home" />} />
