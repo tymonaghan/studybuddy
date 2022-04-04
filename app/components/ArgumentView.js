@@ -8,11 +8,13 @@ import Stack from "react-bootstrap/Stack";
 import InputGroup from "react-bootstrap/InputGroup";
 
 import { useDispatch } from "react-redux";
-import { AddClaim } from ".";
+import { AddClaim, ClaimDetailView } from ".";
 import { deleteClaimFromDb } from "../../store/projectsReducer";
 import { useParams } from "react-router-dom";
 
 export default function ArgumentView(props) {
+  const [showClaimDetails, setShowClaimDetails] = useState(false);
+  const [claimDetailNumber, setClaimDetailNumber] = useState(NaN);
   const [thesis, updateThesis] = useState();
   useEffect(() => {
     updateThesis(currentProject.thesis);
@@ -77,6 +79,10 @@ export default function ArgumentView(props) {
                 className="row mx-auto my-2 p-1"
                 style={{ width: "85%" }}
                 key={key}
+                onClick={() => {
+                  setShowClaimDetails(true);
+                  setClaimDetailNumber(claim.claimNumber);
+                }}
               >
                 <Card.Header className="my-0 py-0">
                   <Row>
@@ -100,7 +106,16 @@ export default function ArgumentView(props) {
             );
           })
         : "No claims yet."}
-      <AddClaim currentClaimCount={currentProject.claims?.length} />
+      <ClaimDetailView
+        show={showClaimDetails}
+        onHide={() => setShowClaimDetails(false)}
+        claim={
+          currentProject.claims?.filter(
+            (claim) => claim.claimNumber == claimDetailNumber
+          )[0]
+        }
+      />
+      ;{/* <AddClaim currentClaimCount={currentProject.claims?.length} /> */}
     </div>
   );
 }
