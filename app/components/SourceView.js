@@ -11,7 +11,7 @@ import {
   getCurrentProjectSourcesFromDb,
 } from "../../store/sourcesReducer";
 import { useParams, useNavigate } from "react-router-dom";
-import { NewNoteForm } from ".";
+import { NewNoteForm, NoteCard } from ".";
 
 const SourceView = () => {
   const dispatch = useDispatch();
@@ -86,14 +86,7 @@ const SourceView = () => {
       {currentNotes[0] ? (
         <Row>
           {currentNotes.map((note, i) => {
-            return (
-              <Col key={i}>
-                <Card>
-                  <Card.Title>{note.headline}</Card.Title>
-                  <p>{note.text}</p>
-                </Card>
-              </Col>
-            );
+            return <NoteCard key={i} note={note} />;
           })}
         </Row>
       ) : (
