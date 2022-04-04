@@ -20,13 +20,11 @@ const About = () => {
       <Card border="primary" className="mb-3" style={{ maxWidth: "36rem" }}>
         <Card.Header>Recent Updates</Card.Header>
         <Card.Body>
+          <b>4/4/2022: </b> Users can now click a Claim on the "Your Argument"
+          view to see a Claim Detail Card that shows notes linked to that claim.
+          <br />
           <b>3/28/2022: </b> Users may now add and remove claims from the "Your
           Argument" view of a project.
-          <br />
-          <b>3/15/2022: </b> Users may now edit and save project info such as
-          title, theme, topic, and thesis.
-          <br />
-          <b>3/15/2022: </b> Update about page to include recent updates.
         </Card.Body>
       </Card>
       <Card border="warning" style={{ maxWidth: "36rem" }}>

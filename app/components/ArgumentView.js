@@ -115,7 +115,7 @@ export default function ArgumentView(props) {
           )[0]
         }
       />
-      ;{/* <AddClaim currentClaimCount={currentProject.claims?.length} /> */}
+      {/* <AddClaim currentClaimCount={currentProject.claims?.length} /> */}
     </div>
   );
 }
