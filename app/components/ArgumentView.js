@@ -47,6 +47,11 @@ export default function ArgumentView(props) {
     updateThesis(event.target.value);
   }
   const { currentProject } = props;
+
+  function getNotes(claimId) {
+    return currentNotes?.filter((note) => note.claimId == claimId);
+  }
+
   return (
     <div>
       <h2>Your thesis:</h2>
@@ -89,13 +94,21 @@ export default function ArgumentView(props) {
                 <Card.Header className="my-0 py-0">
                   <Row>
                     <Col>Claim {claim.claimNumber}</Col>
-                    <Col>
+                    <Col>{getNotes(claim.claimNumber).length} notes</Col>
+                    <Col sm="auto">
+                      (
                       {
-                        currentNotes?.filter(
-                          (note) => note.claimId == claim.claimNumber
+                        getNotes(claim.claimNumber).filter(
+                          (note) => note.source.classification == "secondary"
                         ).length
                       }{" "}
-                      notes
+                      from secondary sources,{" "}
+                      {
+                        getNotes(claim.claimNumber).filter(
+                          (note) => note.source.classification == "primary"
+                        ).length
+                      }{" "}
+                      from primary sources)
                     </Col>
                     <Col me="auto" xs={1}>
                       <Button
