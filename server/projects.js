@@ -143,6 +143,20 @@ router.put("/:projectId/updateProject", async (req, res, next) => {
   }
 });
 
+// modify project thesis
+// expects body: newThesis object
+router.put("/:projectId/updateThesis", async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    const currentProject = await Project.findOne({ where: { id: projectId } });
+    // console.log(currentProject);
+    await currentProject.update({ thesis: req.body.thesis });
+    res.status(200).send(currentProject);
+  } catch (error) {
+    console.log(`error from the router.put method: ${error}`);
+  }
+});
+
 // add a new note to a project
 // expects body: a note object
 router.post("/:projectId/source/:sourceId/addNote", async (req, res, next) => {

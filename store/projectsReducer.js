@@ -46,6 +46,20 @@ export const updateCurrentProjectInDb =
     }
   };
 
+export const updateThesisInDb =
+  (projectId, updatedThesis) => async (dispatch) => {
+    try {
+      const response = await Axios({
+        method: "put",
+        url: `/api/projects/${projectId}/updateThesis`,
+        data: { thesis: updatedThesis },
+      });
+      dispatch(updateCurrentProjectInDb(response.data));
+    } catch (error) {
+      console.log(`error in the updateThesisInDb thunk: ${error}`);
+    }
+  };
+
 export const addNewClaimToDb =
   (projectId, claimNumber, claimText) => async (dispatch) => {
     try {

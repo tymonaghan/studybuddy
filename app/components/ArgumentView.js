@@ -10,40 +10,48 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AddClaim, ClaimDetailView, ConfirmDelete } from ".";
-import { deleteClaimFromDb } from "../../store/projectsReducer";
+import {
+  deleteClaimFromDb,
+  updateThesisInDb,
+} from "../../store/projectsReducer";
 import { useParams } from "react-router-dom";
 
-export default function ArgumentView(props) {
+export default function ArgumentView() {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const initialProject = useSelector((state) =>
+    state.projects.find((project) => project.id == params.projectId)
+  );
+
+  const [currentProject, setCurrentProject] = useState({});
   const [showClaimDetails, setShowClaimDetails] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [claimDetailNumber, setClaimDetailNumber] = useState(NaN);
-  const [thesis, updateThesis] = useState();
+  const [thesis, updateThesis] = useState("");
   const { currentNotes } = useSelector((state) => state);
 
   useEffect(() => {
-    updateThesis(currentProject.thesis);
-  }, [currentProject]);
+    setCurrentProject(initialProject);
+    updateThesis(initialProject.thesis);
+  }, [initialProject]);
 
   function toggleEdit(event) {
-    console.dir(event);
+    // console.dir(event);
     if (event.target.innerText === "Edit") {
       event.target.className = "btn btn-primary";
       event.target.innerText = "Save";
       event.nativeEvent.target.nextSibling.disabled = false;
     } else {
-      // dispatch(updateCurrentProjectInDb(params.projectId, currentProjectData));
+      dispatch(updateThesisInDb(params.projectId, thesis));
       event.target.className = "btn btn-secondary";
       event.target.innerText = "Edit";
       event.nativeEvent.target.nextSibling.disabled = true;
     }
   }
-  const params = useParams();
 
   function handleChange(event) {
-    console.log(thesis);
     updateThesis(event.target.value);
   }
-  const { currentProject } = props;
 
   function getNotes(claimId) {
     return currentNotes?.filter((note) => note.claimId == claimId);
@@ -127,7 +135,7 @@ export default function ArgumentView(props) {
             );
           })
         : "No claims yet."}
-      <AddClaim currentClaimCount={currentProject.claims.length} />
+      <AddClaim currentClaimCount={currentProject.claims?.length} />
       <ClaimDetailView
         show={showClaimDetails}
         onHide={() => setShowClaimDetails(false)}
