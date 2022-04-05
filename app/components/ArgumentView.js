@@ -9,18 +9,21 @@ import Stack from "react-bootstrap/Stack";
 import InputGroup from "react-bootstrap/InputGroup";
 
 import { useDispatch, useSelector } from "react-redux";
-import { AddClaim, ClaimDetailView } from ".";
+import { AddClaim, ClaimDetailView, ConfirmDelete } from ".";
 import { deleteClaimFromDb } from "../../store/projectsReducer";
 import { useParams } from "react-router-dom";
 
 export default function ArgumentView(props) {
   const [showClaimDetails, setShowClaimDetails] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [claimDetailNumber, setClaimDetailNumber] = useState(NaN);
   const [thesis, updateThesis] = useState();
   const { currentNotes } = useSelector((state) => state);
+
   useEffect(() => {
     updateThesis(currentProject.thesis);
   }, [currentProject]);
+
   function toggleEdit(event) {
     console.dir(event);
     if (event.target.innerText === "Edit") {
@@ -35,13 +38,7 @@ export default function ArgumentView(props) {
     }
   }
   const params = useParams();
-  const dispatch = useDispatch();
-  function handleDelete(claimId) {
-    dispatch(deleteClaimFromDb(params.projectId, claimId));
-    // window.alert(
-    //   `delete button pressed. claimID: ${claimId}\n\nprojectId: ${params.projectId}`
-    // );
-  }
+
   function handleChange(event) {
     console.log(thesis);
     updateThesis(event.target.value);
@@ -116,7 +113,8 @@ export default function ArgumentView(props) {
                         size="sm"
                         className="m-0 py-0"
                         onClick={() => {
-                          handleDelete(claim.claimNumber);
+                          setClaimDetailNumber(claim.claimNumber);
+                          setShowDeleteDialog(true);
                         }}
                       >
                         <span className="material-icons">delete</span>{" "}
@@ -138,6 +136,16 @@ export default function ArgumentView(props) {
             (claim) => claim.claimNumber == claimDetailNumber
           )[0]
         }
+      />
+      <ConfirmDelete
+        show={showDeleteDialog}
+        onHide={() => {
+          setShowDeleteDialog(false);
+          setShowClaimDetails(false);
+        }}
+        deleteaction={deleteClaimFromDb}
+        projectid={params.projectId}
+        claimid={claimDetailNumber}
       />
       {/* <AddClaim currentClaimCount={currentProject.claims?.length} /> */}
     </div>

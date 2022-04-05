@@ -22,6 +22,7 @@ import NotesView from "./NotesView";
 import NoteCard from "./NoteCard";
 import AddSourceButton from "./AddSourceButton";
 import ClaimDetailView from "./ClaimDetailView";
+import ConfirmDelete from "./ConfirmDelete";
 
 export {
   Login,
@@ -48,4 +49,5 @@ export {
   NoteCard,
   AddSourceButton,
   ClaimDetailView,
+  ConfirmDelete,
 };
