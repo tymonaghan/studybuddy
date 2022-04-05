@@ -129,6 +129,22 @@ router.delete("/:projectId/claim/:claimId", async (req, res, next) => {
   }
 });
 
+// update a claim's text
+// expects body: {claim: "the new text of the claim"}
+// returns the updated claim object
+router.put("/:projectId/claim/:claimId", async (req, res, next) => {
+  try {
+    const { projectId, claimId } = req.params;
+    const currentClaim = await Claim.findOne({
+      where: { claimNumber: claimId, projectId: projectId },
+    });
+    currentClaim.update({ claimText: req.body.claim });
+    res.status(200).send(currentClaim);
+  } catch (error) {
+    console.log(`error in the delete claim route: ${error}`);
+  }
+});
+
 // modify project info
 // expects body: a project object
 router.put("/:projectId/updateProject", async (req, res, next) => {
@@ -144,7 +160,7 @@ router.put("/:projectId/updateProject", async (req, res, next) => {
 });
 
 // modify project thesis
-// expects body: newThesis object
+// expects body: {thesis: "the text of the new thesis"}
 router.put("/:projectId/updateThesis", async (req, res, next) => {
   try {
     const { projectId } = req.params;
