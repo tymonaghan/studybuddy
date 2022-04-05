@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -7,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import InputGroup from "react-bootstrap/InputGroup";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddClaim, ClaimDetailView } from ".";
 import { deleteClaimFromDb } from "../../store/projectsReducer";
 import { useParams } from "react-router-dom";
@@ -16,6 +17,7 @@ export default function ArgumentView(props) {
   const [showClaimDetails, setShowClaimDetails] = useState(false);
   const [claimDetailNumber, setClaimDetailNumber] = useState(NaN);
   const [thesis, updateThesis] = useState();
+  const { currentNotes } = useSelector((state) => state);
   useEffect(() => {
     updateThesis(currentProject.thesis);
   }, [currentProject]);
@@ -87,6 +89,14 @@ export default function ArgumentView(props) {
                 <Card.Header className="my-0 py-0">
                   <Row>
                     <Col>Claim {claim.claimNumber}</Col>
+                    <Col>
+                      {
+                        currentNotes?.filter(
+                          (note) => note.claimId == claim.claimNumber
+                        ).length
+                      }{" "}
+                      notes
+                    </Col>
                     <Col me="auto" xs={1}>
                       <Button
                         variant="outline-danger"
