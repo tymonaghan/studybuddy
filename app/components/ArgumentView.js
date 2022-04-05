@@ -129,6 +129,7 @@ export default function ArgumentView(props) {
             );
           })
         : "No claims yet."}
+      <AddClaim currentClaimCount={currentProject.claims.length} />
       <ClaimDetailView
         show={showClaimDetails}
         onHide={() => setShowClaimDetails(false)}
