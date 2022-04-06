@@ -72,7 +72,7 @@ export default function ArgumentView() {
           </Button>
           <Form.Control
             as="textarea"
-            rows={5}
+            rows={4}
             name="thesis"
             value={thesis}
             disabled
