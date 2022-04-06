@@ -24,6 +24,7 @@ import AddSourceButton from "./AddSourceButton";
 import ClaimDetailView from "./ClaimDetailView";
 import ConfirmDelete from "./ConfirmDelete";
 import ArgumentTableView from "./ArgumentTableView";
+import ClaimPicker from "./ClaimPicker";
 
 export {
   Login,
@@ -52,4 +53,5 @@ export {
   ClaimDetailView,
   ConfirmDelete,
   ArgumentTableView,
+  ClaimPicker,
 };
