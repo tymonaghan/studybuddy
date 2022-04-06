@@ -138,7 +138,7 @@ router.put("/:projectId/claim/:claimId", async (req, res, next) => {
     const currentClaim = await Claim.findOne({
       where: { claimNumber: claimId, projectId: projectId },
     });
-    currentClaim.update({ claimText: req.body.claim });
+    await currentClaim.update({ claimText: req.body.claim });
     res.status(200).send(currentClaim);
   } catch (error) {
     console.log(`error in the delete claim route: ${error}`);
@@ -150,7 +150,7 @@ router.put("/:projectId/claim/:claimId", async (req, res, next) => {
 router.put("/:projectId/updateProject", async (req, res, next) => {
   try {
     const { projectId } = req.params;
-    const currentProject = await Project.findOne({ where: { id: projectId } });
+    const currentProject = await Project.findOne({ where: { id: +projectId } });
     // console.log(currentProject);
     await currentProject.update(req.body);
     res.status(200).send(currentProject);
