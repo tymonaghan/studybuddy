@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
@@ -49,7 +51,20 @@ const ProjectInfo = (props) => {
       {loaded ? (
         <div>
           <Form.Group className="mb-3">
-            <Form.Label>Project Title</Form.Label>
+            <Form.Label>
+              Project Title{" "}
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip>The name of your project.</Tooltip>}
+              >
+                <span
+                  style={{ fontSize: "18px" }}
+                  className="material-icons-outlined"
+                >
+                  info
+                </span>
+              </OverlayTrigger>
+            </Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -70,7 +85,25 @@ const ProjectInfo = (props) => {
             </InputGroup>
           </Form.Group>
           <Form.Group className="mb-2">
-            <Form.Label className="mb-0">Project Summary</Form.Label>
+            <Form.Label className="mb-0">
+              Project Summary{" "}
+              <OverlayTrigger
+                placement="bottom"
+                overlay={
+                  <Tooltip>
+                    This summary appears in your project list. Use it to help
+                    you identify this particular project.
+                  </Tooltip>
+                }
+              >
+                <span
+                  style={{ fontSize: "18px" }}
+                  className="material-icons-outlined"
+                >
+                  info
+                </span>
+              </OverlayTrigger>
+            </Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -91,7 +124,25 @@ const ProjectInfo = (props) => {
             </InputGroup>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Project Theme</Form.Label>
+            <Form.Label>
+              Project Theme{" "}
+              <OverlayTrigger
+                placement="bottom"
+                overlay={
+                  <Tooltip>
+                    The general theme or prompt for your research. Default is
+                    the current National History Day theme.
+                  </Tooltip>
+                }
+              >
+                <span
+                  style={{ fontSize: "18px" }}
+                  className="material-icons-outlined"
+                >
+                  info
+                </span>
+              </OverlayTrigger>
+            </Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -112,7 +163,20 @@ const ProjectInfo = (props) => {
             </InputGroup>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Project Topic</Form.Label>
+            <Form.Label>
+              Project Topic{" "}
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip>The general topic of your research.</Tooltip>}
+              >
+                <span
+                  style={{ fontSize: "18px" }}
+                  className="material-icons-outlined"
+                >
+                  info
+                </span>
+              </OverlayTrigger>
+            </Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -133,7 +197,26 @@ const ProjectInfo = (props) => {
             </InputGroup>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Project Thesis</Form.Label>
+            <Form.Label>
+              Project Thesis
+              <OverlayTrigger
+                placement="bottom"
+                overlay={
+                  <Tooltip>
+                    Your project's thesis statement should state your central
+                    point or focus in two or three sentences. Use the Argument
+                    View to add specific claims that support your thesis.
+                  </Tooltip>
+                }
+              >
+                <span
+                  style={{ fontSize: "18px" }}
+                  className="material-icons-outlined"
+                >
+                  info
+                </span>
+              </OverlayTrigger>
+            </Form.Label>
             <InputGroup>
               <Button
                 variant="secondary"
@@ -145,7 +228,7 @@ const ProjectInfo = (props) => {
               </Button>
               <Form.Control
                 as="textarea"
-                rows={5}
+                rows={4}
                 name="thesis"
                 value={currentProjectData?.thesis}
                 disabled

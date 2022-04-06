@@ -129,14 +129,49 @@ router.delete("/:projectId/claim/:claimId", async (req, res, next) => {
   }
 });
 
+// update a claim's text
+// expects body: {claim: "the new text of the claim"}
+// returns the updated claim object
+router.put("/:projectId/claim/:claimId", async (req, res, next) => {
+  try {
+    const { projectId, claimId } = req.params;
+    // console.log(`hello, it's your friendly endpoint here.\n
+    // projectId:${projectId}\n
+    // claimId: ${claimId}\n
+    // new claim text: ${req.body.claim}`);
+    // console.dir(req);
+    const currentClaim = await Claim.findOne({
+      where: { claimNumber: claimId, projectId: projectId },
+    });
+    await currentClaim.update({ claimText: req.body.claim });
+    res.status(200).send(currentClaim);
+  } catch (error) {
+    console.log(`error in the delete claim route: ${error}`);
+  }
+});
+
 // modify project info
 // expects body: a project object
 router.put("/:projectId/updateProject", async (req, res, next) => {
   try {
     const { projectId } = req.params;
-    const currentProject = await Project.findOne({ where: { id: projectId } });
+    const currentProject = await Project.findOne({ where: { id: +projectId } });
     // console.log(currentProject);
     await currentProject.update(req.body);
+    res.status(200).send(currentProject);
+  } catch (error) {
+    console.log(`error from the router.put method: ${error}`);
+  }
+});
+
+// modify project thesis
+// expects body: {thesis: "the text of the new thesis"}
+router.put("/:projectId/updateThesis", async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    const currentProject = await Project.findOne({ where: { id: projectId } });
+    // console.log(currentProject);
+    await currentProject.update({ thesis: req.body.thesis });
     res.status(200).send(currentProject);
   } catch (error) {
     console.log(`error from the router.put method: ${error}`);
@@ -158,5 +193,18 @@ router.post("/:projectId/source/:sourceId/addNote", async (req, res, next) => {
     console.log(`error in the add new note to project express route: ${error}`);
   }
 });
+
+router.put(
+  "/:projectId/note/:noteId/attachToClaim/:claimId",
+  async (req, res, next) => {
+    try {
+      const currentNote = await Note.findByPk(req.params.noteId);
+      await currentNote.setClaim(req.params.claimId);
+      res.send(currentNote);
+    } catch (error) {
+      console.log(`error in the add claim to note PUT route: ${error}`);
+    }
+  }
+);
 
 module.exports = router;

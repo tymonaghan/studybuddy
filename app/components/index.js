@@ -22,6 +22,9 @@ import NotesView from "./NotesView";
 import NoteCard from "./NoteCard";
 import AddSourceButton from "./AddSourceButton";
 import ClaimDetailView from "./ClaimDetailView";
+import ConfirmDelete from "./ConfirmDelete";
+import ArgumentTableView from "./ArgumentTableView";
+import ClaimPicker from "./ClaimPicker";
 
 export {
   Login,
@@ -48,4 +51,7 @@ export {
   NoteCard,
   AddSourceButton,
   ClaimDetailView,
+  ConfirmDelete,
+  ArgumentTableView,
+  ClaimPicker,
 };

@@ -3,6 +3,7 @@ const ADD_NEW_PROJECT = "ADD_NEW_PROJECT";
 const UPDATE_CURRENT_PROJECT = "UPDATE_CURRENT_PROJECT";
 const ADD_CLAIM = "ADD_CLAIM";
 const REMOVE_CLAIM = "REMOVE_CLAIM";
+const UPDATE_CLAIM = "UPDATE_CLAIM";
 
 import Axios from "axios";
 
@@ -17,6 +18,10 @@ const addClaimToProject = (projectId, claim) => {
 
 const removeClaimFromProject = (projectId, claimId) => {
   return { type: REMOVE_CLAIM, projectId, claimId };
+};
+
+const updateClaim = (projectId, claimId, newClaim) => {
+  return { type: UPDATE_CLAIM, projectId, claimId, newClaim };
 };
 
 const addNewProject = (newProject) => {
@@ -46,6 +51,21 @@ export const updateCurrentProjectInDb =
     }
   };
 
+export const updateThesisInDb =
+  (projectId, updatedThesis) => async (dispatch) => {
+    try {
+      const response = await Axios({
+        method: "put",
+        url: `/api/projects/${projectId}/updateThesis`,
+        data: { thesis: updatedThesis },
+      });
+      // because Axios returns the entire project object here, we can just use the same action creator as updating other parts of the project
+      dispatch(updateCurrentProjectInDb(response.data));
+    } catch (error) {
+      console.log(`error in the updateThesisInDb thunk: ${error}`);
+    }
+  };
+
 export const addNewClaimToDb =
   (projectId, claimNumber, claimText) => async (dispatch) => {
     try {
@@ -67,15 +87,31 @@ export const deleteClaimFromDb = (projectId, claimId) => async (dispatch) => {
       method: "delete",
       url: `/api/projects/${projectId}/claim/${claimId}`,
     });
-    console.log(
-      "hey cool you deleted the claim from the db! the api responded with: ",
-      response.data
-    );
+    // console.log(
+    //   "hey cool you deleted the claim from the db! the api responded with: ",
+    //   response.data
+    // );
     dispatch(removeClaimFromProject(projectId, claimId));
   } catch (error) {
     console.log(`error in the deleteClaimFromDb thunk: ${error}`);
   }
 };
+
+export const updateClaimInDb =
+  (projectId, claimId, newClaim) => async (dispatch) => {
+    try {
+      const response = await Axios({
+        method: "put",
+        url: `/api/projects/${projectId}/claim/${claimId}`,
+        data: { claim: newClaim },
+      });
+      console.log(`axios response from thunk:`);
+      console.dir(await response.data);
+      dispatch(updateClaim(projectId, claimId, response.data));
+    } catch (error) {
+      console.log(`error in the updateClaimInDb thunk: ${error}`);
+    }
+  };
 
 export const addNewProjectToDb = (projectName, userId) => async (dispatch) => {
   try {
@@ -135,6 +171,20 @@ export function projectsReducer(state = [], action) {
           };
         } else return project;
       });
+
+    case UPDATE_CLAIM:
+      return state.map((project) => {
+        if (project.id == action.projectId) {
+          return {
+            ...project,
+            claims: project.claims.map((claim) => {
+              if (claim.claimNumber == action.claimId) return action.newClaim;
+              else return claim;
+            }),
+          };
+        } else return project;
+      });
+
     default:
       return state;
   }

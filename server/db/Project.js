@@ -19,7 +19,7 @@ const Project = db.define("project", {
   },
   theme: {
     type: Sequelize.STRING,
-    defaultValue: "Debate and Diplomacy in History",
+    defaultValue: "Frontiers in History: People, Places, Ideas",
   },
   topic: {
     type: Sequelize.STRING,
