@@ -135,6 +135,11 @@ router.delete("/:projectId/claim/:claimId", async (req, res, next) => {
 router.put("/:projectId/claim/:claimId", async (req, res, next) => {
   try {
     const { projectId, claimId } = req.params;
+    // console.log(`hello, it's your friendly endpoint here.\n
+    // projectId:${projectId}\n
+    // claimId: ${claimId}\n
+    // new claim text: ${req.body.claim}`);
+    // console.dir(req);
     const currentClaim = await Claim.findOne({
       where: { claimNumber: claimId, projectId: projectId },
     });
