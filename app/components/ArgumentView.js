@@ -9,7 +9,7 @@ import Stack from "react-bootstrap/Stack";
 import InputGroup from "react-bootstrap/InputGroup";
 
 import { useDispatch, useSelector } from "react-redux";
-import { AddClaim, ClaimDetailView, ConfirmDelete } from ".";
+import { AddClaim, ClaimDetailView, ConfirmDelete, ArgumentTableView } from ".";
 import {
   deleteClaimFromDb,
   updateThesisInDb,
@@ -136,6 +136,8 @@ export default function ArgumentView() {
           })
         : "No claims yet."}
       <AddClaim currentClaimCount={currentProject.claims?.length} />
+      <h2>Argument at a glance:</h2>
+      <ArgumentTableView />
       <ClaimDetailView
         show={showClaimDetails}
         onHide={() => setShowClaimDetails(false)}
