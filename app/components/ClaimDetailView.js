@@ -32,9 +32,7 @@ export default function ClaimDetailView(props) {
       // console.log(
       //   `projectId: ${params.projectId} \n\nclaimId: ${claim.claimNumber}\n\nclaimText: ${claimText}`
       // );
-      dispatch(
-        updateClaimInDb(params.projectId, +claim.claimNumber, claimText)
-      );
+      dispatch(updateClaimInDb(params.projectId, +claim.id, claimText));
       toggleEditMode(false);
     } else {
       e.target.innerText = "Save";
@@ -75,13 +73,11 @@ export default function ClaimDetailView(props) {
           </InputGroup>
         </Form.Group>
         <h2>Evidence</h2>
-        {currentNotes.filter(
-          (note) => note.claimId == claim?.claimNumber
-        )[0] ? (
+        {currentNotes.filter((note) => note.claimId == claim?.id)[0] ? (
           <ul>
             {currentNotes[0].source
               ? currentNotes
-                  .filter((note) => note.claimId == claim?.claimNumber)
+                  .filter((note) => note.claimId == claim?.id)
                   .map((note, key) => (
                     <li key={key}>
                       "{note.text}" from {note.source?.name} by{" "}

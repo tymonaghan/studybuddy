@@ -93,23 +93,23 @@ export default function ArgumentView() {
                 key={key}
                 onClick={() => {
                   setShowClaimDetails(true);
-                  setClaimDetailNumber(claim.claimNumber);
+                  setClaimDetailNumber(claim.id);
                 }}
               >
                 <Card.Header className="my-0 py-0">
                   <Row>
                     <Col>Claim {claim.claimNumber}</Col>
-                    <Col>{getNotes(claim.claimNumber).length} notes</Col>
+                    <Col>{getNotes(claim.id).length} notes</Col>
                     <Col sm="auto">
                       (
                       {
-                        getNotes(claim.claimNumber).filter(
+                        getNotes(claim.id).filter(
                           (note) => note.source.classification == "secondary"
                         ).length
                       }{" "}
                       from secondary sources,{" "}
                       {
-                        getNotes(claim.claimNumber).filter(
+                        getNotes(claim.id).filter(
                           (note) => note.source.classification == "primary"
                         ).length
                       }{" "}
@@ -121,7 +121,7 @@ export default function ArgumentView() {
                         size="sm"
                         className="m-0 py-0"
                         onClick={() => {
-                          setClaimDetailNumber(claim.claimNumber);
+                          setClaimDetailNumber(claim.id);
                           setShowDeleteDialog(true);
                         }}
                       >
@@ -143,7 +143,7 @@ export default function ArgumentView() {
         onHide={() => setShowClaimDetails(false)}
         claim={
           currentProject.claims?.filter(
-            (claim) => claim.claimNumber == claimDetailNumber
+            (claim) => claim.id == claimDetailNumber
           )[0]
         }
       />
