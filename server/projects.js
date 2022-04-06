@@ -194,4 +194,17 @@ router.post("/:projectId/source/:sourceId/addNote", async (req, res, next) => {
   }
 });
 
+router.put(
+  "/:projectId/note/:noteId/attachToClaim/:claimId",
+  async (req, res, next) => {
+    try {
+      const currentNote = await Note.findByPk(req.params.noteId);
+      await currentNote.setClaim(req.params.claimId);
+      res.send(currentNote);
+    } catch (error) {
+      console.log(`error in the add claim to note PUT route: ${error}`);
+    }
+  }
+);
+
 module.exports = router;
