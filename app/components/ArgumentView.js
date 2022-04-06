@@ -104,13 +104,13 @@ export default function ArgumentView() {
                       (
                       {
                         getNotes(claim.id).filter(
-                          (note) => note.source.classification == "secondary"
+                          (note) => note.source?.classification == "secondary"
                         ).length
                       }{" "}
                       from secondary sources,{" "}
                       {
                         getNotes(claim.id).filter(
-                          (note) => note.source.classification == "primary"
+                          (note) => note.source?.classification == "primary"
                         ).length
                       }{" "}
                       from primary sources)
