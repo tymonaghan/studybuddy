@@ -107,7 +107,7 @@ export const updateClaimInDb =
       });
       console.log(`axios response from thunk:`);
       console.dir(await response.data);
-      dispatch(updateClaim(projectId, claimId, newClaim));
+      dispatch(updateClaim(projectId, claimId, response.data));
     } catch (error) {
       console.log(`error in the updateClaimInDb thunk: ${error}`);
     }
