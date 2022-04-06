@@ -20,6 +20,12 @@ const About = () => {
       <Card border="primary" className="mb-3" style={{ maxWidth: "36rem" }}>
         <Card.Header>Recent Updates</Card.Header>
         <Card.Body>
+          <b>4/6/2022: </b> Users may now associate notes with claims from a
+          note's card (in either Notes or Sources view).
+          <br />
+          <b>4/6/2022: </b> Argument Table View / "at a glance" added to
+          Argument view.
+          <br />
           <b>4/4/2022: </b> Users can now click a Claim on the "Your Argument"
           view to see a Claim Detail Card that shows notes linked to that claim.
           <br />
