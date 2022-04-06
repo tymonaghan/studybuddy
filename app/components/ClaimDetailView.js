@@ -79,15 +79,17 @@ export default function ClaimDetailView(props) {
           (note) => note.claimId == claim?.claimNumber
         )[0] ? (
           <ul>
-            {currentNotes
-              .filter((note) => note.claimId == claim?.claimNumber)
-              .map((note, key) => (
-                <li key={key}>
-                  "{note.text}" from {note.source.name} by{" "}
-                  {note.source.authorFullName} ({note.source.classification}{" "}
-                  source)
-                </li>
-              ))}
+            {currentNotes[0].source
+              ? currentNotes
+                  .filter((note) => note.claimId == claim?.claimNumber)
+                  .map((note, key) => (
+                    <li key={key}>
+                      "{note.text}" from {note.source?.name} by{" "}
+                      {note.source.authorFullName} ({note.source.classification}{" "}
+                      source)
+                    </li>
+                  ))
+              : ""}
           </ul>
         ) : (
           "no notes linked to this claim yet."
