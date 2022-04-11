@@ -26,26 +26,28 @@ export default function ArgumentTableView() {
           </tr>
         </thead>
         <tbody>
-          {currentProject.claims[0]
-            ? currentProject.claims.map((claim, key) => {
-                return (
-                  <tr key={key}>
-                    <td>{claim.claimNumber}</td>
-                    <td>{claim.claimText}</td>
-                    <td>{getNotes(claim.id).length}</td>
-                    <td>
-                      {
-                        getNotes(claim.id).reduce((accum, val) => {
-                          if (accum.includes(val.sourceId)) return 0;
-                          else accum.push(val.sourceId);
-                          return accum;
-                        }, []).length
-                      }
-                    </td>
-                  </tr>
-                );
-              })
-            : ""}
+          {currentProject?.claims ? (
+            currentProject.claims.map((claim, key) => {
+              return (
+                <tr key={key}>
+                  <td>{claim.claimNumber}</td>
+                  <td>{claim.claimText}</td>
+                  <td>{getNotes(claim.id).length}</td>
+                  <td>
+                    {
+                      getNotes(claim.id).reduce((accum, val) => {
+                        if (accum.includes(val.sourceId)) return 0;
+                        else accum.push(val.sourceId);
+                        return accum;
+                      }, []).length
+                    }
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr></tr>
+          )}
         </tbody>
       </Table>
     </Card>
