@@ -1,16 +1,23 @@
 const Sequelize = require("sequelize");
 
-const db = new Sequelize(
-  process.env.DATABASE_URL || "postgres://localhost:5432/studybuddy",
-  {
-    dialectOptions: {
-      // this dialectOptions section is required for the heroku postgres add-on to connect
-      ssl: {
-        rejectUnauthorized: false,
-      },
+const databaseUrl = process.env.DATABASE_URL || "postgres://studybuddy:studybuddy@localhost:5432/studybuddy";
+
+// Determine if we need SSL (for Heroku and other production databases)
+const isProduction = process.env.NODE_ENV === 'production' || databaseUrl.includes('amazonaws.com');
+
+const config = {
+  logging: false,
+};
+
+// Only add SSL config for production databases
+if (isProduction) {
+  config.dialectOptions = {
+    ssl: {
+      rejectUnauthorized: false,
     },
-    logging: false,
-  }
-);
+  };
+}
+
+const db = new Sequelize(databaseUrl, config);
 
 module.exports = db;
