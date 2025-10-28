@@ -11,7 +11,7 @@ try {
   isProduction = isProduction || url.hostname.endsWith('.amazonaws.com');
 } catch (err) {
   // If URL parsing fails, fall back to NODE_ENV check only
-  console.warn('Warning: Unable to parse DATABASE_URL for SSL detection');
+  console.warn('Warning: Unable to parse DATABASE_URL for SSL detection:', err.message);
 }
 
 const config = {
