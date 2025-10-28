@@ -3,7 +3,16 @@ const Sequelize = require("sequelize");
 const databaseUrl = process.env.DATABASE_URL || "postgres://studybuddy:studybuddy@localhost:5432/studybuddy";
 
 // Determine if we need SSL (for Heroku and other production databases)
-const isProduction = process.env.NODE_ENV === 'production' || databaseUrl.includes('amazonaws.com');
+// Parse the URL to properly check the hostname
+let isProduction = process.env.NODE_ENV === 'production';
+try {
+  const url = new URL(databaseUrl);
+  // Check if hostname ends with amazonaws.com (matches RDS hosts)
+  isProduction = isProduction || url.hostname.endsWith('.amazonaws.com');
+} catch (err) {
+  // If URL parsing fails, fall back to NODE_ENV check only
+  console.warn('Warning: Unable to parse DATABASE_URL for SSL detection');
+}
 
 const config = {
   logging: false,
